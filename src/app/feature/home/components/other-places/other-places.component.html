@@ -1,0 +1,24 @@
+<div class="row item-row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 itemRow__title">
+      <div>
+        <div class="title--primary">Other places to explore</div>
+        <div class="title--secondary">Based on traveller visits and local insights
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <div class="owlCarouselContainer">
+<!--    <div mat-icon-button (click)="owlPlaces.prev()" class="ow-navs ow-navs__button ow-navs__btnPrev mat-icon notranslate material-icons mat-icon-no-color">navigate_before</div>-->
+<!--    <div mat-icon-button (click)="owlPlaces.next()" class="ow-navs ow-navs__button ow-navs__btnNext mat-icon notranslate material-icons mat-icon-no-color">navigate_next</div>-->
+    <!-- Replace the previous button -->
+    <button mat-icon-button (click)="owlCar.prev()" class="ow-navs ow-navs__button ow-navs__btnPrev">
+      <mat-icon> navigate_before </mat-icon>
+    </button>
+
+    <!-- Replace the next button -->
+    <button mat-icon-button (click)="owlCar.next()" class="ow-navs ow-navs__button ow-navs__btnNext">
+      <mat-icon> navigate_next </mat-icon>
+    </button>
+
+</div>

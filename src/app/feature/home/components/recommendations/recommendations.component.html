@@ -1,0 +1,13 @@
+<div class="row item-row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 itemRow__title">
+      <div>
+        <div class="title--primary"> Recommended Places</div>
+        <div class="title--secondary">Based on traveller visits and local insights
+        </div>
+      </div>
+      <button mat-button color="primary">See All</button>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 tile-padding" *ngFor="let PromotionType of RecommendationsArray">
+      <app-products-item [model]="PromotionType"></app-products-item>
+    </div>
+</div>

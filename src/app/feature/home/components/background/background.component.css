@@ -1,0 +1,32 @@
+/* your-component.component.scss */
+
+:host {
+  height: 70vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, transparent, white),
+  url('/assets/home-background.jpg') center/cover no-repeat;
+}
+
+/* Optional: Add some content to see the effect */
+.content {
+  margin-top: 100px;
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
+
+/* In your component's styles file */
+.custom-toggle {
+  background-color: #4CAF50; /* Green background color */
+  color: #ffffff; /* White text color */
+  border-radius: 20px; /* Border radius */
+  margin: 5px; /* Optional: Add margin for spacing */
+}
+
+.custom-toggle.mat-button-toggle-checked {
+  background-color: #4CAF50; /* Green background color when checked */
+}

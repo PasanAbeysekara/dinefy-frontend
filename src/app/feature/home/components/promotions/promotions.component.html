@@ -1,0 +1,21 @@
+<div class="row item-row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 itemRow__title">
+      <div>
+        <div class="title--primary">Promotions</div>
+        <div class="title--secondary">Based on traveller visits and local insights
+        </div>
+      </div>
+      <button mat-button color="primary">See All</button>
+    </div>
+  </div>
+  <div class="owlCarouselContainer">
+    <button mat-icon-button (click)="owlCar.prev()" class="ow-navs ow-navs__button ow-navs__btnPrev mat-icon notranslate material-icons mat-icon-no-color">navigate_before</button>
+    <button mat-icon-button (click)="owlCar.next()" class="ow-navs ow-navs__button ow-navs__btnNext mat-icon notranslate material-icons mat-icon-no-color">navigate_next</button>
+    <owl-carousel-o [options]="customOptions"  #owlCar>
+      <ng-container *ngFor="let productType of PromotionsArray">
+        <ng-template class="slide" carouselSlide >
+          <app-products-item [model]="productType"></app-products-item>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
