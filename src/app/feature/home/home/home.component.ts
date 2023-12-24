@@ -23,7 +23,7 @@ import {JoinUsComponent} from "../components/join-us/join-us.component";
     RecommendationsComponent,
     OtherPlacesComponent,
     BackgroundComponent,
-    JoinUsComponent
+    JoinUsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

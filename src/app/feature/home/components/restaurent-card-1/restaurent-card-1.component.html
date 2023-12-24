@@ -1,0 +1,8 @@
+<!-- restaurent-card-1.component.html -->
+<mat-card class="custom-card hover:cursor-pointer" (click)="redirectToRestaurantDetails()">
+  <mat-icon class="hart-unfilled">favorite_border</mat-icon>
+  <img mat-card-image class="main-image" [src]="cardImage">
+  <img mat-card-avatar class="avatar" [src]="cardAvatar">
+  <mat-card-title class="restaurant-name">{{ cardTitle }}</mat-card-title>
+  <mat-card-subtitle class="address">{{ cardSubtitle }}</mat-card-subtitle>
+</mat-card>

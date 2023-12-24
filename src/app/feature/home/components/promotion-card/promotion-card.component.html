@@ -1,0 +1,28 @@
+<!-- restaurent-card-1.component.html -->
+<mat-card class="custom-card hover:cursor-pointer" id="promo-mat-card" (click)="redirectToRestaurantDetails()">
+<!--  <mat-icon class="hart-unfilled">favorite_border</mat-icon>-->
+<!--  <img mat-card-image class="main-image" src="/assets/promotions-image.jpg">-->
+<!--  <img mat-card-avatar class="avatar" src="/assets/promotions-logo.jpg">-->
+<!--  <mat-card-title class="restaurant-name">Happy hour at cafe Noir</mat-card-title>-->
+<!--  <p class="text-2xl font-mono">LKR 2,750</p>-->
+<!--  <mat-card-subtitle class="address">Approx 2 Person</mat-card-subtitle>-->
+  <div class="flex">
+    <img src="assets/promotions-image.jpg" style="width: 200px" alt="image">
+    <div>
+      <div class="star-container">
+        <span class="filled-star"></span>
+        <span class="filled-star"></span>
+        <span class="filled-star"></span>
+        <span class="filled-star"></span>
+        <span class="filled-star"></span>
+        <span class="text-gray-700 text-sm">(396)</span>
+      </div>
+      <img class="avatar"  src="assets/promotions-logo.jpg">
+      <div class="mt-10 ml-5">
+        <p class="text-3xl font-medium">Happy hour at cafe Noir</p>
+        <p class="text-3xl font-mono">LKR 2750</p>
+        <p class="text-gray-500 " >Approx 2 Person</p>
+      </div>
+    </div>
+  </div>
+</mat-card>
