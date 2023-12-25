@@ -1,13 +1,45 @@
-<div class="row item-row">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12 itemRow__title">
+<div class="section">
+  <div >
+    <div class="flex justify-between">
       <div>
-        <div class="title--primary"> Recommended Places</div>
-        <div class="title--secondary">Based on traveller visits and local insights
-        </div>
+        <p class="text-lg font-medium text-gray-700"> Recommended Places</p>
+        <p class="text-gray-500 mb-3">Based on traveller visits and local insights </p>
       </div>
       <button mat-button color="primary">See All</button>
     </div>
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3 tile-padding" *ngFor="let PromotionType of RecommendationsArray">
-      <app-products-item [model]="PromotionType"></app-products-item>
+  </div>
+  <div class="cards-section">
+    <div class="flex justify-between">
+      <app-recommendation-card></app-recommendation-card>
+      <app-recommendation-card></app-recommendation-card>
+      <app-recommendation-card></app-recommendation-card>
+      <app-recommendation-card></app-recommendation-card>
     </div>
+    <div class="flex justify-between mt-5">
+      <app-recommendation-card></app-recommendation-card>
+      <app-recommendation-card></app-recommendation-card>
+      <app-recommendation-card></app-recommendation-card>
+      <app-recommendation-card></app-recommendation-card>
+    </div>
+  </div>
+<!--  <div class="flex justify-center">-->
+<!--    <div class="flex items-center justify-center mx-3">-->
+<!--      <button mat-icon-button (click)="owlCar.prev()" class="material-icons shadow-button">navigate_before</button>-->
+<!--    </div>-->
+<!--    <div class="scroll-section">-->
+<!--      <owl-carousel-o [options]="customOptions"  #owlCar>-->
+<!--        <ng-template carouselSlide>-->
+<!--          <app-recommendation-card></app-recommendation-card>-->
+<!--        </ng-template>-->
+<!--        <ng-template carouselSlide >-->
+<!--          <app-recommendation-card></app-recommendation-card>-->
+<!--        </ng-template>-->
+<!--      </owl-carousel-o>-->
+<!--    </div>-->
+<!--    <div class="flex items-center justify-center mx-2">-->
+<!--      <button mat-icon-button (click)="owlCar.next()" class="material-icons shadow-button">navigate_next</button>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
 </div>
