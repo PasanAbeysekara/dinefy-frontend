@@ -1,9 +1,7 @@
 .custom-card {
-  width: 440px;
-  height: 230px;
+  width: 300px;
+  height: 210px;
   position: relative;
-  border-color: darkorange;
-  border-width: 1px;
 }
 
 .custom-card .main-image {
@@ -15,16 +13,14 @@
 }
 
 .custom-card .avatar {
-  background: #4CAF50 ;
   position: absolute;
+  top: 16px; /* Adjust the top position as needed */
+  left: 16px; /* Adjust the left position as needed */
   width: 64px; /* Set the desired width for the avatar */
   height: 64px; /* Set the desired height for the avatar */
-  right: 10px;
-  bottom: 10px;
   border-radius: 50%; /* Make the avatar round */
   border: 2px solid white; /* Optional: Add a border for better visibility */
-  /*z-index: 2; !* Ensure the avatar is on top of the main image *!*/
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+  z-index: 2; /* Ensure the avatar is on top of the main image */
 }
 
 .overlay-content {
@@ -41,19 +37,46 @@
   margin-top: 200px;
 }
 
-.star-container {
+.price-per-visitor{
   position: absolute;
   z-index: 2;
-  display: inline-block;
-  font-size: 24px; /* Adjust the size of the stars */
-  color: gold;    /* Adjust the color of the stars */
-  margin: 20px 20px;
+  margin-top: 280px;
+  margin-left: 20px;
+  color: #ecebeb;
+  font-weight: normal;
+  font-size: medium;
 }
 
-.filled-star::before {
-  content: "\2605"; /* Unicode character for a filled star */
+.hart-unfilled{
+  position: absolute;
+  z-index: 2;
+  /*margin-top: 15px;*/
+  top: 15px;
+  right: 15px;
+  /*font-size: 30px;*/
+  color:lightgray;
 }
 
-#text-section{
-  margin-top: 50px;
+.four-dots-icon{
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-size: 30px;
+  width: 30px;
+  bottom:15px;
+  right:20px;
+}
+
+.restaurant-name{
+  color: #f5f0f0;
+  position: absolute;
+  font-size: large;
+  bottom:15px;
+  left: 10px;
+  /*margin-top: 20px;*/
+}
+
+.address{
+  color: #807f7f;
+  margin-top: -5px;
 }

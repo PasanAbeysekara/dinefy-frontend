@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PromotionCardComponent } from './promotion-card.component';
+import { OtherPlacesCardComponent } from './other-places-card.component';
 
-describe('PromotionCardComponent', () => {
-  let component: PromotionCardComponent;
-  let fixture: ComponentFixture<PromotionCardComponent>;
+describe('OtherPlacesCardComponent', () => {
+  let component: OtherPlacesCardComponent;
+  let fixture: ComponentFixture<OtherPlacesCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PromotionCardComponent]
+      imports: [OtherPlacesCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PromotionCardComponent);
+    fixture = TestBed.createComponent(OtherPlacesCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
