@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
 import {MatButtonModule} from "@angular/material/button";
 import {ProductsItemComponent} from "../products-item/products-item.component";
-import {RestaurentCard1Component} from "../restaurent-card-1/restaurent-card-1.component";
 import {PromotionCardComponent} from "./promotion-card/promotion-card.component";
 
 @Component({
@@ -14,7 +13,6 @@ import {PromotionCardComponent} from "./promotion-card/promotion-card.component"
     MatButtonModule,
     CarouselModule,
     ProductsItemComponent,
-    RestaurentCard1Component,
     PromotionCardComponent
   ],
   styleUrls: ['./promotions.component.css']
