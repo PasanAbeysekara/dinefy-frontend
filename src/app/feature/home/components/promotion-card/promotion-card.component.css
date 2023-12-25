@@ -41,30 +41,6 @@
   margin-top: 200px;
 }
 
-.restaurant-name{
-  position: absolute;
-  z-index: 2;
-  margin-top: 280px;
-  margin-left: 20px;
-  color: #ecebeb;
-}
-
-.address{
-  position: absolute;
-  z-index: 2;
-  margin-top: 310px;
-  margin-left: 20px;
-  color:gray;
-}
-
-.hart-unfilled{
-  position: absolute;
-  z-index: 2;
-  margin-top: 15px;
-  margin-left: 240px;
-  color:lightgray;
-}
-
 .star-container {
   position: absolute;
   z-index: 2;
@@ -76,4 +52,8 @@
 
 .filled-star::before {
   content: "\2605"; /* Unicode character for a filled star */
+}
+
+#text-section{
+  margin-top: 50px;
 }
