@@ -113,3 +113,6 @@
 /*  color: gray; !* Use the Material Design primary color *!*/
 /*}*/
 
+.dropdown-toggle::after {
+  display:none;
+}

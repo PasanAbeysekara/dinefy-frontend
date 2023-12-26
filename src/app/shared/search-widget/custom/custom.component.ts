@@ -6,6 +6,7 @@ import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } f
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import {MatIconModule} from "@angular/material/icon";
 
 
 const WIKI_URL = 'https://en.wikipedia.org/w/api.php';
@@ -35,7 +36,7 @@ export class WikipediaService {
 @Component({
   selector: 'app-custom',
   standalone: true,
-  imports: [NgbDropdownModule,NgbTypeaheadModule, FormsModule, JsonPipe,HttpClientModule],
+  imports: [NgbDropdownModule, NgbTypeaheadModule, FormsModule, JsonPipe, HttpClientModule, MatIconModule],
   templateUrl: './custom.component.html',
   providers: [WikipediaService],
   styleUrl: './custom.component.css'
