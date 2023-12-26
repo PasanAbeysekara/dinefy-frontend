@@ -5,6 +5,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import { RegisterComponent } from '../register/register.component';
+import {LoginService} from "../../../../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -24,12 +26,20 @@ import {MatInputModule} from "@angular/material/input";
 export class LoginComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<LoginComponent>,private router: Router
+    public dialogRef: MatDialogRef<LoginComponent>,
+    private loginService: LoginService,
+    private router: Router,
+    private dialog: MatDialog
    ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
     this.router.navigate(['/profile']);
+    this.loginService.setIsLogged(true);
   }
 
+  openRegisterDialog(): void {
+    this.dialogRef.close();
+    this.dialog.open(RegisterComponent);
+  }
 }
