@@ -1,52 +1,56 @@
-<div class="w-[1000px] h-[80px] bg-white rounded-[35px] flex space-x-0">
-  <div class="form-group p-2 flex ml-8 mt-1">
-    <mat-form-field class="example-full-width">
-      <mat-label>Location</mat-label>
-      <input type="text"
-             placeholder="Pick one"
-             aria-label="Location"
-             matInput
-             [formControl]="myControl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        @for (option of filteredOptions | async; track option) {
-        <mat-option [value]="option">{{option}}</mat-option>
-        }
-      </mat-autocomplete>
-    </mat-form-field>
+<div class="w-[1280px] h-[80px] bg-white rounded-[35px] flex">
+  <div class="ml-7 mr-4">
+    <app-custom></app-custom>
   </div>
+  <input id="where" type="text" placeholder="Where ?" class="form-control m-3" [(ngModel)]="model" [ngbTypeahead]="search"  />
+  <input type="text"
+         placeholder="When ?"
+         class="form-control m-3"
+         bsDatepicker
+         [bsConfig]="{ isAnimated: true }">
+  <input placeholder="At what time ?" class="form-control m-3" [ngxTimepicker]="picker">
+  <ngx-material-timepicker #picker></ngx-material-timepicker>
 
-  <div class="form-group p-2 flex mt-1">
-    <mat-form-field>
-      <mat-label>Reserve Date</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
+  <div ngbDropdown class="m-3">
+    <button type="button" class="form-control" id="dropdownBasic1" ngbDropdownToggle>
+      <mat-icon>people</mat-icon>
+      People
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
 
-  <div class="form-group p-2 flex mt-1">
-    <div class="material-input">
-      <input placeholder="Reserve Time" aria-label="default time" id="reservetime"
-             [ngxTimepicker]="defaultTime" readonly>
-<!--      <label for="reservetime">Reserve Time</label>-->
-      <ngx-material-timepicker #defaultTime [defaultTime]="'12:10 pm'"></ngx-material-timepicker>
+      <div class="flex justify-between">
+        <div class="mt-3 mx-4">
+          <p>Adults</p>
+        </div>
+        <div class="flex justify-between h-10 mr-4">
+          <button mat-icon-button (click)="decrementAdults()" class="mt-1">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">remove</mat-icon>
+          </button>
+          <input type="text" [(ngModel)]="valueAdults" class="w-3 h-5 mt-3" readonly/>
+          <button mat-icon-button (click)="incrementAdults()" class="mt-1">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="mt-3 mx-4">
+          <p>Children</p>
+        </div>
+        <div class="flex justify-between h-10 mr-4">
+          <button mat-icon-button (click)="decrementChildren()">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%">remove</mat-icon>
+          </button>
+          <input type="text" [(ngModel)]="valueChildren" class="w-3 h-5 mt-3" readonly/>
+          <button mat-icon-button (click)="incrementChildren()">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="form-group p-2 flex mt-1">
-    <mat-form-field appearance="fill">
-      <mat-label>Guest Count</mat-label>
-      <div class="guest-count">
-        <!--          <button (click)="decrementGuestCount()">-</button>-->
-        <input matInput type="number" [(ngModel)]="guestCount" min="0">
-        <!--          <button (click)="incrementGuestCount()">+</button>-->
-      </div>
-    </mat-form-field>
-  </div>
 
-  <!--    <button mat-raised-button class="search-button p-2 flex">Search</button>-->
-<!--  <button mat-icon-button class="circular-button darker-background p-2 flex" (click)="redirectToSearchResults()">-->
-<!--    <mat-icon>search</mat-icon>-->
-<!--  </button>-->
+
 </div>
