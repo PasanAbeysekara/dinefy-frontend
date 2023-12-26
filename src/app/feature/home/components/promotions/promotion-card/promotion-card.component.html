@@ -7,21 +7,23 @@
 <!--  <p class="text-2xl font-mono">LKR 2,750</p>-->
 <!--  <mat-card-subtitle class="address">Approx 2 Person</mat-card-subtitle>-->
   <div class="flex">
-    <img src="../../../../../../assets/promotions-image.jpg" style="width: 200px" alt="image">
+<!--    <img src="../../../../../../assets/promotions-image.jpg" style="width: 200px" alt="image">-->
+    <img [src]="cardImage" style="width: 200px" alt="image">
     <div>
-      <div class="star-container">
-        <span class="filled-star"></span>
-        <span class="filled-star"></span>
-        <span class="filled-star"></span>
-        <span class="filled-star"></span>
-        <span class="filled-star"></span>
-        <span class="text-gray-700 text-sm">(396)</span>
+      <div class="mt-3 -mb-4 ml-4">
+        <ngb-rating [rate]="ratingsCount" class="text-amber-500 text-xl" />
+<!--        <span class="text-gray-700 text-sm">(396)</span>-->
+        <span class="text-gray-700 text-sm">({{ reviewsCount }})</span>
       </div>
-      <img class="avatar"  src="../../../../../../assets/promotions-logo.jpg">
-      <div class="mt-10 ml-5" id="text-section">
-        <p class="text-2xl font-medium">Happy hour at cafe Noir</p>
-        <p class="text-3xl font-mono">LKR 2750</p>
-        <p class="text-gray-500 " >Approx 2 Person</p>
+<!--      <img class="avatar"  src="../../../../../../assets/promotions-logo.jpg">-->
+      <img class="avatar" [src]="cardAvatar">
+      <div class="mt-7 ml-5" id="text-section">
+<!--        <p class="text-2xl font-medium">Happy hour at cafe Noir</p>-->
+        <p class="text-2xl font-medium">{{restaurantName}}</p>
+<!--        <p class="text-3xl font-mono">LKR 2750</p>-->
+        <p class="text-3xl font-mono">LKR {{ reservationPrice }}</p>
+<!--        <p class="text-gray-500 " >Approx 2 Person</p>-->
+        <p class="text-gray-500 " >Approx {{ reservePeopleCount }} Person</p>
       </div>
     </div>
   </div>

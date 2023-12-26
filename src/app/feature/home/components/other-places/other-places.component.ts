@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
 // import {HomeModule} from "../../home.module";
 import {MatIconModule} from "@angular/material/icon";
@@ -8,6 +8,7 @@ import {PlaceTileComponent} from "../place-tile/place-tile.component";
 import {NgForOf} from "@angular/common";
 import {PromotionCardComponent} from "../promotions/promotion-card/promotion-card.component";
 import {OtherPlacesCardComponent} from "./other-places-card/other-places-card.component";
+import {RecommendationCardComponent} from "../recommendations/recommendation-card/recommendation-card.component";
 
 @Component({
   selector: 'app-other-places',
@@ -22,11 +23,13 @@ import {OtherPlacesCardComponent} from "./other-places-card/other-places-card.co
     PlaceTileComponent,
     NgForOf,
     PromotionCardComponent,
-    OtherPlacesCardComponent
+    OtherPlacesCardComponent,
+    RecommendationCardComponent
   ],
   styleUrls: ['./other-places.component.css']
 })
 export class OtherPlacesComponent{
+
   title: "owl-carousel" | undefined;
   customOptions: any = {
     loop: true,

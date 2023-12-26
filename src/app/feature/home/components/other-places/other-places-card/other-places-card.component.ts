@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 
@@ -13,6 +13,10 @@ import {MatIconModule} from "@angular/material/icon";
   styleUrl: './other-places-card.component.css'
 })
 export class OtherPlacesCardComponent {
+
+  @Input() cardImage!: string;
+  @Input() restaurantName!: string;
+
   redirectToRestaurantDetails = signal<any | null>(null);
 
 }

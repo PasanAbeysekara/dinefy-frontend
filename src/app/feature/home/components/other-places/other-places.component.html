@@ -15,16 +15,21 @@
     <div class="scroll-section">
       <owl-carousel-o [options]="customOptions"  #owlCar>
         <ng-template carouselSlide>
-<!--          <app-promotion-card></app-promotion-card>-->
-          <app-other-places-card></app-other-places-card>
+          <app-other-places-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/f0434856-0c7b-48df-a9b2-4f3e0f5176f5'"
+            [restaurantName]="'Mediterranean Delight'"
+          ></app-other-places-card>
         </ng-template>
         <ng-template carouselSlide >
-<!--          <app-promotion-card></app-promotion-card>-->
-          <app-other-places-card></app-other-places-card>
+          <app-other-places-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/9912f000-0167-42df-8260-7591eeda555a'"
+            [restaurantName]="'Mediterranean Delight'"></app-other-places-card>
         </ng-template>
         <ng-template carouselSlide >
-          <!--          <app-promotion-card></app-promotion-card>-->
-          <app-other-places-card></app-other-places-card>
+          <app-other-places-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/d17f2a25-66bc-42aa-a503-1286def73659'"
+            [restaurantName]="'Mediterranean Delight'"
+          ></app-other-places-card>
         </ng-template>
       </owl-carousel-o>
     </div>
