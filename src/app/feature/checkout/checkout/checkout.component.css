@@ -6,3 +6,8 @@
   font-family: 'Courier New', monospace; /* Use your preferred monospace font */
   margin-right: 2px;
 }
+
+iframe{
+  width: 33vw;
+  height: 43vh;
+}
