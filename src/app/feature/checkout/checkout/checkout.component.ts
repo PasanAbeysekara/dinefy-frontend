@@ -3,6 +3,8 @@ import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
+import {MatTabsModule} from "@angular/material/tabs";
+import {LocationMapComponent} from "../components/location-map/location-map.component";
 
 @Component({
   selector: 'app-checkout',
@@ -10,7 +12,9 @@ import {FormsModule} from "@angular/forms";
   imports: [
     MatIconModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule,
+    LocationMapComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',

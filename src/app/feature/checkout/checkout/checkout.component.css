@@ -1,0 +1,8 @@
+.special-span{
+  border-color: #718096; /* Replace with the desired color */
+  border-width: 1px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.55rem; /* You can adjust the value as needed */
+  font-family: 'Courier New', monospace; /* Use your preferred monospace font */
+  margin-right: 2px;
+}
