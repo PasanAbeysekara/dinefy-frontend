@@ -1,18 +1,18 @@
 
+<div class="mat-dialog-container">
+    <div class="mat-dialog-title">
+      <h1 class="large-font">Please sign in</h1>
+      <button mat-icon-button mat-dialog-close class="clear-icon-button">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
 
-      <div class="mat-dialog-title">
-        <h2 >Please sign in </h2>
-        <button mat-icon-button mat-dialog-close>
-          <mat-icon>clear</mat-icon>
-        </button>
-      </div>
-
-      <mat-dialog-content class="mat-typography">
+      <div class="mat-dialog-content">
         <div>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" style="width: 100%;">
             <input matInput placeholder="User Name">
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" style="width: 100%;">
             <input type="password" matInput placeholder="Password">
             <mat-hint align="end" >Forgot Password ?</mat-hint>
           </mat-form-field>
@@ -20,20 +20,22 @@
         </div>
 
         <!--<div mat-dialog-actions>-->
-        <button class="erg-btn erg-btn--full-width erg-btn--large margin--top" mat-flat-button color="warn" (click)="onNoClick()">Sign In</button>
+        <button class="erg-btn erg-btn--full-width erg-btn--large margin--top" mat-flat-button (click)="onNoClick()">Sign In</button>
         <!--</div>-->
         <hr>
-        <div class="title--primary margin--top">Don't want to complete the form?</div>
+        <div class="text-center title--primary margin--top">Don't want to complete the form?</div>
         <hr>
-        <div class="erg-btn--list erg-btn--list--center">
+        <div class="erg-btn--list">
           <button mat-button>
-            <mat-icon class="hg-icon">_google</mat-icon> Login With Google
+            <i class="fa-brands fa-google mr-1"></i> Login With Google
           </button>
           <button mat-button>
-            <mat-icon class="hg-icon">_facebook</mat-icon> Login With Facebook
+            <mat-icon class="hg-icon">facebook</mat-icon> Login With Facebook
           </button>
         </div>
-        <div class="title--primary margin--top">New User ?<a mat-button color="warn" href="https://www.google.com/" target="_blank" >Create an account</a> </div>
-        <div class="text-left margin--top">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</div>
-      </mat-dialog-content>
+        <div class="text-center title--primary margin--top new-user">New User ?<a mat-link (click)="openRegisterDialog()"> Create an account</a> </div>
+        <div class="text-center margin--top recatcha">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</div>
+      </div>
+
+</div>
 

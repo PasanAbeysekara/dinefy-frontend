@@ -3,6 +3,7 @@
 .container {
   position: relative;
   padding-top: 70px; /* Adjust based on the height of your sticky header */
+
 }
 
 .header {
@@ -22,8 +23,12 @@
 }
 
 .logo {
-  width: 150px; /* Adjust based on your logo size */
-  height: auto;
+  float:left;
+  padding-left:20px;
+}
+
+.btn-container{
+  float:right;
 }
 
 .btn {
@@ -36,4 +41,18 @@
 
 .content {
   margin-top: 90px; /* Adjust based on the height of your sticky header */
+}
+
+.btn-container{
+display: flex; justify-content: flex-end
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+}
+
+.list-item-content {
+  display: flex;
+  align-items: center;
 }
