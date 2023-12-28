@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FavRestaurantsComponent } from './fav-restaurants.component';
+import { HistoryCardComponent } from './history-card.component';
 
-describe('FavRestaurantsComponent', () => {
-  let component: FavRestaurantsComponent;
-  let fixture: ComponentFixture<FavRestaurantsComponent>;
+describe('HistoryCardComponent', () => {
+  let component: HistoryCardComponent;
+  let fixture: ComponentFixture<HistoryCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FavRestaurantsComponent]
+      imports: [HistoryCardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FavRestaurantsComponent);
+    fixture = TestBed.createComponent(HistoryCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

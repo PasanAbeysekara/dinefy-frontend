@@ -7,3 +7,9 @@
 html, body { height: 100%; }
 body { margin: 0;
   font-family: Calibri, serif }
+/* Define color variables */
+:root {
+  --color1: #4b2870; /* Dark purple */
+  --color2: #eee8f6; /* Light purple */
+  --color3: #666; /* Dark gray */
+}

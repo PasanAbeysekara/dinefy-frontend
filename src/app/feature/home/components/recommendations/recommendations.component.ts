@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {ProductsItemComponent} from "../products-item/products-item.component";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-recommendations',
@@ -8,7 +9,8 @@ import {ProductsItemComponent} from "../products-item/products-item.component";
   standalone: true,
   imports: [
     MatButtonModule,
-    ProductsItemComponent
+    ProductsItemComponent,
+    NgForOf
   ],
   styleUrls: ['./recommendations.component.css']
 })
