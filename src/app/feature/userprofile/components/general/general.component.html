@@ -41,27 +41,33 @@
         <button mat-button color="primary">Edit</button>
       </div>
       <!--buttons-->
-      <div class="my-2">
-        <mat-button-toggle-group style="border: none">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 mx-4">
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex flex-col space-y-2">
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
               <p style="margin-top: -4px">Mexican</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Swedish</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Latvian</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Italian</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Spanish</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">American</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Japanese</p>
             </mat-button-toggle>
@@ -69,7 +75,7 @@
               <p style="margin-top: -4px">Canadian</p>
             </mat-button-toggle>
           </div>
-        </mat-button-toggle-group>
+        </div>
       </div>
     </div>
 
@@ -82,26 +88,32 @@
         <button mat-button color="primary">Edit</button>
       </div>
       <!--buttons-->
-      <div class="my-2">
-        <mat-button-toggle-group style="border: none">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 mx-4">
+      <div class="my-2 ml-2">
+        <div style="border: none" class="flex flex-col space-y-2">
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
               <p style="margin-top: -4px">Fast food</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Fast casual</p>
             </mat-button-toggle>
+          </div>
+
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Casual dining</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Cafés</p>
             </mat-button-toggle>
+          </div>
+          <div>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Contemporary</p>
             </mat-button-toggle>
           </div>
-        </mat-button-toggle-group>
+
+        </div>
       </div>
     </div>
 
@@ -115,21 +127,25 @@
         <button mat-button color="primary">Edit</button>
       </div>
       <!--buttons-->
-      <div class="my-2">
-        <mat-button-toggle-group style="border: none">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 mx-4">
+      <div class="my-2 ml-2">
+        <div style="border: none" class="flex flex-col space-y-2">
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
               <p style="margin-top: -4px">Italian</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Sushi</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Mexican</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Vegetarian</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Indian</p>
             </mat-button-toggle>
@@ -137,7 +153,8 @@
               <p style="margin-top: -4px">Barbecue</p>
             </mat-button-toggle>
           </div>
-        </mat-button-toggle-group>
+
+        </div>
       </div>
     </div>
 
@@ -179,7 +196,7 @@
     <div>
       <div class="flex justify-between">
         <!--Reserve-->
-        <mat-card matRipple style="width: 19vw;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
+        <mat-card matRipple style="width: 350px;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
           <div class="flex">
             <div>
               <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://cf.bstatic.com/images/hotel/max1024x768/170/170102675.jpg" alt="">
@@ -211,7 +228,7 @@
 
         </mat-card>
         <!--Reserve-->
-        <mat-card matRipple style="width: 19vw;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
+        <mat-card matRipple style="width: 350px;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
           <div class="flex">
             <div>
               <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://cf.bstatic.com/images/hotel/max1024x768/170/170102675.jpg" alt="">
@@ -244,9 +261,9 @@
         </mat-card>
       </div>
 
-      <div class="flex justify-between my-4">
+      <div class="flex my-4 justify-between">
         <!--Reserve-->
-        <mat-card matRipple style="width: 19vw;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
+        <mat-card matRipple style="width: 350px;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
           <div class="flex">
             <div>
               <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://cf.bstatic.com/images/hotel/max1024x768/170/170102675.jpg" alt="">
@@ -278,7 +295,7 @@
 
         </mat-card>
         <!--Reserve-->
-        <mat-card matRipple style="width: 19vw;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
+        <mat-card matRipple style="width: 350px;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
           <div class="flex">
             <div>
               <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://cf.bstatic.com/images/hotel/max1024x768/170/170102675.jpg" alt="">

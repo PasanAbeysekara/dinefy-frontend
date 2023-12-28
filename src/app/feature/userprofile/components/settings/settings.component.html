@@ -15,27 +15,33 @@
         <button mat-button color="primary">Edit</button>
       </div>
       <!--buttons-->
-      <div class="my-2">
-        <mat-button-toggle-group style="border: none" [multiple]="true">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 mx-4">
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex flex-col space-y-2">
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
               <p style="margin-top: -4px">Mexican</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Swedish</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Latvian</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Italian</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Spanish</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">American</p>
             </mat-button-toggle>
+          </div>
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Japanese</p>
             </mat-button-toggle>
@@ -43,7 +49,7 @@
               <p style="margin-top: -4px">Canadian</p>
             </mat-button-toggle>
           </div>
-        </mat-button-toggle-group>
+        </div>
       </div>
     </div>
 
@@ -56,28 +62,35 @@
         <button mat-button color="primary">Edit</button>
       </div>
       <!--buttons-->
-      <div class="my-2">
-        <mat-button-toggle-group style="border: none" [multiple]="true">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 mx-4">
+      <div class="my-2 ml-2">
+        <div style="border: none" class="flex flex-col space-y-2">
+          <div class="flex space-x-3">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
               <p style="margin-top: -4px">Fast food</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Fast casual</p>
             </mat-button-toggle>
+          </div>
+
+          <div class="flex space-x-2">
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Casual dining</p>
             </mat-button-toggle>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Cafés</p>
             </mat-button-toggle>
+          </div>
+          <div>
             <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
               <p style="margin-top: -4px">Contemporary</p>
             </mat-button-toggle>
           </div>
-        </mat-button-toggle-group>
+
+        </div>
       </div>
     </div>
+
 
   </div>
 
