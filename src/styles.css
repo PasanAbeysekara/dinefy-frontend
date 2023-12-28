@@ -7,3 +7,9 @@
 html, body { height: 100%; }
 body { margin: 0;
   font-family: Calibri, serif }
+
+:root {
+  --foreground: #000000; /* Black text color for foreground */
+  --divider: #bdbdbd; /* Grey divider color */
+  --secondary-text: #858585; /* Grey secondary text color */
+}
