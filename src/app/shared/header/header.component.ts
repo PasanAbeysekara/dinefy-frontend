@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
+import {Component, HostListener, OnInit, Renderer2, signal} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../feature/home/components/login/login.component';
 import { RegisterComponent } from '../../feature/home/components/register/register.component';
@@ -33,6 +33,9 @@ export class HeaderComponent implements OnInit {
   headerClass: string = "";
   isTransparent = true;
   initialHeight = '100px'; // Set your initial height here
+  redirectToUserProfile(){
+    this.router.navigate(['/userprofile']);
+  }
 
   constructor(private dialog: MatDialog, private headerData: HeaderService, public loginService: LoginService, private router: Router, private renderer: Renderer2) { }
 
