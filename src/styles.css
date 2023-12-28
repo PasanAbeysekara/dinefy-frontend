@@ -13,3 +13,7 @@ body { margin: 0;
   --color2: #eee8f6; /* Light purple */
   --color3: #666; /* Dark gray */
 }
+
+*, ::before, ::after {
+  border-style: none;
+}
