@@ -1,0 +1,34 @@
+<!--div class="col-12 col-sm-12 col-md-6 col-lg-3"-->
+<!--<div>-->
+<!--  <button mat-icon-button>-->
+<!--    <mat-icon color="warn">favorite</mat-icon>-->
+<!--  </button>-->
+<!--  <div>-->
+<!--    <img [src]="favFoodItem.image" alt="avatar">-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <div>{{favFoodItem.name}}</div>-->
+<!--    <div>{{favFoodItem.restaurent}}</div>-->
+<!--    <ngb-rating [rate]="4" />-->
+<!--    <div>{{favFoodItem.description}}</div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--/div-->
+
+
+<mat-card class="w-72" style="border-radius: 5%;position: relative">
+  <img class="object-cover object-center w-72 h-36" style="border-top-left-radius: 5%;border-top-right-radius: 5%" [src]="favFoodItem.image" alt="Image">
+  <div class="m-2 text-gray-500">
+    <p class="text-gray-800 my-0" style="font-size: medium">{{favFoodItem.name}}</p>
+    <p class="my-0">{{favFoodItem.restaurent}}</p>
+    <div class="flex space-x-2 my-0" style="margin-bottom: 10px">
+      <p class="my-0">4/5</p>
+      <ngb-rating class="text-red-500 my-0" style="margin-bottom: 10px" [rate]="4" />
+      <p class="my-0">(396)</p>
+    </div>
+    <p class="text-sm">{{favFoodItem.description}}</p>
+  </div>
+  <button mat-fab color="warn" aria-label="Example icon button with a heart icon" style="position: absolute;top:5px;right: 5px;width: 40px;height: 40px" >
+    <mat-icon>favorite</mat-icon>
+  </button>
+</mat-card>
