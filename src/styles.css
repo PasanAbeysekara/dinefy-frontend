@@ -12,8 +12,12 @@ body { margin: 0;
   --color1: #4b2870; /* Dark purple */
   --color2: #eee8f6; /* Light purple */
   --color3: #666; /* Dark gray */
+  --foreground: #000000; /* Black text color for foreground */
+  --divider: #bdbdbd; /* Grey divider color */
+  --secondary-text: #858585; /* Grey secondary text color */
 }
 
 *, ::before, ::after {
   border-style: none;
 }
+
