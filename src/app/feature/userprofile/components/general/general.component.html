@@ -1,14 +1,14 @@
-<div class="flex mt-10">
+<div class="flex min-[1000px]:flex-row max-[1000px]:flex-col  mt-10">
 
 <!-- Left-->
-  <div style="width: 28vh">
+  <div class="min-[1000px]:w-[200px] max-[1000px]:w-[600px] mx-3" >
 <!--    avatar-->
     <div class="flex justify-center">
       <img class="object-cover object-center w-44 h-44 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Poster-sized_portrait_of_Barack_Obama.jpg"  alt="Your Image">
     </div>
 
 <!--    loyalty credits-->
-    <mat-list style="margin-top: 3vh">
+    <mat-list style="margin-top: 20px">
       <mat-list-item>
         <div class="flex justify-between">
           <p class="text-gray-500">Loyalty Credits</p>
@@ -42,38 +42,42 @@
       </div>
       <!--buttons-->
       <div class="my-2 ml-2 flex">
-        <div style="border: none" class="flex flex-col space-y-2">
-          <div class="flex space-x-3">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
-              <p style="margin-top: -4px">Mexican</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Swedish</p>
-            </mat-button-toggle>
+        <div style="border: none" class="flex min-[1000px]:flex-col max-[1000px]:flex-row  min-[1000px]:space-y-2 max-[1000px]:space-x-2  ">
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-3">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Mexican</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Swedish</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Latvian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+            </div>
           </div>
-          <div class="flex space-x-2">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Latvian</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Italian</p>
-            </mat-button-toggle>
-          </div>
-          <div class="flex space-x-2">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Spanish</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">American</p>
-            </mat-button-toggle>
-          </div>
-          <div class="flex space-x-2">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Japanese</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Canadian</p>
-            </mat-button-toggle>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Spanish</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">American</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Italian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Canadian</p>
+              </mat-button-toggle>
+            </div>
           </div>
         </div>
       </div>
@@ -87,36 +91,47 @@
         <p class="font-medium text-gray-500 mt-2">Preferred Restaurants</p>
         <button mat-button color="primary">Edit</button>
       </div>
+
       <!--buttons-->
-      <div class="my-2 ml-2">
-        <div style="border: none" class="flex flex-col space-y-2">
-          <div class="flex space-x-3">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
-              <p style="margin-top: -4px">Fast food</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Fast casual</p>
-            </mat-button-toggle>
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex min-[1000px]:flex-col max-[1000px]:flex-row  min-[1000px]:space-y-2 max-[1000px]:space-x-2  ">
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-3">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Fast food</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Fast casual</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Latvian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Contemporary</p>
+              </mat-button-toggle>
+            </div>
           </div>
-
-          <div class="flex space-x-2">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Casual dining</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Cafés</p>
-            </mat-button-toggle>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Casual dining</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Cafés</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+            </div>
           </div>
-          <div>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Contemporary</p>
-            </mat-button-toggle>
-          </div>
-
         </div>
       </div>
-    </div>
 
+    </div>
 
     <mat-divider style="margin: 20px 0 20px 0;width: 15vw"></mat-divider>
     <!--preferred Restaurant types-->
@@ -126,48 +141,51 @@
         <p class="font-medium text-gray-500 mt-2">Preferred Restaurants Types</p>
         <button mat-button color="primary">Edit</button>
       </div>
-      <!--buttons-->
-      <div class="my-2 ml-2">
-        <div style="border: none" class="flex flex-col space-y-2">
-          <div class="flex space-x-3">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
-              <p style="margin-top: -4px">Italian</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Sushi</p>
-            </mat-button-toggle>
-          </div>
-          <div class="flex space-x-3">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Mexican</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Vegetarian</p>
-            </mat-button-toggle>
-          </div>
-          <div class="flex space-x-3">
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Indian</p>
-            </mat-button-toggle>
-            <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
-              <p style="margin-top: -4px">Barbecue</p>
-            </mat-button-toggle>
-          </div>
 
+      <!--buttons-->
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex min-[1000px]:flex-col max-[1000px]:flex-row  min-[1000px]:space-y-2 max-[1000px]:space-x-2  ">
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-3">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Vegetarian</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Mexican</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Sushi</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Indian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Barbecue</p>
+              </mat-button-toggle>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-
   </div>
 
 <!--  Right-->
-  <div class="mx-5">
+  <div class="mx-3">
 
 <!-- Loyalty-->
     <p class="text-3xl font-medium text-gray-600">Loyalty</p>
     <mat-divider style="margin:10px 0 20px 0;width: 40vw"></mat-divider>
-    <mat-card class="px-10 py-3">
+    <mat-card class="px-10 py-3 min-[1000px]:w-[740px] max-[1000px]:w-[600px]">
       <div>
         <p class="text-xl">Available Credits</p>
         <p class="text-gray-500">Subtitle</p>
@@ -193,7 +211,7 @@
     <p class="text-3xl font-medium text-gray-600 " style="margin-top: 40px">Upcoming Reservations</p>
     <mat-divider style="margin:10px 0 20px 0;width: 40vw"></mat-divider>
 
-    <div>
+    <div class="min-[1000px]:w-[740px] max-[1000px]:w-[600px]">
       <div class="flex justify-between">
         <!--Reserve-->
         <mat-card matRipple style="width: 350px;border: 1px solid #ccc;border-radius: 5%" class="cursor-pointer" >
@@ -332,15 +350,15 @@
 
 
     <!--Favourite Restaurants-->
-    <div>
+    <div class="min-[1000px]:w-[740px] max-[1000px]:w-[600px]">
       <div class="flex justify-between">
         <p class="text-3xl font-medium text-gray-600" style="margin-top: 40px;width: 33vh;">Favourite Restaurants</p>
         <mat-paginator [pageSizeOptions]="[9]" class="mt-9" style="font-size: 15px;color: #666666;width: 42vh;"></mat-paginator>
       </div>
     </div>
 
-    <mat-divider style="margin:10px 0 20px 0;width: 40vw"></mat-divider>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mx-4 mb-10">
+    <mat-divider style="margin:10px 0 20px 0" class="min-[1000px]:w-[740px] max-[1000px]:w-[600px]"></mat-divider>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mx-4 mb-10 min-[1000px]:w-[740px] max-[1000px]:w-[600px]">
 
       <div *ngFor="let favPlaceItem of obs | async">
         <!--One Card-->

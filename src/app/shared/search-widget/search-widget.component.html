@@ -1,17 +1,17 @@
-<div class="w-[1280px] h-[80px] bg-white rounded-[35px] flex">
-  <div class="ml-7 mr-4">
+<div class="min-[1320px]:w-[1280px] min-[1000px]:w-[950px] h-[80px] bg-white rounded-[35px] flex">
+  <div class="ml-4">
     <app-custom></app-custom>
   </div>
-  <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control m-3" [(ngModel)]="model" [ngbTypeahead]="search"  />
+  <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control my-3" [(ngModel)]="model" [ngbTypeahead]="search"  />
   <input type="text"
          placeholder="When ? (Today)"
-         class="form-control m-3"
+         class="form-control my-3"
          bsDatepicker
          [bsConfig]="{ isAnimated: true }">
-  <input placeholder="At what time ? (Anytime)" class="form-control m-3" [ngxTimepicker]="picker">
+  <input placeholder="At what time ? (Anytime)" class="form-control my-3" [ngxTimepicker]="picker">
   <ngx-material-timepicker #picker></ngx-material-timepicker>
 
-  <div ngbDropdown class="m-3">
+  <div ngbDropdown class="my-3 mr-3">
     <button type="button" class="form-control dropdown-toggle flex justify-evenly h-12 w-40 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>
       <mat-icon class="mt-1">people</mat-icon>
       <span class="mt-1">People</span>
