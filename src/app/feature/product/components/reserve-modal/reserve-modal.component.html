@@ -1,7 +1,7 @@
 <div mat-dialog-container>
 <div mat-dialog-title>
   <div class="filtersSheet__header">
-    <div class="reserve-title">Reserve</div>
+    <div class="text-2xl">Reserve</div>
     <button mat-icon-button mat-dialog-close class="clear-icon-button">
       <mat-icon>clear</mat-icon>
     </button>
@@ -12,7 +12,7 @@
 
     <mat-stepper [linear]="isLinear" #stepper>
       <mat-step [completed]="stepOneCompleted" #stepOne>
-        <ng-template matStepLabel>Step Title</ng-template>
+        <ng-template matStepLabel>Step 1</ng-template>
         <div class="blockContainer">
           <div class="blockContentItem blockContentItem--mobile">
             <img class="blockContentItem__image" src="../../../assets/img/svg/signin-01.svg">
@@ -55,7 +55,7 @@
         </div>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
-        <ng-template matStepLabel>Step Title</ng-template>
+        <ng-template matStepLabel>Step 2</ng-template>
         <form [formGroup]="signInFormGroup" *ngIf="signIn">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -108,6 +108,10 @@
               <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Password</mat-label>
                 <input type="password" matInput placeholder="Password" formControlName="password">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="Confirm Password" formControlName="confirmpassword" required>
               </mat-form-field>
             </div>
           </div>
@@ -167,7 +171,7 @@
         </form>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Step Title</ng-template>
+        <ng-template matStepLabel>Done</ng-template>
         <p class="text-2xl mb-3 text-black">You are now done.</p>
         <app-items-summary></app-items-summary>
         <div class="labeledFormGroup">
@@ -215,9 +219,9 @@
   <ng-template #bigScreen>
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <mat-step [completed]="stepOneCompleted" #stepOne>
-        <ng-template matStepLabel>Step Title</ng-template>
+        <ng-template matStepLabel>Step 1</ng-template>
         <div class="c-title c-title--border">
-          <div class="c-title--primary c-title--medium">Step Title</div>
+          <div class="c-title--primary c-title--medium">You’re almost done!</div>
         </div>
         <div class="blockContainer">
           <div class="blockContentItem">
@@ -251,7 +255,7 @@
         </div>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
-        <ng-template matStepLabel>Step Title</ng-template>
+        <ng-template matStepLabel>Step 2</ng-template>
         <form [formGroup]="signInFormGroup" *ngIf="signIn">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
@@ -308,6 +312,10 @@
               <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Password</mat-label>
                 <input type="password" matInput placeholder="Password" formControlName="password" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="Confirm Password" formControlName="confirmpassword" required>
               </mat-form-field>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6">

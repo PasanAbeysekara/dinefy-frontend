@@ -133,7 +133,8 @@ export class ReserveModalComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      confirmpassword: ['', Validators.required]
     });
 
     this.guestFormGroup = this.formBuilder.group({
