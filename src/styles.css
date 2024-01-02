@@ -1,0 +1,23 @@
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { margin: 0;
+  font-family: Calibri, serif }
+/* Define color variables */
+:root {
+  --color1: #4b2870; /* Dark purple */
+  --color2: #eee8f6; /* Light purple */
+  --color3: #666; /* Dark gray */
+  --foreground: #000000; /* Black text color for foreground */
+  --divider: #bdbdbd; /* Grey divider color */
+  --secondary-text: #858585; /* Grey secondary text color */
+}
+
+*, ::before, ::after {
+  border-style: none;
+}
+

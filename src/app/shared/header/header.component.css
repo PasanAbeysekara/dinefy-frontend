@@ -1,0 +1,58 @@
+/* app.component.css */
+
+.container {
+  position: relative;
+  padding-top: 70px; /* Adjust based on the height of your sticky header */
+
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: transparent;
+  transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+
+.header.scrolled {
+  background-color: #f3f3f3; /* Use your preferred light gray color code */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  float:left;
+  padding-left:20px;
+}
+
+.btn-container{
+  float:right;
+}
+
+.btn {
+  background-color: #3490dc; /* Adjust based on your button color */
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content {
+  margin-top: 90px; /* Adjust based on the height of your sticky header */
+}
+
+.btn-container{
+display: flex; justify-content: flex-end
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+}
+
+.list-item-content {
+  display: flex;
+  align-items: center;
+}

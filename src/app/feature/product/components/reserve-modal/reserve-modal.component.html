@@ -1,0 +1,427 @@
+<div mat-dialog-container>
+<div mat-dialog-title>
+  <div class="filtersSheet__header">
+    <div class="text-2xl">Reserve</div>
+    <button mat-icon-button mat-dialog-close class="clear-icon-button">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>
+<div mat-dialog-content>
+  <ng-template [ngIf]="smallScreen" [ngIfElse]="bigScreen">
+
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [completed]="stepOneCompleted" #stepOne>
+        <ng-template matStepLabel>Step 1</ng-template>
+        <div class="blockContainer">
+          <div class="blockContentItem blockContentItem--mobile">
+            <img class="blockContentItem__image" src="../../../assets/img/svg/signin-01.svg">
+            <div class="">
+              <div class="blockContentItem__text">Welcome back! Sign in to access your account.</div>
+              <button mat-stroked-button color="primary" matStepperNext (click)="userJourneyMange('signIn')">Sign
+                In</button>
+            </div>
+
+          </div>
+          <div class="blockContentItem blockContentItem--mobile">
+            <img class="blockContentItem__image" src="../../../assets/img/svg/signup-01.svg">
+            <div class="">
+              <div class="blockContentItem__text">New here? Sign up to unlock exclusive features.</div>
+              <button mat-stroked-button color="primary" matStepperNext (click)="userJourneyMange('signUp')">Sign
+                Up</button>
+            </div>
+
+          </div>
+          <div class="blockContentItem blockContentItem--mobile">
+            <img class="blockContentItem__image" src="../../../assets/img/svg/guest-01.svg">
+            <div class="">
+              <div class="blockContentItem__text">Explore freely as a guest with no commitment. &nbsp;</div>
+              <button mat-stroked-button color="primary" matStepperNext class="whitespace-nowrap" (click)="userJourneyMange('guest')">Continue As
+                A Guest</button>
+            </div>
+
+          </div>
+
+        </div>
+        <hr>
+        <div class="blockContentItem__text">Continue With</div>
+        <div class="erg-btn--list btn-group-user">
+          <button mat-button>
+            <i class="fa-brands fa-google"></i> Google
+          </button>
+          <button mat-button>
+            <i class="fa-brands fa-facebook"></i> Facebook
+          </button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Step 2</ng-template>
+        <form [formGroup]="signInFormGroup" *ngIf="signIn">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="c-title c-title--border">
+                <div class="c-title--primary c-title--medium">Sign In</div>
+              </div>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="mat-dialog-actions__spaced">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+
+          <div class="erg-btn--list erg-btn--list--center">
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-google"></i> Login With Google
+            </button>
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-facebook"></i> Login With Facebook
+            </button>
+          </div>
+        </form>
+        <form [formGroup]="signUpFormGroup" *ngIf="signUp">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="c-title c-title--border">
+                <div class="c-title--primary c-title--medium">Sign Up</div>
+              </div>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="firstname">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" formControlName="lastname">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="Confirm Password" formControlName="confirmpassword" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="mat-dialog-actions__spaced">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+
+          <div class="erg-btn--list erg-btn--list--center">
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-google"></i> Login With Google
+            </button>
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-facebook"></i> Login With Facebook
+            </button>
+          </div>
+        </form>
+        <form [formGroup]="guestFormGroup" *ngIf="guest">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="c-title c-title--border">
+                <div class="c-title--primary c-title--medium">Guest</div>
+              </div>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="firstname">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" formControlName="lastname">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Mobile Number</mat-label>
+                <input type="text" matInput placeholder="Mobile" formControlName="mobile">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="mat-dialog-actions__spaced">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext >Next</button>
+          </div>
+
+          <div class="erg-btn--list erg-btn--list--center">
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-google"></i> Login With Google
+            </button>
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-facebook"></i> Login With Facebook
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p class="text-2xl mb-3 text-black">You are now done.</p>
+        <app-items-summary></app-items-summary>
+        <div class="labeledFormGroup">
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Name</div>
+            <div class="labledForemItems__Value">Thomas Shelby</div>
+          </div>
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Email</div>
+            <div class="labledForemItems__Value">thomas&#64;shelby.com</div>
+          </div>
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Phone Number</div>
+            <div class="labledForemItems__Value">+0012345678</div>
+          </div>
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Address</div>
+            <div class="labledForemItems__Value">Small Heath, Birmingham, England</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 ">
+            <mat-form-field class="example-full-width" appearance="fill" class="w-full">
+              <mat-label>Special Requests</mat-label>
+              <textarea matInput placeholder="Ex. 100 Main St"  [(ngModel)]="specialRequests" name="specialRequests">1600 Amphitheatre Pkwy</textarea>
+            </mat-form-field>
+
+            <section class="example-section">
+              <mat-checkbox class="example-margin" color="primary" (change)="setOptions($event, 'child')" >Children</mat-checkbox>
+              <mat-checkbox style="margin-left: 16px" class="example-margin" color="primary" (change)="setOptions($event, 'veg')" >Veg
+              </mat-checkbox>
+            </section>
+          </div>
+        </div>
+
+        <div class="erg-btn--list--between mt-5">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button mat-flat-button color="primary" (click)="makeReservation()" mat-dialog-close>Make
+            Reservations</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+ </ng-template>
+
+  <ng-template #bigScreen>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [completed]="stepOneCompleted" #stepOne>
+        <ng-template matStepLabel>Step 1</ng-template>
+        <div class="c-title c-title--border">
+          <div class="c-title--primary c-title--medium">You’re almost done!</div>
+        </div>
+        <div class="blockContainer">
+          <div class="blockContentItem">
+            <img class="blockContentItem__image" src="../../../assets/img/svg/signin-01.svg">
+            <div class="blockContentItem__text">Welcome back! Sign in to access your account.</div>
+            <button mat-stroked-button color="primary" matStepperNext (click)="userJourneyMange('signIn')">Sign
+              In</button>
+          </div>
+          <div class="blockContentItem">
+            <img class="blockContentItem__image" src="../../../assets/img/svg/signup-01.svg">
+            <div class="blockContentItem__text">New here? Sign up to unlock exclusive features.</div>
+            <button mat-stroked-button color="primary" matStepperNext (click)="userJourneyMange('signUp')">Sign
+              Up</button>
+          </div>
+          <div class="blockContentItem">
+            <img class="blockContentItem__image" src="../../../assets/img/svg/guest-01.svg">
+            <div class="blockContentItem__text">Explore freely as a guest with no commitment. &nbsp;</div>
+            <button mat-stroked-button color="primary" matStepperNext class="whitespace-nowrap" (click)="userJourneyMange('guest')">Continue As A
+              Guest</button>
+          </div>
+
+        </div>
+        <hr>
+        <div class="erg-btn--list erg-btn--list--center">
+          <button mat-button class="whitespace-nowrap">
+            <i class="fa-brands fa-google"></i> Login With Google
+          </button>
+          <button mat-button class="whitespace-nowrap">
+            <i class="fa-brands fa-facebook"></i> Login With Facebook
+          </button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Step 2</ng-template>
+        <form [formGroup]="signInFormGroup" *ngIf="signIn">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="c-title c-title--border">
+                <div class="c-title--primary c-title--medium">Sign In</div>
+              </div>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full" >
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password" required>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <img class="blockContentItem__image" src="../../../assets/img/svg/signup-01.svg">
+            </div>
+          </div>
+
+          <div class="mat-dialog-actions__spaced">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+
+          <hr>
+          <div class="erg-btn--list erg-btn--list--center">
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-google"></i> Login With Google
+            </button>
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-facebook"></i> Login With Facebook
+            </button>
+          </div>
+        </form>
+        <form [formGroup]="signUpFormGroup" *ngIf="signUp">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="c-title c-title--border">
+                <div class="c-title--primary c-title--medium">Sign Up</div>
+              </div>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="firstname" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" formControlName="lastname" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName="password" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" matInput placeholder="Confirm Password" formControlName="confirmpassword" required>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <img class="blockContentItem__image" src="../../../assets/img/svg/signup-01.svg">
+            </div>
+          </div>
+
+          <div class="mat-dialog-actions__spaced">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+          <hr>
+          <div class="erg-btn--list erg-btn--list--center">
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-google"></i> Login With Google
+            </button>
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-facebook"></i> Login With Facebook
+            </button>
+          </div>
+        </form>
+        <form [formGroup]="guestFormGroup" *ngIf="guest">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="c-title c-title--border">
+                <div class="c-title--primary c-title--medium">Guest User</div>
+              </div>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="firstname" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full" >
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" formControlName="lastname" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Mobile Number</mat-label>
+                <input type="text" matInput placeholder="Mobile" formControlName="mobile" required>
+              </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <img class="blockContentItem__image" src="../../../assets/img/svg/signup-01.svg">
+            </div>
+          </div>
+
+          <div class="mat-dialog-actions__spaced">
+            <button mat-stroked-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+          <hr>
+          <div class="erg-btn--list erg-btn--list--center">
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-google"></i> Login With Google
+            </button>
+            <button mat-button class="whitespace-nowrap">
+              <i class="fa-brands fa-facebook"></i> Login With Facebook
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p class="text-2xl mb-3 text-black">You are now done.</p>
+        <app-items-summary></app-items-summary>
+        <div class="labeledFormGroup">
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Name</div>
+            <div class="labledForemItems__Value">Thomas Shelby</div>
+          </div>
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Email</div>
+            <div class="labledForemItems__Value">thomas&#64;shelby.com</div>
+          </div>
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Phone Number</div>
+            <div class="labledForemItems__Value">+0012345678</div>
+          </div>
+          <div class="labledForemItems">
+            <div class="labledForemItems__label">Address</div>
+            <div class="labledForemItems__Value">Small Heath, Birmingham, England</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 ">
+            <mat-form-field class="w-full" appearance="fill">
+              <mat-label>Special Requests</mat-label>
+              <textarea matInput placeholder="Ex. 100 Main St" [(ngModel)]="specialRequests" name="specialRequests">1600 Amphitheatre Pkwy</textarea>
+            </mat-form-field>
+            <section class="example-section">
+              <mat-checkbox color="primary" class="example-margin" (change)="setOptions($event, 'child')" >Children</mat-checkbox>
+              <mat-checkbox style="margin-left: 16px" color="primary" class="example-margin" (change)="setOptions($event, 'veg')" >Veg
+              </mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="erg-btn--list--between">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button mat-flat-button color="primary" (click)="makeReservation()" mat-dialog-close>Make
+            Reservations</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </ng-template>
+</div>
+</div>

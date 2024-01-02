@@ -1,0 +1,56 @@
+<div class="min-[1320px]:w-[1280px] min-[1000px]:w-[950px] h-[80px] bg-white rounded-[35px] flex">
+  <div class="ml-4">
+    <app-custom></app-custom>
+  </div>
+  <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control my-3" [(ngModel)]="model" [ngbTypeahead]="search"  />
+  <input type="text"
+         placeholder="When ? (Today)"
+         class="form-control my-3"
+         bsDatepicker
+         [bsConfig]="{ isAnimated: true }">
+  <input placeholder="At what time ? (Anytime)" class="form-control my-3" [ngxTimepicker]="picker">
+  <ngx-material-timepicker #picker></ngx-material-timepicker>
+
+  <div ngbDropdown class="my-3 mr-3">
+    <button type="button" class="form-control dropdown-toggle flex justify-evenly h-12 w-40 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>
+      <mat-icon class="mt-1">people</mat-icon>
+      <span class="mt-1">People</span>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+      <div class="flex justify-between">
+        <div class="mt-3 mx-4">
+          <p>Adults</p>
+        </div>
+        <div class="flex justify-between h-10 mr-4">
+          <button mat-icon-button (click)="decrementAdults()" class="mt-1">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">remove</mat-icon>
+          </button>
+          <input type="text" [(ngModel)]="valueAdults" class="w-3 h-5 mt-3" readonly/>
+          <button mat-icon-button (click)="incrementAdults()" class="mt-1">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="mt-3 mx-4">
+          <p>Children</p>
+        </div>
+        <div class="flex justify-between h-10 mr-4">
+          <button mat-icon-button (click)="decrementChildren()">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%">remove</mat-icon>
+          </button>
+          <input type="text" [(ngModel)]="valueChildren" class="w-3 h-5 mt-3" readonly/>
+          <button mat-icon-button (click)="incrementChildren()">
+            <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>

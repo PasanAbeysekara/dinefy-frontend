@@ -1,0 +1,42 @@
+<div class="section">
+  <div >
+    <div class="flex justify-between">
+      <div>
+        <p class="text-lg font-medium text-gray-700">Other Places to Explore</p>
+        <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
+      </div>
+      <button mat-button color="primary">See All</button>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <div class="flex items-center justify-center mx-3">
+      <button mat-icon-button (click)="owlCar.prev()" class="material-icons shadow-button">navigate_before</button>
+    </div>
+    <div class="scroll-section">
+      <owl-carousel-o [options]="customOptions"  #owlCar>
+        <ng-template carouselSlide>
+          <app-other-places-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/f0434856-0c7b-48df-a9b2-4f3e0f5176f5'"
+            [restaurantName]="'Mediterranean Delight'"
+          ></app-other-places-card>
+        </ng-template>
+        <ng-template carouselSlide >
+          <app-other-places-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/9912f000-0167-42df-8260-7591eeda555a'"
+            [restaurantName]="'Mediterranean Delight'"></app-other-places-card>
+        </ng-template>
+        <ng-template carouselSlide >
+          <app-other-places-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/d17f2a25-66bc-42aa-a503-1286def73659'"
+            [restaurantName]="'Mediterranean Delight'"
+          ></app-other-places-card>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+    <div class="flex items-center justify-center mx-2">
+      <button mat-icon-button (click)="owlCar.next()" class="material-icons shadow-button">navigate_next</button>
+    </div>
+
+  </div>
+
+</div>

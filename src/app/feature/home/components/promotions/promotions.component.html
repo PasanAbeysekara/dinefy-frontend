@@ -1,0 +1,47 @@
+<div class="section">
+  <div >
+    <div class="flex justify-between">
+      <div>
+        <p class="text-lg font-medium text-gray-700">Promotions</p>
+        <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
+      </div>
+      <button mat-button color="primary">See All</button>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <div class="flex items-center justify-center mx-3">
+      <button mat-icon-button (click)="owlCar.prev()" class="material-icons shadow-button">navigate_before</button>
+    </div>
+    <div class="scroll-section">
+      <owl-carousel-o [options]="customOptions"  #owlCar>
+        <ng-template carouselSlide>
+          <app-promotion-card
+          [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/4842dfcf-9bbf-4cbf-b255-57415d510d83'"
+          [cardAvatar]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/e9b8fcee-129d-4dcd-b7f5-fff2e042f2f3'"
+          [restaurantName]="'Coconut Grove Kitchen'"
+          [reservationPrice]="'2750'"
+          [reservePeopleCount]="'2'"
+          [reviewsCount]="'321'"
+          [ratingsCount]="4"
+          ></app-promotion-card>
+        </ng-template>
+        <ng-template carouselSlide >
+          <app-promotion-card
+            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/a7b54a84-d419-4089-af40-ac58edd9f4f6'"
+            [cardAvatar]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/365d7cf8-f10e-4b6e-b4ff-531a41fe8773'"
+            [restaurantName]="'Sunset Grill and Chill'"
+            [reservationPrice]="'2750'"
+            [reservePeopleCount]="'3'"
+            [reviewsCount]="'202'"
+            [ratingsCount]="3"
+          ></app-promotion-card>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+    <div class="flex items-center justify-center mx-2">
+      <button mat-icon-button (click)="owlCar.next()" class="material-icons shadow-button">navigate_next</button>
+    </div>
+
+  </div>
+
+</div>
