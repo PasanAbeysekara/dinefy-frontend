@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>More Filters</h2>
+<mat-dialog-content>
+  <section class="example-section" [formGroup]="filters">
+    <h4>Filter titles:</h4>
+    <div class="flex justify-around">
+      <div class="">
+        <p><mat-checkbox formControlName="filteroption1">Filter Option 1</mat-checkbox></p>
+        <p><mat-checkbox formControlName="filteroption2">Filter Option 2</mat-checkbox></p>
+        <p><mat-checkbox formControlName="filteroption3">Filter Option 3</mat-checkbox></p>
+      </div>
+      <div class="">
+        <p><mat-checkbox formControlName="filteroption4">Filter Option 4</mat-checkbox></p>
+        <p><mat-checkbox formControlName="filteroption5">Filter Option 5</mat-checkbox></p>
+        <p><mat-checkbox formControlName="filteroption6">Filter Option 6</mat-checkbox></p>
+      </div>
+    </div>
+  </section>
+</mat-dialog-content>
+<mat-dialog-actions class="flex justify-between space-x-[230px]">
+  <div class="">
+    <button mat-button (click)="clearFilters()">Clear</button>
+  </div>
+  <div class="">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Apply</button>
+  </div>
+</mat-dialog-actions>

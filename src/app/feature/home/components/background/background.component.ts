@@ -7,6 +7,7 @@ import {QuickSearchComponent} from "../quick-search/quick-search.component";
 import {PromotionsComponent} from "../promotions/promotions.component";
 import {RecommendationsComponent} from "../recommendations/recommendations.component";
 import {MatButtonModule} from "@angular/material/button";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-background',
@@ -19,7 +20,8 @@ import {MatButtonModule} from "@angular/material/button";
     QuickSearchComponent,
     PromotionsComponent,
     RecommendationsComponent,
-    MatButtonModule
+    MatButtonModule,
+    RouterLink
   ],
   styleUrls: ['./background.component.css']
 })

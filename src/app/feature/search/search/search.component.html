@@ -1,2 +1,107 @@
-<p>search works!</p>
-<mat-button-toggle (click)="redirectToRestaurant()">Restaurant A</mat-button-toggle>
+<!--<p>search works!</p>-->
+<!--<mat-button-toggle (click)="redirectToRestaurant()">Restaurant A</mat-button-toggle>-->
+
+
+<section class="sticky top-0 z-10 py-3 bg-white flex justify-center items-center shadow-md">
+  <div class="mt-24">
+    <app-search-widget></app-search-widget>
+    <div class="flex justify-center space-x-4 ml-4">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Facilities</mat-label>
+          <mat-select [formControl]="facilities" multiple>
+            <mat-select-trigger>
+              {{facilities.value?.[0] || ''}}
+              @if ((facilities.value?.length || 0) > 1) {
+                <span class="example-additional-selection">
+          (+{{(facilities.value?.length || 0) - 1}} {{facilities.value?.length === 2 ? 'other' : 'others'}})
+        </span>
+              }
+            </mat-select-trigger>
+            @for (faclity of facilityList; track faclity) {
+              <mat-option [value]="faclity">{{faclity}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Tags</mat-label>
+          <mat-select [formControl]="tags" multiple>
+            <mat-select-trigger>
+              {{tags.value?.[0] || ''}}
+              @if ((tags.value?.length || 0) > 1) {
+                <span class="example-additional-selection">
+          (+{{(tags.value?.length || 0) - 1}} {{tags.value?.length === 2 ? 'other' : 'others'}})
+        </span>
+              }
+            </mat-select-trigger>
+            @for (tag of tagList; track tag) {
+              <mat-option [value]="tag">{{tag}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Sort by</mat-label>
+          <mat-select>
+            @for (sortOption of sortOptionList; track sortOption) {
+              <mat-option [value]="sortOption">{{sortOption}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-stroked-button (click)="openDialogPrice()" class="w-52" style="height: 55px;border-color: lightslategray;color: lightslategray">
+          <div class="flex justify-between space-x-28 mt-2">
+            <p class="mt-1">Price</p>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </div>
+
+        </button>
+      </div>
+
+      <div>
+        <button mat-stroked-button (click)="openDialogFilters()" class="w-52" style="height: 55px;border-color: lightslategray;color: lightslategray">
+          <div class="flex justify-between space-x-28 mt-2">
+            <p class="mt-1">Filters</p>
+            <mat-icon>filter_list</mat-icon>
+          </div>
+
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="flex justify-center items-center mt-3">
+  <div>
+    <app-restaurent-result routerLink="/product/rest-code-1"></app-restaurent-result>
+    <app-restaurent-result routerLink="/product/rest-code-1"></app-restaurent-result>
+    <div class="card w-[1250px]">
+      <div class="border-round border-1 surface-border p-4 surface-card">
+        <div class="flex mb-3">
+          <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+          <div>
+            <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height=".5rem"></p-skeleton>
+          </div>
+        </div>
+        <p-skeleton width="100%" height="150px"></p-skeleton>
+        <div class="flex justify-content-between mt-3">
+          <p-skeleton width="4rem" height="2rem"></p-skeleton>
+          <p-skeleton width="4rem" height="2rem"></p-skeleton>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

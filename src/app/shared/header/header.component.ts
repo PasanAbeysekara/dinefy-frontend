@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../feature/home/components/login/login.component';
 import { RegisterComponent } from '../../feature/home/components/register/register.component';
 import { HeaderService } from './header.service';
-import { Router } from '@angular/router';
+import {Router, RouterLinkActive} from '@angular/router';
 import { LoginService } from "../../services/login.service";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
@@ -26,7 +26,8 @@ import { MatListModule } from '@angular/material/list';
     MatMenuModule,
     MatIconModule,
     MatListModule,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class HeaderComponent implements OnInit {
