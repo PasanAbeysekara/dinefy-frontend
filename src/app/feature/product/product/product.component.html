@@ -1,3 +1,32 @@
-<p>product works!</p>
+
+<!--Gallery-->
+<div class="flex justify-center mt-28">
+    <app-product-images></app-product-images>
+</div>
+
+
+<div class="container-md mx-auto flex justify-between">
+
+<!--Left-->
+  <div class="w-2/3">
+    <mat-tab-group class="w-[700px]">
+      <mat-tab label="Overview">  </mat-tab>
+      <mat-tab label="Facilities">  </mat-tab>
+      <mat-tab label="Menu">  </mat-tab>
+      <mat-tab label="Map">  </mat-tab>
+      <mat-tab label="Media">  </mat-tab>
+      <mat-tab label="Reviews">  </mat-tab>
+    </mat-tab-group>
+    <mat-divider></mat-divider>
+    <app-product-overview></app-product-overview>
+    <app-product-facilities></app-product-facilities>
+  </div>
+
+<!--Right-->
+  <div class="w-1/3 mx-16 mt-20">
+    <app-bottom-sheet-reserve-sheet></app-bottom-sheet-reserve-sheet>
+  </div>
+</div>
+
 <mat-button-toggle (click)="redirectToCheckout()">Checkout</mat-button-toggle>
-<mat-button-toggle class="mt-20" (click)="reserve()"> Make Reservation </mat-button-toggle>
+<mat-button-toggle (click)="reserve()"> Make Reservation </mat-button-toggle>

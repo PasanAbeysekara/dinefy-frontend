@@ -1,27 +1,41 @@
-import { Component,OnInit } from '@angular/core';
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {Router} from "@angular/router";
-import { ReserveModalComponent } from '../components/reserve-modal/reserve-modal.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ViewportRuler } from '@angular/cdk/scrolling';
+import { Component } from '@angular/core';
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ViewportRuler} from "@angular/cdk/scrolling";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ProductImagesComponent} from "../components/product-images/product-images.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {ReserveModalComponent} from "../components/reserve-modal/reserve-modal.component";
+import {MatDividerModule} from "@angular/material/divider";
+import {ProductOverviewComponent} from "../components/product-overview/product-overview.component";
+import {
+  BottomSheetReserveSheetComponent
+} from "../components/bottom-sheet-reserve-sheet/bottom-sheet-reserve-sheet.component";
+import {ProductFacilitiesComponent} from "../components/product-facilities/product-facilities.component";
 
 @Component({
   selector: 'app-product',
   standalone: true,
-    providers: [
-      MatDialog,
-    ],
   imports: [
     MatButtonToggleModule,
+    ProductImagesComponent,
+    MatTabsModule,
+    ReserveModalComponent,
+    MatDividerModule,
+    ProductOverviewComponent,
+    BottomSheetReserveSheetComponent,
+    ProductFacilitiesComponent,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent implements OnInit  {
+
+
+export class ProductComponent {
 
   dialogRef: MatDialogRef<any> | null = null; // Initialize as null
-
   constructor(private router: Router,private dialog: MatDialog,private viewportRuler: ViewportRuler) { }
+
 
   redirectToCheckout() {
     const linkToRedirect = '/product/rest-code-1/checkout'; // Replace with the actual link
@@ -35,26 +49,12 @@ export class ProductComponent implements OnInit  {
       width: isSmallScreen ? '100%' : '60%',
       panelClass: ['modal--medium', 'modal--stepper'],
       data: {}
-   });
+    });
 
     this.dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // this.animal = result;
     });
-  }
-
-  setDialogWidth(): void {
-      if (this.dialogRef && this.dialogRef.componentInstance) {
-        const isSmallScreen = this.viewportRuler.getViewportSize().width < 600;
-        this.dialogRef.updateSize(isSmallScreen ? '100%' : '60%', '');
-      }
-  }
-
-  ngOnInit(): void {
-     // Set initial width based on screen size
-     this.setDialogWidth();
-     // Listen for window resize events
-     window.addEventListener('resize', this.setDialogWidth.bind(this)); // Use bind for correct context
   }
 
 }

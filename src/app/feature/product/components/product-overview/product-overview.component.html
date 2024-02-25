@@ -1,1 +1,27 @@
-<p>product-overview works!</p>
+<div class="mt-5">
+  <p class="text-3xl font-sans"> Machan Pannipitiya </p>
+  <p class="font-sans">Colombo 01, Sri Lanka </p>
+
+  <div class="flex space-x-1 text-gray-500">
+    <p>3/5</p>
+    <ngb-rating [rate]="4" class="text-red-500 text-md" />
+    <p>(396)</p>
+  </div>
+  <p class="text-gray-600"><span class="font-sans text-xl text-gray-900"> LKR3,200.00</span> / Approx 4 People</p>
+
+  <!--  description-->
+  <div class="font-sans text-[15px] mt-4">
+    <p class="text-gray-500">
+      Machang Pannipitiya, located in Colombo 01, Sri Lanka, is a vibrant and lively establishment that offers a perfect setting for relaxation and socializing. With a spacious and comfortable environment, it's an ideal place to unwind with friends after a hectic day or to catch up with them over lunch. The venue boasts a large screen where you can enjoy your favorite cricket matches or music videos, adding to the overall experience. Additionally, Machang Pannipitiya offers the opportunity to engage in a friendly game of pool, adding an element of fun and competition to your visit. Whether you're looking for a place to relax, socialize, or have some fun, Machang Pannipitiya has something for everyone.
+    </p>
+
+    <p class="my-2 text-gray-500" *ngIf="showFullDescription">
+      In addition to the entertainment options, Machang Pannipitiya also offers a diverse menu featuring a variety of delicious dishes. From Sri Lankan favorites to international cuisine, there's something to satisfy every palate. The bar serves a selection of refreshing beverages, including cocktails, mocktails, and a range of spirits. The friendly staff ensures that you have a memorable experience, and the lively atmosphere makes it a popular spot for locals and tourists alike. Whether you're looking for a place to relax, socialize, or enjoy a delicious meal, Machang Pannipitiya is the perfect destination.
+    </p>
+
+    <button (click)="showFullDescription = !showFullDescription" class="text-blue-500 hover:text-blue-700 focus:outline-none">
+      {{ showFullDescription ? 'See Less' : 'See More' }}
+    </button>
+  </div>
+
+</div>
