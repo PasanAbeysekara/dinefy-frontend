@@ -16,24 +16,26 @@ import {ProductMenuComponent} from "../components/product-menu/product-menu.comp
 import {ProductMapComponent} from "../components/product-map/product-map.component";
 import {ProductMediaComponent} from "../components/product-media/product-media.component";
 import {ProductReviewComponent} from "../components/product-review/product-review.component";
+import {ErgMenuComponent} from "../components/erg-menu/erg-menu.component";
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [
-    MatButtonToggleModule,
-    ProductImagesComponent,
-    MatTabsModule,
-    ReserveModalComponent,
-    MatDividerModule,
-    ProductOverviewComponent,
-    BottomSheetReserveSheetComponent,
-    ProductFacilitiesComponent,
-    ProductMenuComponent,
-    ProductMapComponent,
-    ProductMediaComponent,
-    ProductReviewComponent,
-  ],
+    imports: [
+        MatButtonToggleModule,
+        ProductImagesComponent,
+        MatTabsModule,
+        ReserveModalComponent,
+        MatDividerModule,
+        ProductOverviewComponent,
+        BottomSheetReserveSheetComponent,
+        ProductFacilitiesComponent,
+        ProductMenuComponent,
+        ProductMapComponent,
+        ProductMediaComponent,
+        ProductReviewComponent,
+        ErgMenuComponent,
+    ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })

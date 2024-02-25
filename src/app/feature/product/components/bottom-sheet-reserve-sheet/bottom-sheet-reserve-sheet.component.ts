@@ -23,6 +23,7 @@ import {ReserveModalComponent} from "../reserve-modal/reserve-modal.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {ViewportRuler} from "@angular/cdk/scrolling";
+import {ErgMenuComponent} from "../erg-menu/erg-menu.component";
 
 @Component({
   selector: 'app-bottom-sheet-reserve-sheet',
@@ -42,7 +43,7 @@ import {ViewportRuler} from "@angular/cdk/scrolling";
     NgbRating,
     MatInputModule,
     MatDatepickerModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, FormsModule, NgbDropdown, NgbDropdownMenu, NgbDropdownToggle, MatAutocompleteModule, ReactiveFormsModule, MatSelectModule, MatRadioModule
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, FormsModule, NgbDropdown, NgbDropdownMenu, NgbDropdownToggle, MatAutocompleteModule, ReactiveFormsModule, MatSelectModule, MatRadioModule, ErgMenuComponent
   ],
   templateUrl: './bottom-sheet-reserve-sheet.component.html',
   styleUrl: './bottom-sheet-reserve-sheet.component.css',

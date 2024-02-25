@@ -6,6 +6,7 @@ import {NgForOf} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-product-review',
@@ -16,7 +17,8 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
     SkeletonModule,
     NgForOf,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatButtonModule
   ],
   templateUrl: './product-review.component.html',
   styleUrl: './product-review.component.css',
