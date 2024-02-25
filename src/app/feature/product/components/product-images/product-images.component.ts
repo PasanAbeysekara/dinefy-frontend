@@ -14,12 +14,12 @@ export class ProductImagesComponent implements OnInit{
   ngOnInit() {
     // Set items array
     this.images = [
-      "https://lh3.googleusercontent.com/p/AF1QipPli3GgtZ83UmGvqbDHJgYqIYOa78YckL5Jj2KB=s680-w680-h510",
-      "https://lh3.googleusercontent.com/p/AF1QipO2aDqT9Hxka-v5oVfkLUfrVfAO-D5Vjz4rTN8R=s680-w680-h510",
-      "https://lh3.googleusercontent.com/p/AF1QipNPKTROB5QPdERdb7gWTRoJPp9AZOokOaxbw6XV=s680-w680-h510",
-      "https://lh3.googleusercontent.com/p/AF1QipOv-tiZh9oLnxBuGLC_VAxGgq5gIv9IMrcyM6aQ=s680-w680-h510",
-      "https://lh3.googleusercontent.com/p/AF1QipNk-UtcMD9ol1cm31bhMejfCMMjA6RnPnWoVJWi=s680-w680-h510",
-      "https://lh3.googleusercontent.com/p/AF1QipMQIhyp1s6KeruzJLHqBJVMpjyaMF7g-7zmgLn3=s680-w680-h510"
+      "https://d3plttq4n63nzt.cloudfront.net/machn-1",
+      "https://d3plttq4n63nzt.cloudfront.net/machn-2",
+      "https://d3plttq4n63nzt.cloudfront.net/machn-3",
+      "https://d3plttq4n63nzt.cloudfront.net/machn-4",
+      "https://d3plttq4n63nzt.cloudfront.net/machn-5",
+      "https://d3plttq4n63nzt.cloudfront.net/machn-6"
   ];
   }
 }
