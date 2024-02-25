@@ -12,6 +12,10 @@ import {
   BottomSheetReserveSheetComponent
 } from "../components/bottom-sheet-reserve-sheet/bottom-sheet-reserve-sheet.component";
 import {ProductFacilitiesComponent} from "../components/product-facilities/product-facilities.component";
+import {ProductMenuComponent} from "../components/product-menu/product-menu.component";
+import {ProductMapComponent} from "../components/product-map/product-map.component";
+import {ProductMediaComponent} from "../components/product-media/product-media.component";
+import {ProductReviewComponent} from "../components/product-review/product-review.component";
 
 @Component({
   selector: 'app-product',
@@ -25,6 +29,10 @@ import {ProductFacilitiesComponent} from "../components/product-facilities/produ
     ProductOverviewComponent,
     BottomSheetReserveSheetComponent,
     ProductFacilitiesComponent,
+    ProductMenuComponent,
+    ProductMapComponent,
+    ProductMediaComponent,
+    ProductReviewComponent,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
