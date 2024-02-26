@@ -1,16 +1,16 @@
-<div class="section bg-emerald-500 ">
-  <div class="">
-    <div class="flex justify-between bg-amber-200">
+<div class="section w-screen">
+  <div class="flex justify-center">
+    <div class="flex justify-between w-[430px]">
       <div>
-        <p class="text-lg font-medium text-gray-700"> Recommended Places</p>
-        <p class="text-gray-500 mb-3">Based on traveller visits and local insights </p>
+        <p class="text-lg font-medium text-gray-700">Recommended Places</p>
+        <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
       </div>
       <button mat-button color="primary">See All</button>
     </div>
   </div>
 
-  <div class="flex justify-center">
-    <div class="cards-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div class="flex mx-auto w-[430px]">
+    <div class="cards-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" >
       <app-recommendation-card
         [cardImage]="'https://media-cdn.tripadvisor.com/media/photo-s/0c/af/fe/ab/front-view-of-restaurant.jpg'"
         [cardAvatar]="'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png'"
@@ -93,6 +93,7 @@
       ></app-recommendation-card>
     </div>
   </div>
+
 
 
 </div>

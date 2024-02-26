@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
-// import {HomeModule} from "../../home.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogClose} from "@angular/material/dialog";
@@ -8,7 +6,12 @@ import {PlaceTileComponent} from "../place-tile/place-tile.component";
 import {NgForOf} from "@angular/common";
 import {PromotionCardComponent} from "../promotions/promotion-card/promotion-card.component";
 import {OtherPlacesCardComponent} from "./other-places-card/other-places-card.component";
-import {RecommendationCardComponent} from "../recommendations/recommendation-card/recommendation-card.component";
+import {RecommendationCardComponent} from "../recommendation/recommendation-card/recommendation-card.component";
+import {CarouselModule} from "primeng/carousel";
+import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
+import {SharedModule} from "primeng/api";
+import {Product} from "../promotions/model/product";
+import {Otherplace} from "./model/other-place";
 
 @Component({
   selector: 'app-other-places',
@@ -24,37 +27,57 @@ import {RecommendationCardComponent} from "../recommendations/recommendation-car
     NgForOf,
     PromotionCardComponent,
     OtherPlacesCardComponent,
-    RecommendationCardComponent
+    RecommendationCardComponent,
+    CarouselModule,
+    NgbRating,
+    SharedModule
   ],
   styleUrls: ['./other-places.component.css']
 })
 export class OtherPlacesComponent{
+  otherPlaces: Otherplace[] = [];
 
-  title: "owl-carousel" | undefined;
-  customOptions: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
+  responsiveOptions: any[] = [];
+
+  ngOnInit() {
+    this.otherPlaces = [
+      {
+        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
+        restaurantName: 'Summer Sale',
       },
-      400: {
-        items: 2
+      {
+        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
+        restaurantName: 'Holiday Savings',
       },
-      740: {
-        items: 3
+      {
+        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
+        restaurantName: 'Winter Chill',
       },
-      940: {
-        items: 4
+      {
+        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
+        restaurantName: 'Spring Fling',
       }
-    },
-    nav: true
+    ]
+
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
+
 }
 
 

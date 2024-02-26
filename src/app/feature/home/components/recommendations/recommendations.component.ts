@@ -3,7 +3,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {ProductsItemComponent} from "../products-item/products-item.component";
 import {CarouselModule} from "ngx-owl-carousel-o";
 import {PromotionCardComponent} from "../promotions/promotion-card/promotion-card.component";
-import {RecommendationCardComponent} from "./recommendation-card/recommendation-card.component";
+import {RecommendationCardComponent} from "../recommendation/recommendation-card/recommendation-card.component";
 
 @Component({
   selector: 'app-recommendations',

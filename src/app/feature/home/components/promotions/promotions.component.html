@@ -1,6 +1,6 @@
-<div class="section">
-  <div >
-    <div class="flex justify-between">
+<div class="section w-screen mt-10 ">
+  <div class="flex justify-center">
+    <div class="flex justify-between w-[430px]">
       <div>
         <p class="text-lg font-medium text-gray-700">Promotions</p>
         <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
@@ -8,40 +8,44 @@
       <button mat-button color="primary">See All</button>
     </div>
   </div>
-  <div class="flex justify-center">
-    <div class="flex items-center justify-center mx-3">
-      <button mat-icon-button (click)="owlCar.prev()" class="material-icons shadow-button">navigate_before</button>
-    </div>
-    <div class="scroll-section">
-      <owl-carousel-o [options]="customOptions"  #owlCar>
-        <ng-template carouselSlide>
-          <app-promotion-card
-          [cardImage]="'https://d3plttq4n63nzt.cloudfront.net/Rectangle_73.png'"
-          [cardAvatar]="'https://d3plttq4n63nzt.cloudfront.net/Ellipse_20.png'"
-          [restaurantName]="'Coconut Grove Kitchen'"
-          [reservationPrice]="'2750'"
-          [reservePeopleCount]="'2'"
-          [reviewsCount]="'321'"
-          [ratingsCount]="4"
-          ></app-promotion-card>
-        </ng-template>
-        <ng-template carouselSlide >
-          <app-promotion-card
-            [cardImage]="'https://d3plttq4n63nzt.cloudfront.net/Rectangle_74.png'"
-            [cardAvatar]="'https://d3plttq4n63nzt.cloudfront.net/Ellipse_21.png'"
-            [restaurantName]="'Sunset Grill and Chill'"
-            [reservationPrice]="'2750'"
-            [reservePeopleCount]="'3'"
-            [reviewsCount]="'202'"
-            [ratingsCount]="3"
-          ></app-promotion-card>
-        </ng-template>
-      </owl-carousel-o>
-    </div>
-    <div class="flex items-center justify-center mx-2">
-      <button mat-icon-button (click)="owlCar.next()" class="material-icons shadow-button">navigate_next</button>
-    </div>
 
+  <div class="flex justify-center">
+    <div class="w-[500px] h-[300px]">
+      <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-product pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 text-center px-3 flex border-orange-400 border-solid rounded-md py-3">
+            <div class="mb-3">
+              <img [src]="product.image" [alt]="product.name" class="shadow-2 h-[200px]"/>
+            </div>
+<!--            <div>-->
+<!--              <h4 class="mb-1">{{ product.name }}</h4>-->
+<!--              <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6>-->
+<!--              <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>-->
+<!--              <div class="mt-5 flex align-items-center justify-content-center gap-2">-->
+<!--                <p-button icon="pi pi-search" [rounded]="true" />-->
+<!--                <p-button icon="pi pi-star-fill" [rounded]="true" severity="secondary" />-->
+<!--              </div>-->
+<!--            </div>-->
+            <div class="flex flex-col justify-center">
+
+              <div class="flex">
+                <img class="avatar w-14 ml-2" [src]="product.avatar">
+                <div class="mt-2">
+                  <ngb-rating [rate]="product.rating" class="text-amber-500 ml-2" />
+                  <!--        <span class="text-gray-700 text-sm">(396)</span>-->
+                  <p class="text-gray-700 text-sm">({{ product.reviewCount }})</p>
+                </div>
+              </div>
+              <div class="ml-5 " id="text-section">
+                <p class="text-xl font-medium">{{product.name}}</p>
+                <p class="text-2xl font-mono" style="margin-bottom: 0">LKR {{ product.price }}</p>
+                <p class="text-gray-500 " >Approx {{ product.approxPeople }}  Person</p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
   </div>
 
 </div>

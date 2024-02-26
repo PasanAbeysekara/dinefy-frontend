@@ -1,20 +1,29 @@
-<div class="min-[1320px]:w-[1280px] min-[1000px]:w-[950px] h-[80px] bg-white rounded-[35px] flex">
+<div class="min-[1320px]:w-[1280px] min-[1000px]:w-[950px] bg-white rounded-[10px] flex flex-col h-[330px]">
+
+<!--  what ? -->
   <div class="ml-4">
     <app-custom></app-custom>
   </div>
-  <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control my-3" [(ngModel)]="model" [ngbTypeahead]="search"  />
+
+<!--  Where ? -->
+  <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control mt-3 ml-4 py-[12px] w-[400px]" [(ngModel)]="model" [ngbTypeahead]="search"  />
+
+<!--  Date ? -->
   <input type="text"
          placeholder="When ? (Today)"
-         class="form-control my-3"
+         class="form-control mt-3  ml-4 py-[12px] w-[400px]"
          bsDatepicker
          [bsConfig]="{ isAnimated: true }">
-  <input placeholder="At what time ? (Anytime)" class="form-control my-3" [ngxTimepicker]="picker">
+
+<!--  Time ? -->
+  <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] w-[400px]" [ngxTimepicker]="picker">
   <ngx-material-timepicker #picker></ngx-material-timepicker>
 
+<!--  People ? -->
   <div ngbDropdown class="my-3 mr-3">
-    <button type="button" class="form-control dropdown-toggle flex justify-evenly h-12 w-40 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>
+    <button type="button" class="form-control dropdown-toggle flex h-12 w-[400px] ml-4 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>
       <mat-icon class="mt-1">people</mat-icon>
-      <span class="mt-1">People</span>
+      <span class="mt-1 ml-3">People</span>
     </button>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
 
