@@ -39,7 +39,7 @@ export class PromotionsComponent implements OnInit{
       {
         image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
         avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
-        name: 'Summer Sale',
+        name: 'Sun Sale',
         price: 10.99,
         inventoryStatus: 'In Stock',
         rating:4,
@@ -80,17 +80,17 @@ export class PromotionsComponent implements OnInit{
 
     this.responsiveOptions = [
       {
-        breakpoint: '1199px',
-        numVisible: 1,
+        breakpoint: '1536px',
+        numVisible: 3,
         numScroll: 1
       },
       {
-        breakpoint: '991px',
+        breakpoint: '1024px',
         numVisible: 2,
         numScroll: 1
       },
       {
-        breakpoint: '767px',
+        breakpoint: '768px',
         numVisible: 1,
         numScroll: 1
       }

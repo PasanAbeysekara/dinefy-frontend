@@ -4,6 +4,10 @@
   position: relative;
   transition: background 0.3s ease;
 }
+mat-card {
+  transition: none !important;
+  box-shadow: none !important;
+}
 
 .custom-card:hover{
   filter: brightness(70%) contrast(130%) saturate(120%);

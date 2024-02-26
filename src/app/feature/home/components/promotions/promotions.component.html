@@ -1,6 +1,6 @@
-<div class="section w-screen mt-10 ">
+<div class="w-screen mt-10 2xl:w-[1300px]">
   <div class="flex justify-center">
-    <div class="flex justify-between w-[430px]">
+    <div class="flex justify-between w-[430px] md:w-[630px] lg:w-[800px] 2xl:w-[1200px]">
       <div>
         <p class="text-lg font-medium text-gray-700">Promotions</p>
         <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="flex justify-center">
-    <div class="w-[500px] h-[300px]">
+    <div class="w-[500px] md:w-[720px] lg:w-[900px] 2xl:w-[1300px] h-[300px]">
       <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
         <ng-template let-product pTemplate="item">
           <div class="border-1 surface-border border-round m-2 text-center px-3 flex border-orange-400 border-solid rounded-md py-3">
@@ -28,9 +28,9 @@
 <!--            </div>-->
             <div class="flex flex-col justify-center">
 
-              <div class="flex">
+              <div class="flex md:max-2xl:justify-center">
                 <img class="avatar w-14 ml-2" [src]="product.avatar">
-                <div class="mt-2">
+                <div class="mt-2 md:max-2xl:hidden">
                   <ngb-rating [rate]="product.rating" class="text-amber-500 ml-2" />
                   <!--        <span class="text-gray-700 text-sm">(396)</span>-->
                   <p class="text-gray-700 text-sm">({{ product.reviewCount }})</p>
