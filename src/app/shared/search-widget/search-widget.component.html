@@ -1,4 +1,4 @@
-<div class=" bg-white rounded-[10px] xl:flex w-[430px] md:w-[600px] xl:w-[1200px] h-[340px] md:h-[160px] xl:h-[80px]">
+<div class=" bg-white rounded-[10px] xl:flex w-[330px] md:w-[600px] xl:w-[1200px] h-[340px] md:h-[160px] xl:h-[80px] ml-2">
 
   <div class="md:flex">
     <!--  what ? -->
@@ -7,24 +7,24 @@
     </div>
 
     <!--  Where ? -->
-    <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control mt-3 ml-4 md:ml-2 py-[12px] xl:my-4 w-[400px] md:w-[300px]" [(ngModel)]="model" [ngbTypeahead]="search"  />
+    <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control mt-3 ml-4 md:ml-2 py-[12px] xl:my-4 w-[300px]" [(ngModel)]="model" [ngbTypeahead]="search"  />
   </div>
 
   <div class="md:flex">
     <!--  Date ? -->
     <input type="text"
            placeholder="When ? (Today)"
-           class="form-control mt-3  ml-4 py-[12px] md:my-3 xl:my-4 w-[400px] md:w-[200px]"
+           class="form-control mt-3  ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]"
            bsDatepicker
            [bsConfig]="{ isAnimated: true }">
 
     <!--  Time ? -->
-    <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[400px] md:w-[200px]" [ngxTimepicker]="picker">
+    <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]" [ngxTimepicker]="picker">
     <ngx-material-timepicker #picker></ngx-material-timepicker>
 
     <!--  People ? -->
     <div ngbDropdown class="my-3 mr-3">
-      <button type="button" class="form-control dropdown-toggle flex h-12 w-[400px] md:w-[136px] ml-4 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>
+      <button type="button" class="form-control dropdown-toggle flex h-12 w-[300px] md:w-[136px] ml-4 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>
         <mat-icon class="mt-1">people</mat-icon>
         <span class="mt-1 ml-3">People</span>
       </button>

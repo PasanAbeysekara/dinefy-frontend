@@ -1,22 +1,23 @@
 
 <!--Gallery-->
-<div class="flex justify-center mt-28">
+<div class="justify-center mt-28 hidden">
     <app-product-images></app-product-images>
 </div>
 
 
-<div class="container-md mx-auto flex justify-between">
-
+<div class="flex justify-between">
 <!--Left-->
-  <div class="w-2/3">
-    <mat-tab-group class="w-[700px]">
-      <mat-tab label="Overview">  </mat-tab>
-      <mat-tab label="Facilities">  </mat-tab>
-      <mat-tab label="Menu">  </mat-tab>
-      <mat-tab label="Map">  </mat-tab>
-      <mat-tab label="Media">  </mat-tab>
-      <mat-tab label="Reviews">  </mat-tab>
-    </mat-tab-group>
+  <div class="md:w-2/3 flex flex-col justify-center mx-auto">
+    <div class="hidden">
+      <mat-tab-group class="w-[700px]">
+        <mat-tab label="Overview">  </mat-tab>
+        <mat-tab label="Facilities">  </mat-tab>
+        <mat-tab label="Menu">  </mat-tab>
+        <mat-tab label="Map">  </mat-tab>
+        <mat-tab label="Media">  </mat-tab>
+        <mat-tab label="Reviews">  </mat-tab>
+      </mat-tab-group>
+    </div>
     <mat-divider></mat-divider>
     <app-product-overview></app-product-overview>
     <app-product-facilities></app-product-facilities>
@@ -25,15 +26,13 @@
     <app-product-media></app-product-media>
     <app-product-review></app-product-review>
   </div>
-
 <!--Right-->
-  <div class="w-1/3 mx-16 mt-20">
+  <div class="w-1/3 mx-16 mt-20 hidden">
     <app-bottom-sheet-reserve-sheet></app-bottom-sheet-reserve-sheet>
     <div class="mt-10">
       <app-erg-menu></app-erg-menu>
     </div>
   </div>
-
 </div>
 
 <!--<mat-button-toggle (click)="redirectToCheckout()">Checkout</mat-button-toggle>-->

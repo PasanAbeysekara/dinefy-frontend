@@ -10,8 +10,8 @@
     <div>
       <div class="logo">
         <a routerLink="/home" routerLinkActive="active" class="logo-link">
-      <img src="assets/logo.png" alt="Logo" class="mr-4" [style.height]="isTransparent ? '80px' : '40px'" />
-      </a>
+          <img src="assets/logo.png" alt="Logo" class="mr-4" [ngStyle]="{'height.px': isTransparent ? 40 : 40}" />
+        </a>
       </div>
       <div class="c-header__links erg-btn--list btn-container">
         <ng-container *ngIf="loginService.getIsLoggedIn()">
