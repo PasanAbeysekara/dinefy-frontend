@@ -4,7 +4,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDialogClose} from "@angular/material/dialog";
 import {PlaceTileComponent} from "../place-tile/place-tile.component";
 import {NgForOf} from "@angular/common";
-import {PromotionCardComponent} from "../promotions/promotion-card/promotion-card.component";
 import {OtherPlacesCardComponent} from "./other-places-card/other-places-card.component";
 import {RecommendationCardComponent} from "../recommendation/recommendation-card/recommendation-card.component";
 import {CarouselModule} from "primeng/carousel";
@@ -25,7 +24,6 @@ import {Otherplace} from "./model/other-place";
     MatDialogClose,
     PlaceTileComponent,
     NgForOf,
-    PromotionCardComponent,
     OtherPlacesCardComponent,
     RecommendationCardComponent,
     CarouselModule,

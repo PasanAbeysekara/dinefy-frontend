@@ -3,13 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../feature/home/components/login/login.component';
 import { RegisterComponent } from '../../feature/home/components/register/register.component';
 import { HeaderService } from './header.service';
-import { Router } from '@angular/router';
+import {Router, RouterLinkActive} from '@angular/router';
 import { LoginService } from "../../services/login.service";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { MatListModule } from '@angular/material/list';
+import {MatLineModule, MatRippleModule} from "@angular/material/core";
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,10 @@ import { MatListModule } from '@angular/material/list';
     MatMenuModule,
     MatIconModule,
     MatListModule,
-    RouterLink
+    RouterLink,
+    RouterLinkActive,
+    MatRippleModule,
+    MatLineModule
   ]
 })
 export class HeaderComponent implements OnInit {

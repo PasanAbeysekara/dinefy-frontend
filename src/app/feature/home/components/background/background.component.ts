@@ -5,7 +5,6 @@ import {green} from "@mui/material/colors";
 import {MatIconModule} from "@angular/material/icon";
 import {QuickSearchComponent} from "../quick-search/quick-search.component";
 import {PromotionsComponent} from "../promotions/promotions.component";
-import {RecommendationsComponent} from "../recommendations/recommendations.component";
 import {MatButtonModule} from "@angular/material/button";
 
 @Component({
@@ -18,7 +17,6 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     QuickSearchComponent,
     PromotionsComponent,
-    RecommendationsComponent,
     MatButtonModule
   ],
   styleUrls: ['./background.component.css']

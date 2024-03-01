@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {ProductsItemComponent} from "../products-item/products-item.component";
-import {PromotionCardComponent} from "./promotion-card/promotion-card.component";
 import {CarouselModule} from "primeng/carousel";
 import {TagModule} from "primeng/tag";
 import {ButtonModule} from "primeng/button";
@@ -18,7 +17,6 @@ import {Router} from "@angular/router";
     MatButtonModule,
     CarouselModule,
     ProductsItemComponent,
-    PromotionCardComponent,
     CarouselModule,
     TagModule,
     ButtonModule,
@@ -30,6 +28,9 @@ import {Router} from "@angular/router";
 
 export class PromotionsComponent implements OnInit{
 
+  redirectToRestaurantDetails(){
+    this.router.navigate(['/product/rest-code-1']);
+  }
   products: Product[] = [];
 
   responsiveOptions: any[] = [];
