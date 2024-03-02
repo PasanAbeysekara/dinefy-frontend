@@ -7,6 +7,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import { RegisterComponent } from '../register/register.component';
 import {LoginService} from "../../../../services/login.service";
+import { AuthService } from "../../../../services/auth.service";
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -19,24 +22,43 @@ import {LoginService} from "../../../../services/login.service";
     MatSelectModule,
     MatButtonModule,
     MatDialogClose,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    CommonModule
   ]
 })
 
 export class LoginComponent {
 
+  username: string = '';
+  password: string = '';
+  authenticationError: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     private loginService: LoginService,
+    private authService: AuthService, // Inject the AuthService
     private router: Router,
     private dialog: MatDialog
    ) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-    this.router.navigate(['/profile']);
-    this.loginService.setIsLogged(true);
+ async onClick(username: string, password: string): Promise<void> {
+    try {
+     const token = await this.authService.login(username, password);
+
+      if (token) {
+        this.dialogRef.close();
+        //this.router.navigate(['/profile']);
+        this.loginService.setIsLogged(true);
+        this.loginService.setJwtToken(token);
+      } else {
+        this.authenticationError = true;
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   }
+
 
   openRegisterDialog(): void {
     this.dialogRef.close();

@@ -16,5 +16,12 @@ export class LoginService {
     return sessionStorage.getItem('isLoggedIn') == 'true' ? true : false;
   }
 
+  setJwtToken(token: string): void{
+    sessionStorage.setItem('token', token);
+  }
+
+  getJwtToken(): string{
+    return sessionStorage.getItem('token') as string;
+  }
 
 }

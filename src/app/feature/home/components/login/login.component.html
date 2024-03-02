@@ -10,17 +10,17 @@
       <div class="mat-dialog-content">
         <div>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input matInput placeholder="User Name">
+            <input matInput [(ngModel)]="username"  placeholder="User Name">
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input type="password" matInput placeholder="Password">
+            <input type="password" [(ngModel)]="password" matInput placeholder="Password">
             <mat-hint align="end" >Forgot Password ?</mat-hint>
           </mat-form-field>
 
         </div>
-
+        <div *ngIf="authenticationError" style="color: red;">Incorrect username or password. Please try again</div>
         <!--<div mat-dialog-actions>-->
-        <button class="erg-btn erg-btn--full-width erg-btn--large margin--top" mat-flat-button (click)="onNoClick()">Sign In</button>
+        <button class="erg-btn erg-btn--full-width erg-btn--large margin--top" mat-flat-button (click)="onClick(username, password)">Sign In</button>
         <!--</div>-->
         <hr>
         <div class="text-center title--primary margin--top">Don't want to complete the form?</div>
