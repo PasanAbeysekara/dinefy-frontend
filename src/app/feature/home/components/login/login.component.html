@@ -26,10 +26,10 @@
         <div class="text-center title--primary margin--top">Don't want to complete the form?</div>
         <hr>
         <div class="erg-btn--list">
-          <button mat-button>
+          <button mat-button (click)="signInWithGoogle()">
             <i class="fa-brands fa-google mr-1"></i> Login With Google
           </button>
-          <button mat-button>
+          <button mat-button (click)="loginWithFacebook()">
             <mat-icon class="hg-icon">facebook</mat-icon> Login With Facebook
           </button>
         </div>
