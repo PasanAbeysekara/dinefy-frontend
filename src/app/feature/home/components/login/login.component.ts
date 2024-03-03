@@ -57,6 +57,16 @@ export class LoginComponent {
     } catch (error) {
       console.error('Error during login:', error);
     }
+
+  }
+
+  signInWithGoogle(): void {
+
+  }
+
+  loginWithFacebook(): void {
+
+
   }
 
 
