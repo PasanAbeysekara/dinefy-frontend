@@ -59,13 +59,6 @@ export class LoginComponent {
     }
   }
 
-  signInWithGoogle(): void {
-
-  }
-
-  loginWithFacebook(): void {
-
-  }
 
   openRegisterDialog(): void {
     this.dialogRef.close();
