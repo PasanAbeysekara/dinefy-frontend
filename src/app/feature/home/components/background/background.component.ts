@@ -6,6 +6,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {QuickSearchComponent} from "../quick-search/quick-search.component";
 import {PromotionsComponent} from "../promotions/promotions.component";
 import {MatButtonModule} from "@angular/material/button";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-background',
@@ -22,8 +23,10 @@ import {MatButtonModule} from "@angular/material/button";
   styleUrls: ['./background.component.css']
 })
 export class BackgroundComponent implements OnInit {
-
-  constructor() { }
+  redirectToSearchResults(){
+    this.router.navigate(['/search']);
+  }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
