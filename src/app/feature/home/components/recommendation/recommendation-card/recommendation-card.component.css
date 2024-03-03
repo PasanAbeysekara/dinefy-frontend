@@ -1,0 +1,62 @@
+.custom-card {
+  /*position: relative;*/
+  border-color: darkorange;
+  border-width: 1px;
+  transition: background 0.3s ease;
+}
+
+.custom-card:hover{
+  background: #cccccc;
+}
+/*.custom-card .main-image {*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  object-fit: cover;*/
+/*  filter: brightness(70%) contrast(130%) saturate(120%);*/
+/*  border-radius: 3%;*/
+/*}*/
+
+.custom-card .avatar {
+  background: #4CAF50 ;
+  position: absolute;
+  width: 64px; /* Set the desired width for the avatar */
+  height: 64px; /* Set the desired height for the avatar */
+  right: 10px;
+  bottom: 10px;
+  border-radius: 50%; /* Make the avatar round */
+  border: 2px solid white; /* Optional: Add a border for better visibility */
+  /*z-index: 2; !* Ensure the avatar is on top of the main image *!*/
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+}
+
+/*.overlay-content {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  transform: translate(-50%, -50%);*/
+/*  z-index: 1;*/
+/*  color: white; !* Set text color for overlay content *!*/
+/*  !* Additional styling for overlay content *!*/
+/*}*/
+
+/*.avatar{*/
+/*  margin-top: 200px;*/
+/*}*/
+
+.star-container {
+  /*position: absolute;*/
+  z-index: 2;
+  display: inline-block;
+  font-size: 24px; /* Adjust the size of the stars */
+  color: gold;    /* Adjust the color of the stars */
+  margin: 20px 20px;
+}
+
+.filled-star::before {
+  content: "\2605"; /* Unicode character for a filled star */
+}
+
+/*#text-section{*/
+/*  margin-top: 50px;*/
+/*}*/
+

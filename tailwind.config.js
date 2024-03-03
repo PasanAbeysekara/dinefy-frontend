@@ -5,7 +5,12 @@ module.exports = {
   ],
   mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
+

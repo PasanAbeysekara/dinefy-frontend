@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-
-import {CarouselModule, OwlOptions} from 'ngx-owl-carousel-o';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {ProductsItemComponent} from "../products-item/products-item.component";
-import {PromotionCardComponent} from "./promotion-card/promotion-card.component";
+import {CarouselModule} from "primeng/carousel";
+import {TagModule} from "primeng/tag";
+import {ButtonModule} from "primeng/button";
+import {Product} from "./model/product";
+import {NgOptimizedImage} from "@angular/common";
+import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-promotions',
@@ -13,37 +17,112 @@ import {PromotionCardComponent} from "./promotion-card/promotion-card.component"
     MatButtonModule,
     CarouselModule,
     ProductsItemComponent,
-    PromotionCardComponent
+    CarouselModule,
+    TagModule,
+    ButtonModule,
+    NgOptimizedImage,
+    NgbRating
   ],
   styleUrls: ['./promotions.component.css']
 })
 
-export class PromotionsComponent{
-  title: "owl-carousel" | undefined;
-  customOptions: any = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
+export class PromotionsComponent implements OnInit{
+
+  redirectToRestaurantDetails(){
+    this.router.navigate(['/product/rest-code-1']);
   }
+  products: Product[] = [];
+
+  responsiveOptions: any[] = [];
+
+  ngOnInit() {
+    this.products = [
+      {
+        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
+        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
+        name: 'Sun Sale',
+        price: 10.99,
+        inventoryStatus: 'In Stock',
+        rating:4,
+        reviewCount:396,
+        approxPeople:2
+      },
+      {
+        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
+        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_23.png',
+        name: 'Holiday Savings',
+        price: 20.99,
+        inventoryStatus: 'Out of Stock',
+        rating:3,
+        reviewCount:124,
+        approxPeople:2
+      },
+      {
+        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
+        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
+        name: 'Winter Chill',
+        price: 30.99,
+        inventoryStatus: 'In Stock',
+        rating:4,
+        reviewCount:244,
+        approxPeople:3
+      },
+      {
+        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
+        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_23.png',
+        name: 'Spring Fling',
+        price: 40.99,
+        inventoryStatus: 'Out of Stock',
+        rating:3,
+        reviewCount:123,
+        approxPeople:3
+      }
+    ]
+
+    this.responsiveOptions = [
+      {
+        breakpoint: '1536px',
+        numVisible: 3,
+        numScroll: 1
+      },
+      {
+        breakpoint: '1024px',
+        numVisible: 2,
+        numScroll: 1
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
+  }
+
+  getSeverity(status: string) {
+    switch (status) {
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
+    }
+    return 'default';
+  }
+
+
+  @Input() cardImage!: string;
+  @Input() cardAvatar!: string;
+  @Input() restaurantName!: string;
+  @Input() reservationPrice!: string;
+  @Input() reservePeopleCount!: string;
+  @Input() reviewsCount!: string;
+  @Input() ratingsCount!: number;
+  constructor(config: NgbRatingConfig,private router: Router) {
+    config.max = 5;
+    config.readonly = true;
+  }
+
 }
 
 

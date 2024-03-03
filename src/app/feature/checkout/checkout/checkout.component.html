@@ -15,7 +15,6 @@
     </button>
   </div>
   <div class="offcanvas-body">
-
     <div class="flex justify-between items-center">
       <div class="mt-3 mx-4">
         <p class="my-0 font-medium text-lg">Bacon & Egg Sandwich</p>
@@ -33,7 +32,6 @@
         </button>
       </div>
     </div>
-
     <div class="flex justify-between items-center">
       <div class="mt-3 mx-4">
         <p class="my-0 font-medium text-lg">Grilled Chicken Wrap</p>
@@ -51,7 +49,6 @@
         </button>
       </div>
     </div>
-
     <div class="flex justify-between items-center">
       <div class="mt-3 mx-4">
         <p class="my-0 font-medium text-lg">Vegetarian Delight Pizza</p>
@@ -69,57 +66,63 @@
         </button>
       </div>
     </div>
-
-
   </div>
 </ng-template>
 
 
 <div class="relative">
+
+
 <!-- Cart Button -->
-  <div class="absolute bottom-5 right-5 flex">
-    <button class=" px-3 py-2 flex items-center justify-evenly bg-[#4b2870] hover:bg-[#6c3aa1] rounded-3xl text-amber-50" style="width: 130px" (click)="openEnd(content)">
-      <mat-icon>shopping_cart</mat-icon>
-      <p class="mt-2 text-lg font-medium">Cart</p>
-    </button>
+  <div>
+    <div class="fixed bottom-5 right-5 flex z-2">
+      <button class="px-0 md:px-3 py-2 flex items-center justify-evenly bg-[#4b2870] hover:bg-[#6c3aa1] rounded-3xl md:rounded-full  text-amber-50 w-[60px] h-[60px] md:h-full md:w-[130px]"  (click)="openEnd(content)">
+        <mat-icon>shopping_cart</mat-icon>
+        <p class="mt-2 text-lg font-medium hidden md:block">Cart</p>
+      </button>
+    </div>
+    <p class="px-2 rounded-full bg-gray-800 text-gray-50 fixed bottom-14 right-5 z-3 font-medium">3</p>
   </div>
-  <p class="px-2 rounded-full bg-gray-800 text-gray-50 absolute bottom-14 right-5 font-medium">3</p>
+
+<!--  <div class="fixed bottom-8 right-8">-->
+<!--    <button>Dope</button>-->
+<!--  </div>-->
 
 <!--Hero-->
-  <div class="flex justify-center mt-32" >
+  <div class="flex flex-col 2xl:flex-row justify-center mt-20 md:mt-32 font-sans ml-5 md:ml-10 2xl:ml-0" >
     <!--  Success message -->
-    <div class="text-lg mt-10">
-      <p class="text-5xl font-medium text-gray-800">Successfully Reserved</p>
+    <div class="text-md md:text-lg mt-10">
+      <p class="text-4xl md:text-5xl font-medium text-gray-800">Successfully Reserved</p>
       <div class="my-4">
         <p class="my-0" style="margin-bottom: 0.5em;">Cafe plus 94 for 2 people on 21st July 8:30 PM</p>
         <p class="my-0">Colombo, Sri Lanka</p>
       </div>
       <p class="font-bold">What To Know Before You Go!</p>
       <p>A note from the restaurant</p>
-      <div style="width: 40vw;">
+      <div class="w-[340px] md:w-[700px]">
         <p class="text-gray-500 text-sm py-0">Thank you for choosing graze kitchen - Hilton Colombo. Should your plans change, Please let us know. We look forward to serving you</p>
       </div>
-      <div class="flex my-3">
+      <div class="flex my-3 w-[320px]">
         <input type="text" class="form-control px-3 py-2" style="width: 280px;" placeholder="Ex. pat@example.com">
         <button class="bg-[#4b2870] hover:bg-[#6c3aa1] ml-1 px-2 py-1 text-amber-50 rounded-md text-sm font-medium">Add Coupons</button>
       </div>
     </div>
     <!--  Map -->
-    <div class="ml-32" style="width: 30vw">
+    <div class="ml-2 md:ml-0 2xl:ml-12">
 <!--      <img src="https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/2ddba3f9-3af4-46be-a815-8cae82418756" alt="">-->
       <div>
 <!--        <app-location-map></app-location-map>-->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6822183036384!2d79.84186127593368!3d6.928535393071291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593b09364c4f%3A0x7dc13fa1f24d5c16!2sShangri-La%20Colombo!5e0!3m2!1sen!2slk!4v1703677846969!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe class="w-[320px] md:w-[740px] 2xl:w-[500px] h-[350px] md:h-[400px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6822183036384!2d79.84186127593368!3d6.928535393071291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593b09364c4f%3A0x7dc13fa1f24d5c16!2sShangri-La%20Colombo!5e0!3m2!1sen!2slk!4v1703677846969!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
     </div>
   </div>
 
-<!-- Menu-->
-  <div class="flex justify-center mt-10">
-    <div class="-ml-24" style="width: 70vw;">
+  <!-- Menu-->
+  <div class="flex justify-center mt-10 ml-28 2xl:ml-24 md:w-full">
+    <div class="-ml-24">
       <p class="text-3xl text-gray-700 font-medium">Menu</p>
-      <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab-group class="w-[320px] md:w-[720px] 2xl:w-[1300px]" dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
         <mat-tab label="Kids Menu">
           <div class="">
@@ -127,10 +130,10 @@
             <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
               <mat-tab label="Breakfast">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px] justify-between mt-4">
 
                   <!-- Sample 1: Fruity Pancake Stack -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Fruity Pancake Stack</p>
@@ -148,7 +151,7 @@
                   </div>
 
                   <!-- Sample 2: Cheesy Egg Muffins -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Cheesy Egg Muffins</p>
@@ -166,7 +169,7 @@
                   </div>
 
                   <!-- Sample 3: Banana and Nutella Wrap -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Banana and Nutella Wrap</p>
@@ -184,10 +187,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Sample 4: Yogurt Parfait -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Yogurt Parfait</p>
@@ -205,7 +208,7 @@
                   </div>
 
                   <!-- Sample 5: Mini Breakfast Burritos -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Mini Breakfast Burritos</p>
@@ -223,7 +226,7 @@
                   </div>
 
                   <!-- Sample 6: Peanut Butter and Banana Toast -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Peanut Butter and Banana Toast</p>
@@ -245,10 +248,10 @@
               </mat-tab>
 
               <mat-tab label="Lunch">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Lunch Sample 1: Chicken Nugget Delight -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Chicken Nugget Delight</p>
@@ -266,7 +269,7 @@
                   </div>
 
                   <!-- Lunch Sample 2: Mini Cheese Pizza -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Mini Cheese Pizza</p>
@@ -284,7 +287,7 @@
                   </div>
 
                   <!-- Lunch Sample 3: Veggie Pasta Twist -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Veggie Pasta Twist</p>
@@ -302,10 +305,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Lunch Sample 4: Grilled Cheese Bites -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Grilled Cheese Bites</p>
@@ -323,7 +326,7 @@
                   </div>
 
                   <!-- Lunch Sample 5: Turkey and Cheese Wrap -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Turkey and Cheese Wrap</p>
@@ -341,7 +344,7 @@
                   </div>
 
                   <!-- Lunch Sample 6: Mini Veggie Burger -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Mini Veggie Burger</p>
@@ -363,10 +366,10 @@
               </mat-tab>
 
               <mat-tab label="Dinner">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Kids Menu Dinner Item 1: Cheesy Mac 'n' Cheese -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Cheesy Mac 'n' Cheese</p>
@@ -384,7 +387,7 @@
                   </div>
 
                   <!-- Kids Menu Dinner Item 2: Mini Chicken Tenders -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Mini Chicken Tenders</p>
@@ -402,7 +405,7 @@
                   </div>
 
                   <!-- Kids Menu Dinner Item 3: Pizza Bites -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Pizza Bites</p>
@@ -420,10 +423,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Kids Menu Dinner Item 4: Dino Nuggets -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Dino Nuggets</p>
@@ -441,7 +444,7 @@
                   </div>
 
                   <!-- Kids Menu Dinner Item 5: Spaghetti and Meatballs -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Spaghetti and Meatballs</p>
@@ -459,7 +462,7 @@
                   </div>
 
                   <!-- Kids Menu Dinner Item 6: Grilled Cheese Sandwich -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Grilled Cheese Sandwich</p>
@@ -491,10 +494,10 @@
             <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
               <mat-tab label="Breakfast">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- À LA CARTE Breakfast Item 1: Avocado Toast -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Avocado Toast</p>
@@ -512,7 +515,7 @@
                   </div>
 
                   <!-- À LA CARTE Breakfast Item 2: Smoked Salmon Bagel -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Smoked Salmon Bagel</p>
@@ -530,7 +533,7 @@
                   </div>
 
                   <!-- À LA CARTE Breakfast Item 3: Eggs Benedict -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Eggs Benedict</p>
@@ -548,10 +551,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- À LA CARTE Breakfast Item 4: Belgian Waffles -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Belgian Waffles</p>
@@ -569,7 +572,7 @@
                   </div>
 
                   <!-- À LA CARTE Breakfast Item 5: Breakfast Burrito Bowl -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Breakfast Burrito Bowl</p>
@@ -587,7 +590,7 @@
                   </div>
 
                   <!-- À LA CARTE Breakfast Item 6: French Toast Sticks -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">French Toast Sticks</p>
@@ -609,10 +612,10 @@
               </mat-tab>
 
               <mat-tab label="Lunch">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- À LA CARTE Lunch Item 1: Grilled Chicken Salad -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Grilled Chicken Salad</p>
@@ -630,7 +633,7 @@
                   </div>
 
                   <!-- À LA CARTE Lunch Item 2: Shrimp Pasta Alfredo -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Shrimp Pasta Alfredo</p>
@@ -648,7 +651,7 @@
                   </div>
 
                   <!-- À LA CARTE Lunch Item 3: Caprese Panini -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Caprese Panini</p>
@@ -666,10 +669,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- À LA CARTE Lunch Item 4: Quinoa Salad -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Quinoa Salad</p>
@@ -687,7 +690,7 @@
                   </div>
 
                   <!-- À LA CARTE Lunch Item 5: Chicken Caesar Wrap -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Chicken Caesar Wrap</p>
@@ -705,7 +708,7 @@
                   </div>
 
                   <!-- À LA CARTE Lunch Item 6: Margherita Pizza -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Margherita Pizza</p>
@@ -728,10 +731,10 @@
 
               <!-- À LA CARTE Dinner Tab -->
               <mat-tab label="Dinner">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- À LA CARTE Dinner Item 1: Filet Mignon -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Filet Mignon</p>
@@ -749,7 +752,7 @@
                   </div>
 
                   <!-- À LA CARTE Dinner Item 2: Lobster Linguine -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Lobster Linguine</p>
@@ -767,7 +770,7 @@
                   </div>
 
                   <!-- À LA CARTE Dinner Item 3: Vegetarian Risotto -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Vegetarian Risotto</p>
@@ -785,10 +788,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- À LA CARTE Dinner Item 4: Salmon Teriyaki -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Salmon Teriyaki</p>
@@ -806,7 +809,7 @@
                   </div>
 
                   <!-- À LA CARTE Dinner Item 5: Beef Stroganoff -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Beef Stroganoff</p>
@@ -824,7 +827,7 @@
                   </div>
 
                   <!-- À LA CARTE Dinner Item 6: Chicken Piccata -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Chicken Piccata</p>
@@ -858,10 +861,10 @@
 
               <!-- Beverage Breakfast Tab -->
               <mat-tab label="Breakfast">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Beverage Breakfast Item 1: Fresh Orange Juice -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Fresh Orange Juice</p>
@@ -879,7 +882,7 @@
                   </div>
 
                   <!-- Beverage Breakfast Item 2: Classic Coffee -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Classic Coffee</p>
@@ -897,7 +900,7 @@
                   </div>
 
                   <!-- Beverage Breakfast Item 3: Berry Smoothie -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Berry Smoothie</p>
@@ -915,10 +918,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Beverage Breakfast Item 4: Iced Caramel Latte -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Iced Caramel Latte</p>
@@ -936,7 +939,7 @@
                   </div>
 
                   <!-- Beverage Breakfast Item 5: Green Tea Frappuccino -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Green Tea Frappuccino</p>
@@ -954,7 +957,7 @@
                   </div>
 
                   <!-- Beverage Breakfast Item 6: Mango-Pineapple Smoothie -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Mango-Pineapple Smoothie</p>
@@ -977,10 +980,10 @@
 
               <!-- Beverage Lunch Tab -->
               <mat-tab label="Lunch">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Beverage Lunch Item 1: Iced Tea -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Iced Tea</p>
@@ -998,7 +1001,7 @@
                   </div>
 
                   <!-- Beverage Lunch Item 2: Sparkling Lemonade -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Sparkling Lemonade</p>
@@ -1016,7 +1019,7 @@
                   </div>
 
                   <!-- Beverage Lunch Item 3: Cranberry Spritzer -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Cranberry Spritzer</p>
@@ -1034,10 +1037,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Beverage Lunch Item 4: Mint Mojito -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Mint Mojito</p>
@@ -1055,7 +1058,7 @@
                   </div>
 
                   <!-- Beverage Lunch Item 5: Peach Iced Tea -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Peach Iced Tea</p>
@@ -1073,7 +1076,7 @@
                   </div>
 
                   <!-- Beverage Lunch Item 6: Cucumber Mint Cooler -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Cucumber Mint Cooler</p>
@@ -1096,10 +1099,10 @@
 
               <!-- Beverage Dinner Tab -->
               <mat-tab label="Dinner">
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Beverage Dinner Item 1: Classic Lemonade -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Classic Lemonade</p>
@@ -1117,7 +1120,7 @@
                   </div>
 
                   <!-- Beverage Dinner Item 2: Berry Bliss Smoothie -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Berry Bliss Smoothie</p>
@@ -1135,7 +1138,7 @@
                   </div>
 
                   <!-- Beverage Dinner Item 3: Tropical Punch -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Tropical Punch</p>
@@ -1153,10 +1156,10 @@
                   </div>
 
                 </div>
-                <div class="flex justify-between mt-4">
+                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
 
                   <!-- Beverage Dinner Item 4: Caramel Macchiato -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Caramel Macchiato</p>
@@ -1174,7 +1177,7 @@
                   </div>
 
                   <!-- Beverage Dinner Item 5: Green Tea Infusion -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Green Tea Infusion</p>
@@ -1192,7 +1195,7 @@
                   </div>
 
                   <!-- Beverage Dinner Item 6: Vanilla Chai Latte -->
-                  <div class="flex items-center justify-between" style="width: 20vw">
+                  <div class="flex items-center justify-between" >
                     <!-- Description -->
                     <div>
                       <p class="text-md font-medium text-gray-700">Vanilla Chai Latte</p>
@@ -1222,5 +1225,6 @@
       </mat-tab-group>
     </div>
   </div>
+
 
 </div>

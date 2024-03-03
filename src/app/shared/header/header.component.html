@@ -6,12 +6,12 @@
   class="fixed top-0 left-0 w-full transition-all duration-300 ease-in-out flex items-center justify-between z-50"
   [style.height]="isTransparent ? initialHeight : '50px'"
 >
-  <div class="container mx-auto p-4 w-full">
-    <div>
+  <div class="container mx-auto p-1 md:p-4 w-full">
+    <div class="">
       <div class="logo">
         <a routerLink="/home" routerLinkActive="active" class="logo-link">
-      <img src="assets/logo.png" alt="Logo" class="mr-4" [style.height]="isTransparent ? '80px' : '40px'" />
-      </a>
+          <img src="assets/logo.png" alt="Logo" class="mr-4" [ngStyle]="{'height.px': isTransparent ? 40 : 40}" />
+        </a>
       </div>
       <div class="c-header__links erg-btn--list btn-container">
         <ng-container *ngIf="loginService.getIsLoggedIn()">
@@ -62,13 +62,15 @@
           </mat-menu>
         </ng-container>
         <ng-container *ngIf="!loginService.getIsLoggedIn()">
-          <div class="flex items-center space-x-4 ">
-          <button class="text-white bg-black hover:bg-opacity-80 transition-colors duration-300 rounded-md px-4 py-2" (click)="signin()">
-            Sign In
-          </button>
-          <button class="text-black bg-white hover:bg-gray-800 hover:text-white transition-colors duration-300 rounded-md px-4 py-2" (click)="signup()">
-            Sign Up
-          </button>
+          <div class="mt-1">
+            <div class="flex items-center space-x-4 ">
+              <button class="text-white bg-black hover:bg-opacity-80 transition-colors duration-300 rounded-md px-4 py-2" (click)="signin()">
+                Sign In
+              </button>
+              <button class="text-black bg-white hover:bg-gray-800 hover:text-white transition-colors duration-300 rounded-md px-4 py-2" (click)="signup()">
+                Sign Up
+              </button>
+            </div>
           </div>
         </ng-container>
       </div>

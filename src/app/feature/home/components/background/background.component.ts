@@ -5,9 +5,7 @@ import {green} from "@mui/material/colors";
 import {MatIconModule} from "@angular/material/icon";
 import {QuickSearchComponent} from "../quick-search/quick-search.component";
 import {PromotionsComponent} from "../promotions/promotions.component";
-import {RecommendationsComponent} from "../recommendations/recommendations.component";
 import {MatButtonModule} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-background',
@@ -19,9 +17,7 @@ import {RouterLink} from "@angular/router";
     MatIconModule,
     QuickSearchComponent,
     PromotionsComponent,
-    RecommendationsComponent,
-    MatButtonModule,
-    RouterLink
+    MatButtonModule
   ],
   styleUrls: ['./background.component.css']
 })

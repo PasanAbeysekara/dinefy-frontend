@@ -5,6 +5,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {MatTabsModule} from "@angular/material/tabs";
 import {LocationMapComponent} from "../components/location-map/location-map.component";
+import {ProductMenuComponent} from "../../product/components/product-menu/product-menu.component";
+import {MenuComponent} from "../components/menu/menu.component";
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +16,9 @@ import {LocationMapComponent} from "../components/location-map/location-map.comp
     MatButtonModule,
     FormsModule,
     MatTabsModule,
-    LocationMapComponent
+    LocationMapComponent,
+    ProductMenuComponent,
+    MenuComponent,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',

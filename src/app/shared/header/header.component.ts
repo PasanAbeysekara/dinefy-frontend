@@ -10,6 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { MatListModule } from '@angular/material/list';
+import {MatLineModule, MatRippleModule} from "@angular/material/core";
 
 @Component({
   selector: 'app-header',
@@ -27,7 +28,9 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatListModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MatRippleModule,
+    MatLineModule
   ]
 })
 export class HeaderComponent implements OnInit {

@@ -1,6 +1,18 @@
-<div class="section">
-  <div >
-    <div class="flex justify-between">
+<!--<div class="section">-->
+<!--  <div>-->
+<!--    <div class="flex justify-between w-[430px]">-->
+<!--      <div>-->
+<!--        <p class="text-lg font-medium text-gray-700">Other Places to Explore</p>-->
+<!--        <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>-->
+<!--      </div>-->
+<!--      <button mat-button color="primary">See All</button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<div class="w-screen mt-10 ">
+
+  <div class="flex justify-center">
+    <div class="flex justify-between w-[340px] md:w-[630px] lg:w-[800px] 2xl:w-[1200px]">
       <div>
         <p class="text-lg font-medium text-gray-700">Other Places to Explore</p>
         <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
@@ -8,35 +20,50 @@
       <button mat-button color="primary">See All</button>
     </div>
   </div>
-  <div class="flex justify-center">
-    <div class="flex items-center justify-center mx-3">
-      <button mat-icon-button (click)="owlCar.prev()" class="material-icons shadow-button">navigate_before</button>
-    </div>
-    <div class="scroll-section">
-      <owl-carousel-o [options]="customOptions"  #owlCar>
-        <ng-template carouselSlide>
-          <app-other-places-card
-            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/f0434856-0c7b-48df-a9b2-4f3e0f5176f5'"
-            [restaurantName]="'Mediterranean Delight'"
-          ></app-other-places-card>
-        </ng-template>
-        <ng-template carouselSlide >
-          <app-other-places-card
-            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/9912f000-0167-42df-8260-7591eeda555a'"
-            [restaurantName]="'Mediterranean Delight'"></app-other-places-card>
-        </ng-template>
-        <ng-template carouselSlide >
-          <app-other-places-card
-            [cardImage]="'https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/d17f2a25-66bc-42aa-a503-1286def73659'"
-            [restaurantName]="'Mediterranean Delight'"
-          ></app-other-places-card>
-        </ng-template>
-      </owl-carousel-o>
-    </div>
-    <div class="flex items-center justify-center mx-2">
-      <button mat-icon-button (click)="owlCar.next()" class="material-icons shadow-button">navigate_next</button>
-    </div>
 
+<!--  <div class="flex justify-center">-->
+<!--    <div class="flex items-center justify-center mx-3">-->
+<!--      <button mat-icon-button (click)="owlCar.prev()" class="material-icons shadow-button">navigate_before</button>-->
+<!--    </div>-->
+<!--    <div class="scroll-section w-[300px]">-->
+<!--      <owl-carousel-o [options]="customOptions"  #owlCar>-->
+<!--        <ng-template carouselSlide>-->
+<!--          <app-other-places-card-->
+<!--            [cardImage]="'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png'"-->
+<!--            [restaurantName]="'Mediterranean Delight'"-->
+<!--          ></app-other-places-card>-->
+<!--        </ng-template>-->
+<!--        <ng-template carouselSlide >-->
+<!--          <app-other-places-card-->
+<!--            [cardImage]="'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png'"-->
+<!--            [restaurantName]="'Mediterranean Delight'"></app-other-places-card>-->
+<!--        </ng-template>-->
+<!--        <ng-template carouselSlide >-->
+<!--          <app-other-places-card-->
+<!--            [cardImage]="'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-3.png'"-->
+<!--            [restaurantName]="'Mediterranean Delight'"-->
+<!--          ></app-other-places-card>-->
+<!--        </ng-template>-->
+<!--      </owl-carousel-o>-->
+<!--    </div>-->
+<!--    <div class="flex items-center justify-center mx-2">-->
+<!--      <button mat-icon-button (click)="owlCar.next()" class="material-icons shadow-button">navigate_next</button>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+  <div class="flex justify-center">
+    <div class="h-[300px] w-[350px] md:w-[700px] lg:w-[870px] 2xl:w-[1250px]">
+      <p-carousel [value]="otherPlaces" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-otherPlace pTemplate="item">
+                    <app-other-places-card
+                      [cardImage]="otherPlace.cardImage"
+                      [restaurantName]="otherPlace.restaurantName"
+                    ></app-other-places-card>
+        </ng-template>
+      </p-carousel>
+    </div>
   </div>
+
 
 </div>
