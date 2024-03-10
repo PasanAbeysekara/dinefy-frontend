@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogClose} from "@angular/material/dialog";
@@ -11,6 +11,8 @@ import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "primeng/api";
 import {Product} from "../promotions/model/product";
 import {Otherplace} from "./model/other-place";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-other-places',
@@ -32,55 +34,49 @@ import {Otherplace} from "./model/other-place";
   ],
   styleUrls: ['./other-places.component.css']
 })
-export class OtherPlacesComponent{
-  otherPlaces: Otherplace[] = [];
 
-  responsiveOptions: any[] = [];
+export class OtherPlacesComponent implements OnInit{
+
+  httpClient = inject(HttpClient);
+  otherPlaces: any[] = [];
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '2000px',
+      numVisible: 4,
+      numScroll: 1
+    },
+    {
+      breakpoint: '1536px',
+      numVisible: 3,
+      numScroll: 1
+    },
+    {
+      breakpoint: '1024px',
+      numVisible: 2,
+      numScroll: 1
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 1,
+      numScroll: 1
+    }
+  ];
 
   ngOnInit() {
-    this.otherPlaces = [
-      {
-        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
-        restaurantName: 'Summer Sale',
-      },
-      {
-        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
-        restaurantName: 'Holiday Savings',
-      },
-      {
-        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
-        restaurantName: 'Winter Chill',
-      },
-      {
-        cardImage: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
-        restaurantName: 'Spring Fling',
-      }
-    ]
-
-    this.responsiveOptions = [
-      {
-        breakpoint: '2000px',
-        numVisible: 4,
-        numScroll: 1
-      },
-      {
-        breakpoint: '1536px',
-        numVisible: 3,
-        numScroll: 1
-      },
-      {
-        breakpoint: '1024px',
-        numVisible: 2,
-        numScroll: 1
-      },
-      {
-        breakpoint: '768px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
+    this.fetchOtherProperties().subscribe((data: any) => {
+      data.forEach((prop: any) => {
+        this.otherPlaces.push({
+          cardImage: prop.propertyMedia[0].mediaUrl,
+          restaurantName: prop.name
+        });
+      });
+      console.log(this.otherPlaces)
+    });
   }
 
+  fetchOtherProperties(): Observable<any> {
+    return this.httpClient.get('http://localhost:8081/data/properties');
+  }
 }
 
 

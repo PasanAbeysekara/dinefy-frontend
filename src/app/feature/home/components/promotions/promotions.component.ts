@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {ProductsItemComponent} from "../products-item/products-item.component";
 import {CarouselModule} from "primeng/carousel";
@@ -8,76 +8,55 @@ import {Product} from "./model/product";
 import {NgOptimizedImage} from "@angular/common";
 import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {SharedModule} from "primeng/api";
+import {finalize, forkJoin, Observable, of, Subject} from "rxjs";
+import {mergeMap, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-promotions',
   templateUrl: './promotions.component.html',
   standalone: true,
   imports: [
+    CarouselModule,
     MatButtonModule,
-    CarouselModule,
-    ProductsItemComponent,
-    CarouselModule,
-    TagModule,
-    ButtonModule,
-    NgOptimizedImage,
-    NgbRating
+    NgbRating,
+    SharedModule
   ],
   styleUrls: ['./promotions.component.css']
 })
 
-export class PromotionsComponent implements OnInit{
+export class PromotionsComponent implements OnInit {
+  constructor(config: NgbRatingConfig,private router: Router) {
+    config.max = 5;
+    config.readonly = true;
+  }
 
-  redirectToRestaurantDetails(){
+
+  redirectToRestaurantDetails() {
     this.router.navigate(['/product/rest-code-1']);
   }
-  products: Product[] = [];
 
   responsiveOptions: any[] = [];
+  products: any[] = [];
+  promotionPropIds: number[] = [];
 
-  ngOnInit() {
-    this.products = [
-      {
-        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
-        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
-        name: 'Sun Sale',
-        price: 10.99,
-        inventoryStatus: 'In Stock',
-        rating:4,
-        reviewCount:396,
-        approxPeople:2
-      },
-      {
-        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
-        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_23.png',
-        name: 'Holiday Savings',
-        price: 20.99,
-        inventoryStatus: 'Out of Stock',
-        rating:3,
-        reviewCount:124,
-        approxPeople:2
-      },
-      {
-        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-1.png',
-        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
-        name: 'Winter Chill',
-        price: 30.99,
-        inventoryStatus: 'In Stock',
-        rating:4,
-        reviewCount:244,
-        approxPeople:3
-      },
-      {
-        image: 'https://d3plttq4n63nzt.cloudfront.net/Property-col-image-2.png',
-        avatar:'https://d3plttq4n63nzt.cloudfront.net/Ellipse_23.png',
-        name: 'Spring Fling',
-        price: 40.99,
-        inventoryStatus: 'Out of Stock',
-        rating:3,
-        reviewCount:123,
-        approxPeople:3
-      }
-    ]
+  httpClient = inject(HttpClient);
+  data: any[] = [];
+  property: any;
+
+  productsSubject: Subject<any[]> = new Subject<any[]>();
+
+
+  ngOnInit(): void {
+    this.fetchPromotionData().pipe(
+      mergeMap(() => {
+        const requests = this.promotionPropIds.map(promoPropId => this.fetchPropertyData(promoPropId));
+        return requests.length > 0 ? forkJoin(requests) : of([]);
+      })
+    ).subscribe(() => {
+      this.productsSubject.next(this.products);
+    });
 
     this.responsiveOptions = [
       {
@@ -98,33 +77,41 @@ export class PromotionsComponent implements OnInit{
     ];
   }
 
-  getSeverity(status: string) {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-    }
-    return 'default';
+
+  fetchPromotionData(): Observable<any> {
+    return this.httpClient.get('http://localhost:8081/data/promotions').pipe(
+      tap((data: any) => {
+        data.data.content.forEach((promo: any) => {
+          this.promotionPropIds.push(promo.propId);
+        });
+      })
+    );
   }
 
-
-  @Input() cardImage!: string;
-  @Input() cardAvatar!: string;
-  @Input() restaurantName!: string;
-  @Input() reservationPrice!: string;
-  @Input() reservePeopleCount!: string;
-  @Input() reviewsCount!: string;
-  @Input() ratingsCount!: number;
-  constructor(config: NgbRatingConfig,private router: Router) {
-    config.max = 5;
-    config.readonly = true;
+  fetchPropertyData(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8081/data/properties/${id}`).pipe(
+      tap((data: any) => {
+        this.property = data.data;
+        this.products.push({
+          image: this.property.propertyMediaWrapper.bannerImages[0].mediaUrl,
+          avatar: this.property.propertyMediaWrapper.bannerImages[0].thumbnail,
+          name: this.property.livePromotions[0].name,
+          price: this.property.amount,
+          inventoryStatus: 'In Stock',
+          rating: this.property.avgRating,
+          reviewCount: this.property.totalRating,
+          approxPeople: 2
+        });
+      }),
+      finalize(() => {
+        // console.log(this.products); // You can remove this line, it's for debugging purposes
+        // console.log(this.promotionPropIds);
+      })
+    );
   }
+
 
 }
-
 
 // export class PromotionsComponent implements OnInit {
 //

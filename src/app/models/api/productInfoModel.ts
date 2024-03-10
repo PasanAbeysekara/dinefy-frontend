@@ -128,16 +128,22 @@ export interface PaymentOptions{
 }
 
 export interface Promotion{
-    promoId: object;
-    name: string;
-    description: string;
-    tierId: string;
-    promoTypeId: number;
-    start: Date;
-    end: Date;
-    live: boolean;
-    maxedOutLanding: boolean;
-    maxedOutSearch: boolean;
+  promoId: PromoId
+  propId: number
+  description: string
+  endDate: any
+  live: boolean
+  maxedOutLanding: boolean
+  maxedOutSearch: boolean
+  name: string
+  promoType: number
+  startDate: string
+  tierId: number
+}
+
+export interface PromoId {
+  propId: number
+  promoId: number
 }
 
 export interface Organization{
