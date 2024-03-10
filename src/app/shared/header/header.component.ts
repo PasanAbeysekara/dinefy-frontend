@@ -5,6 +5,7 @@ import { RegisterComponent } from '../../feature/home/components/register/regist
 import { HeaderService } from './header.service';
 import { Router } from '@angular/router';
 import { LoginService } from "../../services/login.service";
+import { GoogleApiService, UserInfo } from "../../services/google-api.service";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
@@ -19,7 +20,8 @@ import { MatListModule } from '@angular/material/list';
   providers: [
     MatDialog,
     HeaderService,
-    LoginService
+    LoginService,
+    GoogleApiService
   ],
   imports: [
     CommonModule,
@@ -33,11 +35,24 @@ export class HeaderComponent implements OnInit {
   headerClass: string = "";
   isTransparent = true;
   initialHeight = '100px'; // Set your initial height here
+  userInfo?: UserInfo;
+  cacheBuster?: number;
+
   redirectToUserProfile(){
     this.router.navigate(['/userprofile']);
   }
 
-  constructor(private dialog: MatDialog, private headerData: HeaderService, public loginService: LoginService, private router: Router, private renderer: Renderer2) { }
+  constructor(
+    private dialog: MatDialog,
+    private headerData: HeaderService,
+    public loginService: LoginService,
+    private readonly googleApiService: GoogleApiService,
+    private router: Router,
+    private renderer: Renderer2) {
+     googleApiService.userProfileSubject.subscribe( info => {
+          this.userInfo = info
+        })
+  }
 
   signin(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
@@ -64,11 +79,21 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.googleApiService.initializeGoogleAuth().then(() => {
+      this.loginService.setIsLogged(this.googleApiService.isLoggedIn());
+      this.googleApiService.userProfileSubject.subscribe( info => {
+            this.userInfo = info;
+            this.cacheBuster = Math.random();
+          })
+
+      })
+
     this.headerData.currentHeader.subscribe(headerClass => this.headerClass = headerClass);
   }
 
   logout() {
     this.loginService.setIsLogged(false);
+    this.googleApiService.signOut();
     this.router.navigate(['/home']);
   }
 

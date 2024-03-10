@@ -10,6 +10,9 @@ import {LoginService} from "../../../../services/login.service";
 import { AuthService } from "../../../../services/auth.service";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { GoogleApiService } from "../../../../services/google-api.service"
 
 @Component({
   selector: 'app-login',
@@ -28,10 +31,11 @@ import { CommonModule } from '@angular/common';
   ]
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
+  hide: boolean = true;
   authenticationError: boolean = false;
 
   constructor(
@@ -39,35 +43,54 @@ export class LoginComponent {
     private loginService: LoginService,
     private authService: AuthService, // Inject the AuthService
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private googleApiService: GoogleApiService
    ) {}
 
- async onClick(username: string, password: string): Promise<void> {
-    try {
-     const token = await this.authService.login(username, password);
+  ngOnInit(): void {
 
+  }
+
+onClick(username: string, password: string): void {
+  this.authService.login(username, password).subscribe(
+    (token: string | null) => {
       if (token) {
-        this.dialogRef.close();
-        //this.router.navigate(['/profile']);
-        this.loginService.setIsLogged(true);
-        this.loginService.setJwtToken(token);
-      } else {
+       this.dialogRef.close();
+       //this.router.navigate(['/profile']);
+       this.loginService.setIsLogged(true);
+       this.loginService.setToken(token);
+      }
+      else
+      {
         this.authenticationError = true;
       }
-    } catch (error) {
-      console.error('Error during login:', error);
+    },
+    (error) => {
+      console.error('Login error:', error.message);
     }
+  );
+}
 
-  }
+togglePasswordVisibility(): void {
+  this.hide = !this.hide;
+}
 
-  signInWithGoogle(): void {
+signInWithGoogle(): void {
 
-  }
+  this.googleApiService.signIn();
 
-  loginWithFacebook(): void {
+}
 
-
-  }
+signInWithFacebook(): void {
+  this.authService.signInWithFacebook().subscribe(
+    (response) => {
+      // Handle successful response
+    },
+    (error) => {
+      console.error('Facebook sign-in error:', error);
+    }
+  );
+}
 
 
   openRegisterDialog(): void {

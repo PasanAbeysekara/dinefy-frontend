@@ -13,7 +13,10 @@
             <input matInput [(ngModel)]="username"  placeholder="User Name">
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input type="password" [(ngModel)]="password" matInput placeholder="Password">
+            <input [type]="hide ? 'password' : 'text'" [(ngModel)]="password" matInput placeholder="Password">
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
             <mat-hint align="end" >Forgot Password ?</mat-hint>
           </mat-form-field>
 
@@ -29,7 +32,7 @@
           <button mat-button (click)="signInWithGoogle()">
             <i class="fa-brands fa-google mr-1"></i> Login With Google
           </button>
-          <button mat-button (click)="loginWithFacebook()">
+          <button mat-button (click)="signInWithFacebook()">
             <mat-icon class="hg-icon">facebook</mat-icon> Login With Facebook
           </button>
         </div>
