@@ -21,7 +21,8 @@ import {mergeMap, tap} from "rxjs/operators";
     CarouselModule,
     MatButtonModule,
     NgbRating,
-    SharedModule
+    SharedModule,
+    HttpClientModule,
   ],
   styleUrls: ['./promotions.component.css']
 })
@@ -31,7 +32,6 @@ export class PromotionsComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
-
 
   redirectToRestaurantDetails() {
     this.router.navigate(['/product/rest-code-1']);

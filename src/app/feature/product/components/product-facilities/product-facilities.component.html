@@ -1,43 +1,12 @@
-<div class="mt-10 w-[350px] md:w-[720px] ml-5 md:ml-0">
+<div class="mt-10 w-[350px] md:w-[720px] ml-5 md:ml-0" *ngIf="facilities.length > 0">
   <p class="text-3xl font-sans"> Facilities </p>
 
   <mat-divider></mat-divider>
 
   <div class="flex text-lg text-gray-600 mt-4 flex-wrap space-y-4 items-center ml-5 md:ml-0">
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 mt-2">
-      <mat-icon class="text-emerald-400"> local_florist</mat-icon>
-      <p class="text-sm">Outdoor Patio</p>
-    </div>
-
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4">
-      <mat-icon class="text-emerald-400"> party_mode</mat-icon>
-      <p class="text-sm">Party Room</p>
-    </div>
-
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 ">
-      <mat-icon class="text-emerald-400"> restaurant</mat-icon>
-      <p class="text-sm">Private Dining</p>
-    </div>
-
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 ">
-      <mat-icon class="text-emerald-400"> music_note</mat-icon>
-      <p class="text-sm">Live Music</p>
-    </div>
-
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 ">
-      <mat-icon class="text-emerald-400"> room_service</mat-icon>
-      <p class="text-sm">Catering Services</p>
-    </div>
-
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 ">
-      <mat-icon class="text-emerald-400"> local_bar</mat-icon>
-      <p class="text-sm">Wine Tasting</p>
-    </div>
-
-    <div class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 ">
-      <mat-icon class="text-emerald-400"> local_parking</mat-icon>
-      <p class="text-sm">Car Parking</p>
+    <div *ngFor="let facility of facilities" class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 mt-2">
+      <mat-icon class="text-emerald-400">{{ facility.icon }}</mat-icon>
+      <p class="text-sm">{{ facility.name }}</p>
     </div>
   </div>
-
 </div>

@@ -70,7 +70,7 @@ export class OtherPlacesComponent implements OnInit{
           restaurantName: prop.name
         });
       });
-      console.log(this.otherPlaces)
+      // console.log(this.otherPlaces)
     });
   }
 

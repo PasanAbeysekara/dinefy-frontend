@@ -1,22 +1,22 @@
-<div class="mt-[140px] md:mt-[40px] w-[330px] md:w-[680px] ml-5 md:ml-0">
-  <p class="text-3xl font-sans"> Machan Pannipitiya </p>
-  <p class="font-sans">Colombo 01, Sri Lanka </p>
+<div class="mt-[140px] md:mt-[40px] w-[330px] md:w-[680px] ml-5 md:ml-0" *ngIf="restaurantDetails">
+  <p class="text-3xl font-sans">{{ restaurantDetails.name }}</p>
+  <p class="font-sans">{{ restaurantDetails.contactDetails.address1 }}, {{ restaurantDetails.contactDetails.address2 }}, {{ restaurantDetails.contactDetails.address3 }}</p>
 
   <div class="flex space-x-1 text-gray-500">
-    <p>4/5</p>
-    <ngb-rating [rate]="4" class="text-red-500 text-md" />
-    <p>(1402)</p>
+    <p>{{ restaurantDetails.avgRating }}/5</p>
+    <ngb-rating [rate]="restaurantDetails.avgRating" class="text-red-500 text-md" />
+    <p>({{ restaurantDetails.totalRating }})</p>
   </div>
-  <p class="text-gray-600"><span class="font-sans text-xl text-gray-900"> LKR3,200.00</span> / Approx 4 People</p>
+  <p class="text-gray-600"><span class="font-sans text-xl text-gray-900"> LKR{{ restaurantDetails.amount }}</span> / Approx 4 People</p>
 
-  <!--  description-->
+  <!-- description -->
   <div class="font-sans text-[15px] mt-4">
     <p class="text-gray-500">
-      Machan Pannipitiya, located in Colombo 01, Sri Lanka, is a vibrant and lively establishment that offers a perfect setting for relaxation and socializing. With a spacious and comfortable environment, it's an ideal place to unwind with friends after a hectic day or to catch up with them over lunch. The venue boasts a large screen where you can enjoy your favorite cricket matches or music videos, adding to the overall experience. Additionally, Machang Pannipitiya offers the opportunity to engage in a friendly game of pool, adding an element of fun and competition to your visit. Whether you're looking for a place to relax, socialize, or have some fun, Machang Pannipitiya has something for everyone.
+      {{ restaurantDetails.description }}
     </p>
 
     <p class="my-2 text-gray-500" *ngIf="showFullDescription">
-      In addition to the entertainment options, Machang Pannipitiya also offers a diverse menu featuring a variety of delicious dishes. From Sri Lankan favorites to international cuisine, there's something to satisfy every palate. The bar serves a selection of refreshing beverages, including cocktails, mocktails, and a range of spirits. The friendly staff ensures that you have a memorable experience, and the lively atmosphere makes it a popular spot for locals and tourists alike. Whether you're looking for a place to relax, socialize, or enjoy a delicious meal, Machang Pannipitiya is the perfect destination.
+      {{ restaurantDetails.additionalDescription }}
     </p>
 
     <div class="flex justify-center">
