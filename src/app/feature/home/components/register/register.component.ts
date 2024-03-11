@@ -3,6 +3,7 @@ import {MatDialog, MatDialogClose, MatDialogContent, MatDialogRef} from '@angula
 import { Router } from '@angular/router';
 import {LoginService} from "../../../../services/login.service";
 import {AuthService} from "../../../../services/auth.service";
+import {GoogleApiService} from "../../../../services/google-api.service";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
@@ -22,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogContent,
     MatSelectModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ]
 })
 
@@ -46,7 +47,8 @@ export class RegisterComponent
     private loginService: LoginService,
     private authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private googleApiService: GoogleApiService
   ) {}
 
   onClick(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): void {
@@ -120,6 +122,12 @@ export class RegisterComponent
     this.emailError = '';
     this.passwordError = '';
     this.confirmPasswordError = '';
+  }
+
+  signInWithGoogle(): void {
+
+    this.googleApiService.signIn();
+
   }
 
   openLoginDialog(): void {
