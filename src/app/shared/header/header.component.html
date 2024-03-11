@@ -18,10 +18,10 @@
           <div class="user-container" mat-button [matMenuTriggerFor]="user">
             <div class="flex items-center">
               <div class="user-details flex">
-                <span class="text-lg font-bold ">Hi! Jhon Doe</span>
-                <span class="text-gray-600 text-sm">jhonedoe&#64;domain.com</span>
+                <span class="text-lg font-bold ">Hi! {{ userInfo?.info?.name }}</span>
+                <span class="text-black-600 text-sm">{{ userInfo?.info?.email }}</span>
               </div>
-              <img class="avatar-user rounded-full w-12 h-12 ml-4" src="../../../assets/profile-image.png" />
+              <img class="avatar-user rounded-full w-12 h-12 ml-4" src="{{userInfo?.info?.picture}}" />
             </div>
           </div>
 
@@ -29,8 +29,8 @@
             <mat-list>
               <mat-list-item>
                 <div class="user-details user-details--ms">
-                  <span class="text-lg">Hi! Jhon Doe</span>
-                  <span class="text-gray-600  mb-2">jhonedoe&#64;domain.com</span>
+                  <span class="text-lg"> {{ userInfo?.info?.name }} </span>
+                  <span class="text-gray-600  mb-2">{{ userInfo?.info?.email }} </span>
                 </div>
               </mat-list-item>
               <mat-divider></mat-divider>

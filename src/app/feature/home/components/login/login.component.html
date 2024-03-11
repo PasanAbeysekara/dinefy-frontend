@@ -10,26 +10,29 @@
       <div class="mat-dialog-content">
         <div>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input matInput placeholder="User Name">
+            <input matInput [(ngModel)]="username"  placeholder="User Name">
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input type="password" matInput placeholder="Password">
+            <input [type]="hide ? 'password' : 'text'" [(ngModel)]="password" matInput placeholder="Password">
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
             <mat-hint align="end" >Forgot Password ?</mat-hint>
           </mat-form-field>
 
         </div>
-
+        <div *ngIf="authenticationError" style="color: red;">Incorrect username or password. Please try again</div>
         <!--<div mat-dialog-actions>-->
-        <button class="erg-btn erg-btn--full-width erg-btn--large margin--top" mat-flat-button (click)="onNoClick()">Sign In</button>
+        <button class="erg-btn erg-btn--full-width erg-btn--large margin--top" mat-flat-button (click)="onClick(username, password)">Sign In</button>
         <!--</div>-->
         <hr>
         <div class="text-center title--primary margin--top">Don't want to complete the form?</div>
         <hr>
         <div class="erg-btn--list">
-          <button mat-button>
+          <button mat-button (click)="signInWithGoogle()">
             <i class="fa-brands fa-google mr-1"></i> Login With Google
           </button>
-          <button mat-button>
+          <button mat-button (click)="signInWithFacebook()">
             <mat-icon class="hg-icon">facebook</mat-icon> Login With Facebook
           </button>
         </div>

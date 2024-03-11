@@ -16,5 +16,12 @@ export class LoginService {
     return sessionStorage.getItem('isLoggedIn') == 'true' ? true : false;
   }
 
+  setToken(token: string): void{
+    sessionStorage.setItem('token', token);
+  }
+
+  getToken(): string{
+    return sessionStorage.getItem('token') as string;
+  }
 
 }
