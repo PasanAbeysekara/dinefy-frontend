@@ -23,6 +23,16 @@ export class AuthService {
       );
   }
 
+ register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
+    const userData = { firstName, lastName, email, password };
+    return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
+      catchError(error => {
+        console.error('Error during user registration:', error);
+        return of(null);
+      })
+    );
+  }
+
     signInWithFacebook(): Observable<any> {
       return this.http.post<any>(`${this.apiUrl}/facebook`, {}).pipe(
         catchError(error => {

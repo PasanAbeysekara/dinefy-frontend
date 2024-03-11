@@ -83,3 +83,9 @@ a:hover {
 .fa-google{
   color: var(--color1);
 }
+
+.error-message {
+  color: red;
+  font-size: smaller;
+  margin-top: 5px;
+}

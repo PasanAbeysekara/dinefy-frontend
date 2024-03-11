@@ -86,6 +86,11 @@ export class HeaderComponent implements OnInit {
             this.cacheBuster = Math.random();
           })
 
+      if(sessionStorage.getItem('logType') == 'normal')
+      {
+        //get first name, last name
+      }
+
       })
 
     this.headerData.currentHeader.subscribe(headerClass => this.headerClass = headerClass);
@@ -93,6 +98,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.loginService.setIsLogged(false);
+    sessionStorage.setItem('logType', '');
     this.googleApiService.signOut();
     this.router.navigate(['/home']);
   }

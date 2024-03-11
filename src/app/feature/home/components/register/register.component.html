@@ -8,25 +8,36 @@
   </div>
   <div class="mat-dialog-content">
     <div class="row">
-      <mat-form-field appearance="outline" style="width: 50%; ">
-        <input matInput placeholder="First Name">
-      </mat-form-field>
+      <div class="error-message" style="width: 50%;" >{{firstNameError}}</div>
+      <div class="error-message" style="width: 50%;">{{lastNameError}}</div>
+    </div>
+    <div class="row">
       <mat-form-field appearance="outline" style="width: 50%;">
-        <input matInput placeholder="Last Name">
+        <input matInput [(ngModel)]="firstName" placeholder="First Name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 50%;">
+        <input matInput [(ngModel)]="lastName" placeholder="Last Name">
       </mat-form-field>
     </div>
+
+    <div class="error-message" >{{emailError}}</div>
     <mat-form-field appearance="outline" style="width: 100%;">
-      <input type="email" matInput placeholder="Email">
+      <input type="email" [(ngModel)]="email" matInput placeholder="Email">
     </mat-form-field>
+
+    <div class="error-message" >{{ passwordError }}</div>
     <mat-form-field appearance="outline" style="width: 100%;">
-      <input type="password" matInput placeholder="Password">
+      <input type="password" [(ngModel)]="password" matInput placeholder="Password">
     </mat-form-field>
+
+    <div class="error-message" >{{ confirmPasswordError }}</div>
     <mat-form-field appearance="outline" style="width: 100%;">
-      <input type="password" matInput placeholder="Confirm Password">
+      <input type="password" [(ngModel)]="confirmPassword" matInput placeholder="Confirm Password">
     </mat-form-field>
 
   <!--<div mat-dialog-actions>-->
-  <button class="erg-btn erg-btn--full-width erg-btn--large" mat-flat-button (click)="onNoClick()">Sign Up</button>
+  <button class="erg-btn erg-btn--full-width erg-btn--large" mat-flat-button (click)="onClick(firstName, lastName, email, password, confirmPassword)">Sign Up</button>
   <!--</div>-->
   <hr>
   <div class="erg-btn--list erg-btn--list--center">
