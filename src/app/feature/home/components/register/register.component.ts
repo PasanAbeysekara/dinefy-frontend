@@ -39,6 +39,7 @@ export class RegisterComponent
   emailError: string = '';
   passwordError: string = '';
   confirmPasswordError: string = '';
+  userExistError: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
@@ -49,8 +50,10 @@ export class RegisterComponent
   ) {}
 
   onClick(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): void {
-this.clearErrors();
 
+    this.clearErrors();
+    this.emailError = this.userExistError;
+    //alert("2"+this.emailError);
     if (!this.firstName) {
       this.firstNameError = 'First Name is required';
     }
@@ -80,13 +83,22 @@ this.clearErrors();
     if (this.isValid()) {
       this.authService.register(this.firstName, this.lastName, this.email, this.password).subscribe(
         (response) => {
-          this.dialogRef.close();
-          alert("Registration successful!");
-          //this.loginService.setIsLogged(true);
-          //this.router.navigate(['/profile']);
+         // if (response == "User registered successfully!") {
+            this.dialogRef.close();
+            alert("Registration successful!");
+            //this.loginService.setIsLogged(true);
+            //this.router.navigate(['/profile']);
+         // }
+          /* else{
+          alert("0");
+                    if (response.error.includes('Username already exists')) {
+                      this.userExistError = "Email already exists";
+                       alert("1"+this.userExistError);
+                    }
+          } */
         },
         (error) => {
-          // Handle error response (if needed)
+            console.error('Registration failed:', error);
         }
       );
     }
