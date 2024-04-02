@@ -13,6 +13,7 @@ import {Product} from "../promotions/model/product";
 import {Otherplace} from "./model/other-place";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {SkeletonModule} from "primeng/skeleton";
 
 @Component({
   selector: 'app-other-places',
@@ -30,7 +31,8 @@ import {Observable} from "rxjs";
     RecommendationCardComponent,
     CarouselModule,
     NgbRating,
-    SharedModule
+    SharedModule,
+    SkeletonModule,
   ],
   styleUrls: ['./other-places.component.css']
 })
@@ -61,6 +63,7 @@ export class OtherPlacesComponent implements OnInit{
       numScroll: 1
     }
   ];
+  isLoading: boolean = true;
 
   ngOnInit() {
     this.fetchOtherProperties().subscribe((data: any) => {
@@ -71,6 +74,7 @@ export class OtherPlacesComponent implements OnInit{
         });
       });
       // console.log(this.otherPlaces)
+      this.isLoading = false;
     });
   }
 

@@ -24,7 +24,7 @@ export class ProductOverviewComponent implements OnInit{
   showFullDescription:boolean = false;
 
   ngOnInit() {
-    this.fetchRestaurantDetails(14).subscribe((data: any) => {
+    this.fetchRestaurantDetails(58).subscribe((data: any) => {
       this.restaurantDetails = data.data;
     });
   }

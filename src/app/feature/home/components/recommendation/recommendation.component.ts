@@ -1,10 +1,11 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {RecommendationCardComponent} from "./recommendation-card/recommendation-card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {finalize, Observable, Subject} from "rxjs";
 import {tap} from "rxjs/operators";
+import {SkeletonModule} from "primeng/skeleton";
 
 @Component({
   selector: 'app-recommendation',
@@ -12,7 +13,9 @@ import {tap} from "rxjs/operators";
   imports: [
     MatButtonModule,
     RecommendationCardComponent,
-    NgForOf
+    NgForOf,
+    SkeletonModule,
+    NgIf
   ],
   templateUrl: './recommendation.component.html',
   styleUrl: './recommendation.component.css'
@@ -21,6 +24,7 @@ export class RecommendationComponent implements OnInit{
 
   httpClient = inject(HttpClient);
   recommendationCards: any[] = [];
+  isLoading: boolean = true;
 
   recommendationCards2 = [
     {
@@ -28,6 +32,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
       restaurantName: 'Delicious Bistro',
       reservationPrice: '4000',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '2',
       reviewsCount: '150',
       ratingsCount: 5
@@ -37,6 +42,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_23.png',
       restaurantName: 'Savory Grill',
       reservationPrice: '4500',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '4',
       reviewsCount: '200',
       ratingsCount: 4
@@ -46,6 +52,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_21.png',
       restaurantName: 'Spice Haven',
       reservationPrice: '3500',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '3',
       reviewsCount: '180',
       ratingsCount: 4
@@ -55,6 +62,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_22.png',
       restaurantName: 'Café Serenity',
       reservationPrice: '3000',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '2',
       reviewsCount: '120',
       ratingsCount: 5
@@ -64,6 +72,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_21.png',
       restaurantName: 'Mediterranean Delight',
       reservationPrice: '5000',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '5',
       reviewsCount: '250',
       ratingsCount: 3
@@ -73,6 +82,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_22.png',
       restaurantName: 'Sushi Fusion',
       reservationPrice: '4200',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '3',
       reviewsCount: '210',
       ratingsCount: 4
@@ -82,6 +92,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_24.png',
       restaurantName: 'Farm-to-Table Fresh',
       reservationPrice: '4800',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '4',
       reviewsCount: '190',
       ratingsCount: 5
@@ -91,6 +102,7 @@ export class RecommendationComponent implements OnInit{
       cardAvatar: 'https://d3plttq4n63nzt.cloudfront.net/Ellipse_23.png',
       restaurantName: 'Urban Spice',
       reservationPrice: '3900',
+      reservationPriceCurrency:'LKR',
       reservePeopleCount: '2',
       reviewsCount: '160',
       ratingsCount: 4
@@ -105,12 +117,14 @@ export class RecommendationComponent implements OnInit{
           cardAvatar: prop.propertyMedia[0].thumbnail,
           restaurantName: prop.name,
           reservationPrice: prop.amount.toString(),
+          reservationPriceCurrency: prop.amountCurrency,
           reservePeopleCount: '2',
           reviewsCount: prop.totalRating.toString(),
           ratingsCount: prop.avgRating
         });
       });
       // console.log(this.recommendationCards);
+      this.isLoading = false;
     });
   }
 

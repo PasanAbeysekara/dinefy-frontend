@@ -20,7 +20,7 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class ProductFacilitiesComponent implements OnInit{
   facilities: any[] = [];
-  restaurantId: number = 14; // Sample restaurant ID, replace with actual value if needed
+  restaurantId: number = 58; // Sample restaurant ID, replace with actual value if needed
   httpClient = inject(HttpClient)
 
   ngOnInit() {

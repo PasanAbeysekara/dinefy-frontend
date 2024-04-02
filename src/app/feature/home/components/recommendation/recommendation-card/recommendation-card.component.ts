@@ -24,6 +24,7 @@ export class RecommendationCardComponent {
   @Input() cardAvatar!: string;
   @Input() restaurantName!: string;
   @Input() reservationPrice!: string;
+  @Input() reservationPriceCurrency!: string;
   @Input() reservePeopleCount!: string;
   @Input() reviewsCount!: string;
   @Input() ratingsCount!: number;

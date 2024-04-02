@@ -12,6 +12,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {SharedModule} from "primeng/api";
 import {finalize, forkJoin, Observable, of, Subject} from "rxjs";
 import {mergeMap, tap} from "rxjs/operators";
+import {SkeletonModule} from "primeng/skeleton";
 
 @Component({
   selector: 'app-promotions',
@@ -23,6 +24,7 @@ import {mergeMap, tap} from "rxjs/operators";
     NgbRating,
     SharedModule,
     HttpClientModule,
+    SkeletonModule,
   ],
   styleUrls: ['./promotions.component.css']
 })
@@ -41,6 +43,8 @@ export class PromotionsComponent implements OnInit {
   products: any[] = [];
   promotionPropIds: number[] = [];
 
+  isLoading: boolean = true;
+
   httpClient = inject(HttpClient);
   data: any[] = [];
   property: any;
@@ -49,13 +53,15 @@ export class PromotionsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.fetchPromotionData().pipe(
       mergeMap(() => {
         const requests = this.promotionPropIds.map(promoPropId => this.fetchPropertyData(promoPropId));
         return requests.length > 0 ? forkJoin(requests) : of([]);
       })
     ).subscribe(() => {
-      this.productsSubject.next(this.products);
+       this.productsSubject.next(this.products);
+       this.isLoading = false;
     });
 
     this.responsiveOptions = [
@@ -77,7 +83,6 @@ export class PromotionsComponent implements OnInit {
     ];
   }
 
-
   fetchPromotionData(): Observable<any> {
     return this.httpClient.get('http://localhost:8081/data/promotions').pipe(
       tap((data: any) => {
@@ -97,6 +102,7 @@ export class PromotionsComponent implements OnInit {
           avatar: this.property.propertyMediaWrapper.bannerImages[0].thumbnail,
           name: this.property.livePromotions[0].name,
           price: this.property.amount,
+          currency: this.property.amountCurrency,
           inventoryStatus: 'In Stock',
           rating: this.property.avgRating,
           reviewCount: this.property.totalRating,
@@ -105,7 +111,7 @@ export class PromotionsComponent implements OnInit {
       }),
       finalize(() => {
         // console.log(this.products); // You can remove this line, it's for debugging purposes
-        // console.log(this.promotionPropIds);
+        console.log(this.promotionPropIds);
       })
     );
   }
