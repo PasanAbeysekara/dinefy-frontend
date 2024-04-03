@@ -4,6 +4,9 @@ import {NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ProductService} from "../../../../services/product.service";
+import {ActivatedRoute} from "@angular/router";
+import {SkeletonModule} from "primeng/skeleton";
 
 @Component({
   selector: 'app-product-overview',
@@ -12,7 +15,8 @@ import {Observable} from "rxjs";
     NgbRating,
     NgIf,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    SkeletonModule
   ],
   templateUrl: './product-overview.component.html',
   styleUrl: './product-overview.component.css'
@@ -22,19 +26,21 @@ export class ProductOverviewComponent implements OnInit{
   restaurantDetails: any;
   httpClient = inject(HttpClient);
   showFullDescription:boolean = false;
+  propCode:string = "GHI012";
+
+  constructor(private route: ActivatedRoute, private productService: ProductService, public changeDetectorRef: ChangeDetectorRef, config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = true;
+  }
 
   ngOnInit() {
-    this.fetchRestaurantDetails(58).subscribe((data: any) => {
+    this.route.params.subscribe(params => {
+      this.propCode = params['propCode'];
+    });
+
+    this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
       this.restaurantDetails = data.data;
     });
   }
 
-  fetchRestaurantDetails(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8081/data/properties/${id}`);
-  }
-
-  constructor(public changeDetectorRef: ChangeDetectorRef, config: NgbRatingConfig) {
-    config.max = 5;
-    config.readonly = true;
-  }
 }

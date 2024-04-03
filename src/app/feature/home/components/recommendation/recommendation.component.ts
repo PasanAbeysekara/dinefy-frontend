@@ -3,9 +3,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {RecommendationCardComponent} from "./recommendation-card/recommendation-card.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
-import {finalize, Observable, Subject} from "rxjs";
-import {tap} from "rxjs/operators";
 import {SkeletonModule} from "primeng/skeleton";
+import {ProductService} from "../../../../services/product.service";
 
 @Component({
   selector: 'app-recommendation',
@@ -109,8 +108,11 @@ export class RecommendationComponent implements OnInit{
     }
   ];
 
+  constructor(private productService: ProductService) {}
+
+
   ngOnInit() {
-    this.fetchProperties().subscribe((data: any) => {
+    this.productService.getAllProducts().subscribe((data: any) => {
       data.forEach((prop: any) => {
         this.recommendationCards.push({
           cardImage: prop.propertyMedia[0].mediaUrl,
@@ -120,16 +122,13 @@ export class RecommendationComponent implements OnInit{
           reservationPriceCurrency: prop.amountCurrency,
           reservePeopleCount: '2',
           reviewsCount: prop.totalRating.toString(),
-          ratingsCount: prop.avgRating
+          ratingsCount: prop.avgRating,
+          propCode: prop.code
         });
       });
       // console.log(this.recommendationCards);
       this.isLoading = false;
     });
-  }
-
-  fetchProperties(): Observable<any> {
-    return this.httpClient.get('http://localhost:8081/data/properties');
   }
 
 }

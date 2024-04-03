@@ -36,7 +36,7 @@ export class PromotionsComponent implements OnInit {
   }
 
   redirectToRestaurantDetails() {
-    this.router.navigate(['/product/rest-code-1']);
+    this.router.navigate([`/product/${this.property.code}`]);
   }
 
   responsiveOptions: any[] = [];

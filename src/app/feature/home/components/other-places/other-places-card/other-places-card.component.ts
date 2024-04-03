@@ -17,9 +17,10 @@ export class OtherPlacesCardComponent {
 
   @Input() cardImage!: string;
   @Input() restaurantName!: string;
+  @Input() propCode!:string;
 
   redirectToRestaurantDetails(){
-    this.router.navigate(['/product/rest-code-1']);
+    this.router.navigate([`/product/${this.propCode}`]);
   }
 
   constructor(private router: Router){

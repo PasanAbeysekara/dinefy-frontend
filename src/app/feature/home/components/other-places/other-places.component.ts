@@ -70,7 +70,8 @@ export class OtherPlacesComponent implements OnInit{
       data.forEach((prop: any) => {
         this.otherPlaces.push({
           cardImage: prop.propertyMedia[0].mediaUrl,
-          restaurantName: prop.name
+          restaurantName: prop.name,
+          propCode: prop.code
         });
       });
       // console.log(this.otherPlaces)

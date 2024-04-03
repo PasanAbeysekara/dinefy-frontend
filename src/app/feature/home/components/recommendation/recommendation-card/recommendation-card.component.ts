@@ -17,9 +17,6 @@ import {Router} from "@angular/router";
   providers: [NgbRatingConfig],
 })
 export class RecommendationCardComponent {
-  redirectToRestaurantDetails(){
-    this.router.navigate(['/product/rest-code-1']);
-  }
   @Input() cardImage!: string;
   @Input() cardAvatar!: string;
   @Input() restaurantName!: string;
@@ -28,6 +25,11 @@ export class RecommendationCardComponent {
   @Input() reservePeopleCount!: string;
   @Input() reviewsCount!: string;
   @Input() ratingsCount!: number;
+  @Input() propCode!: string;
+
+  redirectToRestaurantDetails(){
+    this.router.navigate([`/product/${this.propCode}`]);
+  }
 
   constructor(config: NgbRatingConfig,private router: Router) {
     config.max = 5;
