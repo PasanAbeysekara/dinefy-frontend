@@ -21,7 +21,6 @@ import {SkeletonModule} from "primeng/skeleton";
   standalone: true,
   imports: [
     CarouselModule,
-    // HomeModule,
     MatIconModule,
     MatButtonModule,
     MatDialogClose,
@@ -64,12 +63,18 @@ export class OtherPlacesComponent implements OnInit{
     }
   ];
   isLoading: boolean = true;
+  image: any;
 
   ngOnInit() {
     this.fetchOtherProperties().subscribe((data: any) => {
       data.forEach((prop: any) => {
+        prop.propertyMedia.forEach((value: any) => {
+          if (value.category == 'banner') {
+            this.image = value;
+          }
+        });
         this.otherPlaces.push({
-          cardImage: prop.propertyMedia[0].mediaUrl,
+          cardImage: this.image.mediaUrl,
           restaurantName: prop.name,
           propCode: prop.code
         });

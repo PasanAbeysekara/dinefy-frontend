@@ -24,6 +24,7 @@ export class RecommendationComponent implements OnInit{
   httpClient = inject(HttpClient);
   recommendationCards: any[] = [];
   isLoading: boolean = true;
+  images: any;
 
   recommendationCards2 = [
     {
@@ -114,9 +115,16 @@ export class RecommendationComponent implements OnInit{
   ngOnInit() {
     this.productService.getAllProducts().subscribe((data: any) => {
       data.forEach((prop: any) => {
+
+        prop.propertyMedia.forEach((value: any) => {
+          if (value.category == 'banner') {
+            this.images = value;
+          }
+        });
+
         this.recommendationCards.push({
-          cardImage: prop.propertyMedia[0].mediaUrl,
-          cardAvatar: prop.propertyMedia[0].thumbnail,
+          cardImage: this.images.mediaUrl,
+          cardAvatar: this.images.thumbnail,
           restaurantName: prop.name,
           reservationPrice: prop.amount.toString(),
           reservationPriceCurrency: prop.amountCurrency,
@@ -125,8 +133,8 @@ export class RecommendationComponent implements OnInit{
           ratingsCount: prop.avgRating,
           propCode: prop.code
         });
+
       });
-      // console.log(this.recommendationCards);
       this.isLoading = false;
     });
   }
