@@ -158,7 +158,8 @@ export class BottomSheetReserveSheetComponent implements OnInit {
       time: formattedTime,
       status: 'Pending',
       headCount: this.valueAdults + this.valueChildren,
-      option1: this.selectedSeatType
+      option1: this.selectedSeatType,
+      reserveCode:generateReserveCode(this.restaurant.propId,"2024")
     };
 
     const restuData = this.restaurant;
@@ -193,3 +194,8 @@ export class BottomSheetReserveSheetComponent implements OnInit {
   }
 }
 
+function generateReserveCode(reservationId: number, year: string): string {
+  const randomLetter = () => String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  const randomNumber = () => Math.floor(1000 + Math.random() * 9000).toString();
+  return `${year}${randomLetter()}${randomLetter()}-${randomNumber()}-${reservationId}`;
+}

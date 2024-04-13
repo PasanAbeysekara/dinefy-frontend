@@ -183,7 +183,7 @@ export class ReserveModalComponent implements OnInit {
       next: (response) => {
         console.log('Reservation successful', response);
         this.dialogRef.close('Reservation made successfully');
-        this.router.navigate([`/product/${this.data.restaurantDatas.code}/checkout`]);
+        this.router.navigate([`/product/${this.data.restaurantDatas.code}/checkout/${this.data.reservationPayload.reserveCode}`]);
         this.showSuccess();
       },
       error: (error) => {
