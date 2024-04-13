@@ -3,16 +3,17 @@
     <img src="https://resizer.otstatic.com/v2/photos/small/1/25287184.jpg" class="imageClass">
   </div>
   <div class="contentWrapper">
-    <div class="itemTitle">The Garrison</div>
+    <div class="itemTitle">{{restaurantData.name}}</div>
     <div class="itemsDetails">
       <div class="itemsDetails__item">
-        <mat-icon>event</mat-icon>Aug 19, 2020
+        <mat-icon>event</mat-icon>{{reservationData.date}}
       </div>
       <div class="itemsDetails__item">
-        <mat-icon>access_time</mat-icon>08.44 PM
+        <mat-icon>access_time</mat-icon>
+        {{ reservationData.time }}
       </div>
       <div class="itemsDetails__item">
-        <mat-icon>person_outline</mat-icon>2 People
+        <mat-icon>person_outline</mat-icon>{{reservationData.headCount}} People
       </div>
     </div>
   </div>

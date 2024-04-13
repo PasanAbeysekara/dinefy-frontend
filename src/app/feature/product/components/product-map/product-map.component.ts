@@ -22,7 +22,7 @@ import {SkeletonModule} from "primeng/skeleton";
 export class ProductMapComponent implements OnInit{
   httpClient = inject(HttpClient)
   locationPath: SafeResourceUrl = "";
-  propCode:string = "GHI012";
+  propCode:string = "";
   isLoading:boolean = true;
 
   constructor(private route: ActivatedRoute, private productService: ProductService,private sanitizer: DomSanitizer) {}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -8,6 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './items-summary.component.html',
   styleUrl: './items-summary.component.css'
 })
-export class ItemsSummaryComponent {
+export class ItemsSummaryComponent implements OnInit{
+  @Input() restaurantData: any;
+  @Input() reservationData:any;
 
+  constructor() {}
+
+  ngOnInit(): void {
+    console.log(this.restaurantData);
+    console.log(this.reservationData);
+  }
 }

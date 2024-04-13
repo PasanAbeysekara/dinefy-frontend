@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ViewChild, Inject, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 //import { MatStepper, MatHorizontalStepper, MatStep, MatVerticalStepper } from '@angular/material/stepper';
 import { Store } from '@ngrx/store';
@@ -21,6 +21,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ItemsSummaryComponent } from '../items-summary/items-summary.component'
+import {HttpClient} from "@angular/common/http";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 
 @Component({
   selector: 'app-reserve-modal',
@@ -35,16 +38,22 @@ import { ItemsSummaryComponent } from '../items-summary/items-summary.component'
             MatCheckboxModule,
             MatDialogModule,
             MatButtonModule,
-            ItemsSummaryComponent
+            ItemsSummaryComponent,
+            ToastModule
             ],
+  providers: [MessageService],
   templateUrl: './reserve-modal.component.html',
   styleUrl: './reserve-modal.component.css'
 })
 export class ReserveModalComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<ReserveModalComponent>, private formBuilder: FormBuilder, private breakpointObserver: BreakpointObserver
-  , private changeDetectorRef: ChangeDetectorRef, private router: Router) {
+    public dialogRef: MatDialogRef<ReserveModalComponent>,
+    private formBuilder: FormBuilder,
+    private breakpointObserver: BreakpointObserver,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private messageService: MessageService,
+    private changeDetectorRef: ChangeDetectorRef, private router: Router) {
     breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small
@@ -72,6 +81,7 @@ export class ReserveModalComponent implements OnInit {
   specialRequests!: string;
   productInfo!: ProductInfoModel;
   options: string[] = [];
+  httpClient = inject(HttpClient)
 
   goBack(stepper: MatStepper) {
     stepper.previous();
@@ -124,6 +134,7 @@ export class ReserveModalComponent implements OnInit {
     /*this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });*/
+
     this.signInFormGroup = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -154,14 +165,33 @@ export class ReserveModalComponent implements OnInit {
 */
   }
 
-  makeReservation(){
-    this.router.navigate(['/product/rest-code-1/checkout']);
-    this.reservation = {...this.reservation, specialRequest : this.specialRequests,
-    slotLength: this.productInfo.reservationSlotLength,
-    slotMinutes: this.productInfo.reservationSlotMinutes,
-    option1: this.options[0] ?? '', // Use an empty string if options[0] is null
-    option2: this.options[1] ?? ''  };
-     // this.store.dispatch(new PostReservation(this.reservation));
+  // makeReservation(){
+  //   this.router.navigate(['/product/rest-code-1/checkout']);
+  //   this.reservation = {...this.reservation, specialRequest : this.specialRequests,
+  //   slotLength: this.productInfo.reservationSlotLength,
+  //   slotMinutes: this.productInfo.reservationSlotMinutes,
+  //   option1: this.options[0] ?? '', // Use an empty string if options[0] is null
+  //   option2: this.options[1] ?? ''  };
+  //    // this.store.dispatch(new PostReservation(this.reservation));
+  // }
+
+  makeReservation(): void {
+
+    this.data.reservationPayload.specialRequest = this.specialRequests;
+
+    this.httpClient.post('http://localhost:8081/res/reservations',this.data.reservationPayload).subscribe({
+      next: (response) => {
+        console.log('Reservation successful', response);
+        this.dialogRef.close('Reservation made successfully');
+        this.router.navigate([`/product/${this.data.restaurantDatas.code}/checkout`]);
+        this.showSuccess();
+      },
+      error: (error) => {
+        console.error('Error making reservation', error);
+        this.dialogRef.close('Failed to make reservation');
+        this.showFailed();
+      }
+    });
   }
 
   setOptions($event: any, type: any){
@@ -176,4 +206,12 @@ export class ReserveModalComponent implements OnInit {
       }
     }
   }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully Reserved !' });
+  }
+  showFailed() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Reserve was Unsuccessful !' });
+  }
+
 }

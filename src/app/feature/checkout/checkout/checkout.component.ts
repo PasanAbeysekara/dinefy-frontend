@@ -7,6 +7,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {LocationMapComponent} from "../components/location-map/location-map.component";
 import {ProductMenuComponent} from "../../product/components/product-menu/product-menu.component";
 import {MenuComponent} from "../components/menu/menu.component";
+import {OrderSummaryComponent} from "../components/order-summary/order-summary.component";
 
 @Component({
   selector: 'app-checkout',
@@ -19,6 +20,7 @@ import {MenuComponent} from "../components/menu/menu.component";
     LocationMapComponent,
     ProductMenuComponent,
     MenuComponent,
+    OrderSummaryComponent,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
