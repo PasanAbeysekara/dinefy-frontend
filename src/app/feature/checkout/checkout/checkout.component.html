@@ -1,70 +1,42 @@
 <ng-template #content let-offcanvas>
+<!--  Header -->
   <div class="offcanvas-header bg-gray-800 text-amber-50">
-    <p class="text-lg font-medium mt-1">Order Summary</p>
+    <p class="text-lg font-medium mt-1">Order Summary ({{ totalItems }} items)</p>
     <button type="button" class="mt-1" aria-label="Close" (click)="offcanvas.dismiss('Cross click')">
       <mat-icon>close</mat-icon>
     </button>
   </div>
+
+<!--  Cart Items-->
+  <div class="offcanvas-body">
+    <div *ngFor="let cartItem of cart" class="flex justify-between items-center">
+      <div class="mt-3 mx-4">
+        <p class="my-0 font-medium text-lg">{{ cartItem.name }}</p>
+        <p class="my-0 font-mono">{{cartItem.amountCurrency}} {{ cartItem.amount }}</p>
+        <p class="my-0 text-gray-500">{{ cartItem.description }}</p>
+      </div>
+      <div class="flex justify-between h-10 mr-4 ">
+        <button mat-icon-button (click)="decrementCartItem(cartItem)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <input type="text" [(ngModel)]="cartItem.quantity" class="w-3 h-5 mt-3" readonly/>
+        <button mat-icon-button (click)="incrementCartItem(cartItem)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!--  Bottom -->
   <div class="bg-gray-800 text-amber-50 absolute bottom-0 flex justify-between w-full">
     <div class="m-3">
-      <p class="my-0">3 items</p>
-      <p class="my-0 font-mono text-lg">LKR 13,500</p>
+      <p class="my-0">{{ totalItems }} items</p>
+      <p class="my-0 font-mono text-lg">{{amountCurrency}} {{ totalPrice }}</p>
     </div>
-    <button class="m-3 mt-4" (click)="offcanvas.dismiss('Cross click')">
-      <mat-icon>chevron_right</mat-icon>
-    </button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="flex justify-between items-center">
-      <div class="mt-3 mx-4">
-        <p class="my-0 font-medium text-lg">Bacon & Egg Sandwich</p>
-        <p class="my-0 font-mono">LKR 3000.00</p>
-        <p class="my-0 text-gray-500">Small</p>
-        <p></p>
-      </div>
-      <div class="flex justify-between h-10 mr-4 ">
-        <button mat-icon-button (click)="decrementProduct1()">
-          <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%">remove</mat-icon>
-        </button>
-        <input type="text" [(ngModel)]="valueProduct1" class="w-3 h-5 mt-3" readonly/>
-        <button mat-icon-button (click)="incrementProduct1()">
-          <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="flex justify-between items-center">
-      <div class="mt-3 mx-4">
-        <p class="my-0 font-medium text-lg">Grilled Chicken Wrap</p>
-        <p class="my-0 font-mono">LKR 4500.00</p>
-        <p class="my-0 text-gray-500">Regular</p>
-        <p></p>
-      </div>
-      <div class="flex justify-between h-10 mr-4">
-        <button mat-icon-button (click)="decrementProduct2()">
-          <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%">remove</mat-icon>
-        </button>
-        <input type="text" [(ngModel)]="valueProduct2" class="w-3 h-5 mt-3" readonly/>
-        <button mat-icon-button (click)="incrementProduct2()">
-          <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="flex justify-between items-center">
-      <div class="mt-3 mx-4">
-        <p class="my-0 font-medium text-lg">Vegetarian Delight Pizza</p>
-        <p class="my-0 font-mono">LKR 6000.00</p>
-        <p class="my-0 text-gray-500">Large</p>
-        <p></p>
-      </div>
-      <div class="flex justify-between h-10 mr-4 ">
-        <button mat-icon-button (click)="decrementProduct3()">
-          <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%">remove</mat-icon>
-        </button>
-        <input type="text" [(ngModel)]="valueProduct3" class="w-3 h-5 mt-3" readonly/>
-        <button mat-icon-button (click)="incrementProduct3()">
-          <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>
-        </button>
-      </div>
+    <div (click)="offcanvas.dismiss('Cross click')" class="mt-3">
+      <button class="my-2 px-3 mr-2 bg-red-500 rounded-md" (click)="redirectPayment()">
+        <p class="mt-2">Place Order</p>
+      </button>
     </div>
   </div>
 </ng-template>
@@ -73,7 +45,7 @@
 <div class="relative">
 
 
-<!-- Cart Button -->
+  <!-- Cart Button -->
   <div>
     <div class="fixed bottom-5 right-5 flex z-2">
       <button class="px-0 md:px-3 py-2 flex items-center justify-evenly bg-[#4b2870] hover:bg-[#6c3aa1] rounded-3xl md:rounded-full  text-amber-50 w-[60px] h-[60px] md:h-full md:w-[130px]"  (click)="openEnd(content)">
@@ -81,1128 +53,777 @@
         <p class="mt-2 text-lg font-medium hidden md:block">Cart</p>
       </button>
     </div>
-    <p class="px-2 rounded-full bg-gray-800 text-gray-50 fixed bottom-14 right-5 z-3 font-medium">3</p>
+    <p class="px-2 rounded-full bg-gray-800 text-gray-50 fixed bottom-14 right-5 z-3 font-medium">{{totalItems}}</p>
   </div>
 
-<!--  <div class="fixed bottom-8 right-8">-->
-<!--    <button>Dope</button>-->
-<!--  </div>-->
+  <!--  <div class="fixed bottom-8 right-8">-->
+  <!--    <button>Dope</button>-->
+  <!--  </div>-->
 
-<!--Hero-->
+  <!--Hero-->
   <div class="flex flex-col 2xl:flex-row justify-center mt-20 md:mt-32 font-sans ml-5 md:ml-10 2xl:ml-0" >
     <!--  Success message -->
     <app-order-summary></app-order-summary>
     <!--  Map -->
     <div class="ml-2 md:ml-0 2xl:ml-12">
-<!--      <img src="https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/2ddba3f9-3af4-46be-a815-8cae82418756" alt="">-->
+      <!--      <img src="https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/2ddba3f9-3af4-46be-a815-8cae82418756" alt="">-->
       <div>
         <app-location-map></app-location-map>
-<!--        <iframe class="w-[320px] md:w-[740px] 2xl:w-[500px] h-[350px] md:h-[400px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6822183036384!2d79.84186127593368!3d6.928535393071291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593b09364c4f%3A0x7dc13fa1f24d5c16!2sShangri-La%20Colombo!5e0!3m2!1sen!2slk!4v1703677846969!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+        <!--        <iframe class="w-[320px] md:w-[740px] 2xl:w-[500px] h-[350px] md:h-[400px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6822183036384!2d79.84186127593368!3d6.928535393071291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593b09364c4f%3A0x7dc13fa1f24d5c16!2sShangri-La%20Colombo!5e0!3m2!1sen!2slk!4v1703677846969!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
       </div>
 
     </div>
   </div>
 
   <!-- Menu-->
-  <div class="flex justify-center mt-10 ml-28 2xl:ml-24 md:w-full">
-    <div class="-ml-24">
+  <div class="flex justify-center mt-10 pb-10">
+    <div *ngIf="isLoading>=4; else loadingTemplate;"  class="-ml-24">
       <p class="text-3xl text-gray-700 font-medium">Menu</p>
-      <mat-tab-group class="w-[320px] md:w-[720px] 2xl:w-[1300px]" dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab-group class="w-[320px] md:w-[720px] 2xl:w-[900px]" dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-        <mat-tab label="Kids Menu">
+        <mat-tab label="Main Menu">
+
           <div class="">
-
             <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-              <mat-tab label="Breakfast">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px] justify-between mt-4">
+              <mat-tab label="Starters">
+                <div class="flex justify-between mt-4">
 
-                  <!-- Sample 1: Fruity Pancake Stack -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Fruity Pancake Stack</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[0].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Fluffy pancakes topped with a mix of fresh berries and a drizzle of maple syrup.
+                        {{propChoicesList[0].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 490</p>
+                      <p class="font-mono text-lg">{{propChoicesList[0].amountCurrency}} {{propChoicesList[0].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[0]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Sample 2: Cheesy Egg Muffins -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Cheesy Egg Muffins</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[1].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Mini muffin-sized omelets with diced veggies and a sprinkle of melted cheese.
+                        {{propChoicesList[1].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 400</p>
+                      <p class="font-mono text-lg">{{propChoicesList[1].amountCurrency}} {{propChoicesList[1].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[1]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Sample 3: Banana and Nutella Wrap -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Banana and Nutella Wrap</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[2].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A whole-grain tortilla filled with sliced bananas and a spread of Nutella, rolled up like a wrap.
+                        {{propChoicesList[2].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 350</p>
+                      <p class="font-mono text-lg">{{propChoicesList[2].amountCurrency}} {{propChoicesList[2].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- Sample 4: Yogurt Parfait -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Yogurt Parfait</p>
-                      <p class="font-medium text-gray-500">
-                        Layers of vanilla yogurt, granola, and fresh fruit like strawberries and blueberries.
-                      </p>
-                      <p class="font-mono text-lg">LKR 450</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Sample 5: Mini Breakfast Burritos -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Mini Breakfast Burritos</p>
-                      <p class="font-medium text-gray-500">
-                        Small tortillas filled with scrambled eggs, cheese, and a choice of mild salsa.
-                      </p>
-                      <p class="font-mono text-lg">LKR 500</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Sample 6: Peanut Butter and Banana Toast -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Peanut Butter and Banana Toast</p>
-                      <p class="font-medium text-gray-500">
-                        Whole-grain toast spread with peanut butter and topped with banana slices.
-                      </p>
-                      <p class="font-mono text-lg">LKR 350</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[2]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[3].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[3].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[3].amountCurrency}} {{propChoicesList[3].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[3]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[4].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[4].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[4].amountCurrency}} {{propChoicesList[4].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[4]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[5].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[5].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[5].amountCurrency}} {{propChoicesList[5].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[5]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
               </mat-tab>
 
-              <mat-tab label="Lunch">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
+              <mat-tab label="Mains">
+                <div class="flex justify-between mt-4">
 
-                  <!-- Lunch Sample 1: Chicken Nugget Delight -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 6-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Chicken Nugget Delight</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[6].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Crispy chicken nuggets served with a side of colorful veggie sticks and honey mustard dip.
+                        {{propChoicesList[6].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 450</p>
+                      <p class="font-mono text-lg">{{propChoicesList[6].amountCurrency}} {{propChoicesList[6].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[6]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Lunch Sample 2: Mini Cheese Pizza -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Mini Cheese Pizza</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[7].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Personal-sized pizza with gooey melted cheese on a crispy crust, topped with tomato sauce.
+                        {{propChoicesList[7].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 400</p>
+                      <p class="font-mono text-lg">{{propChoicesList[7].amountCurrency}} {{propChoicesList[7].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[7]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Lunch Sample 3: Veggie Pasta Twist -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Veggie Pasta Twist</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[8].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Rotini pasta with a medley of colorful vegetables and a light tomato sauce.
+                        {{propChoicesList[8].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 350</p>
+                      <p class="font-mono text-lg">{{propChoicesList[8].amountCurrency}} {{propChoicesList[8].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- Lunch Sample 4: Grilled Cheese Bites -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Grilled Cheese Bites</p>
-                      <p class="font-medium text-gray-500">
-                        Bite-sized grilled cheese sandwiches served with a side of tomato soup for dipping.
-                      </p>
-                      <p class="font-mono text-lg">LKR 380</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Lunch Sample 5: Turkey and Cheese Wrap -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Turkey and Cheese Wrap</p>
-                      <p class="font-medium text-gray-500">
-                        A whole-grain tortilla filled with sliced turkey, cheese, and crisp lettuce.
-                      </p>
-                      <p class="font-mono text-lg">LKR 420</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Lunch Sample 6: Mini Veggie Burger -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Mini Veggie Burger</p>
-                      <p class="font-medium text-gray-500">
-                        A petite veggie patty on a mini bun with lettuce, tomato, and a touch of ketchup.
-                      </p>
-                      <p class="font-mono text-lg">LKR 380</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[8]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[9].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[9].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[9].amountCurrency}} {{propChoicesList[9].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[9]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[10].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[10].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[10].amountCurrency}} {{propChoicesList[10].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[10]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[11].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[11].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[11].amountCurrency}} {{propChoicesList[11].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[11]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
               </mat-tab>
 
-              <mat-tab label="Dinner">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
+              <mat-tab label="Deserts">
+                <div class="flex justify-between mt-4">
 
-                  <!-- Kids Menu Dinner Item 1: Cheesy Mac 'n' Cheese -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Cheesy Mac 'n' Cheese</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[12].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Elbow macaroni in a creamy and cheesy sauce, loved by kids of all ages.
+                        {{propChoicesList[12].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 350</p>
+                      <p class="font-mono text-lg">{{propChoicesList[12].amountCurrency}} {{propChoicesList[12].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[12]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Kids Menu Dinner Item 2: Mini Chicken Tenders -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Mini Chicken Tenders</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[13].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Bite-sized breaded chicken tenders served with a side of ketchup or barbecue sauce.
+                        {{propChoicesList[13].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 380</p>
+                      <p class="font-mono text-lg">{{propChoicesList[13].amountCurrency}} {{propChoicesList[13].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[13]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Kids Menu Dinner Item 3: Pizza Bites -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Pizza Bites</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[14].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Mini pizza bites with tomato sauce, melted cheese, and kid-friendly toppings.
+                        {{propChoicesList[14].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 320</p>
+                      <p class="font-mono text-lg">{{propChoicesList[14].amountCurrency}} {{propChoicesList[14].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- Kids Menu Dinner Item 4: Dino Nuggets -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Dino Nuggets</p>
-                      <p class="font-medium text-gray-500">
-                        Fun-shaped chicken nuggets that are sure to delight little ones, served with a side of dipping sauce.
-                      </p>
-                      <p class="font-mono text-lg">LKR 360</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Kids Menu Dinner Item 5: Spaghetti and Meatballs -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Spaghetti and Meatballs</p>
-                      <p class="font-medium text-gray-500">
-                        Classic spaghetti with meatballs and tomato sauce, a timeless favorite among kids.
-                      </p>
-                      <p class="font-mono text-lg">LKR 390</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Kids Menu Dinner Item 6: Grilled Cheese Sandwich -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Grilled Cheese Sandwich</p>
-                      <p class="font-medium text-gray-500">
-                        Melted cheese between slices of toasted bread, a simple and satisfying option for young diners.
-                      </p>
-                      <p class="font-mono text-lg">LKR 330</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[14]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[15].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[15].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[15].amountCurrency}} {{propChoicesList[15].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[15]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[16].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[16].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[16].amountCurrency}} {{propChoicesList[16].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[16]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[17].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[17].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[17].amountCurrency}} {{propChoicesList[17].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[17]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
               </mat-tab>
+
 
             </mat-tab-group>
-
           </div>
         </mat-tab>
 
-        <mat-tab label="À La Carte Menu">
+        <mat-tab label="Deserts">
           <div class="">
-
             <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-              <mat-tab label="Breakfast">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
+              <mat-tab label="Cakes">
+                <div class="flex justify-between mt-4">
 
-                  <!-- À LA CARTE Breakfast Item 1: Avocado Toast -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Avocado Toast</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[18].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Sliced avocado on whole-grain toast, seasoned to perfection with a hint of lime.
+                        {{propChoicesList[18].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 480</p>
+                      <p class="font-mono text-lg">{{propChoicesList[18].amountCurrency}} {{propChoicesList[18].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[18]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- À LA CARTE Breakfast Item 2: Smoked Salmon Bagel -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Smoked Salmon Bagel</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[19].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A classic bagel topped with smoked salmon, cream cheese, and capers.
+                        {{propChoicesList[19].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 550</p>
+                      <p class="font-mono text-lg">{{propChoicesList[19].amountCurrency}} {{propChoicesList[19].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[19]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- À LA CARTE Breakfast Item 3: Eggs Benedict -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Eggs Benedict</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[20].name}}</p>
                       <p class="font-medium text-gray-500">
-                        English muffin halves topped with poached eggs, Canadian bacon, and hollandaise sauce.
+                        {{propChoicesList[20].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 620</p>
+                      <p class="font-mono text-lg">{{propChoicesList[20].amountCurrency}} {{propChoicesList[20].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- À LA CARTE Breakfast Item 4: Belgian Waffles -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Belgian Waffles</p>
-                      <p class="font-medium text-gray-500">
-                        Light and fluffy waffles served with a choice of fresh fruit and whipped cream.
-                      </p>
-                      <p class="font-mono text-lg">LKR 580</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Breakfast Item 5: Breakfast Burrito Bowl -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Breakfast Burrito Bowl</p>
-                      <p class="font-medium text-gray-500">
-                        A hearty bowl with scrambled eggs, black beans, avocado, and salsa.
-                      </p>
-                      <p class="font-mono text-lg">LKR 600</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Breakfast Item 6: French Toast Sticks -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">French Toast Sticks</p>
-                      <p class="font-medium text-gray-500">
-                        Golden brown French toast sticks served with a side of maple syrup.
-                      </p>
-                      <p class="font-mono text-lg">LKR 520</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[20]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[21].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[21].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[21].amountCurrency}} {{propChoicesList[21].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[21]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[22].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[22].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[22].amountCurrency}} {{propChoicesList[22].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[22]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[23].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[23].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[23].amountCurrency}} {{propChoicesList[23].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[23]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
               </mat-tab>
-
-              <mat-tab label="Lunch">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- À LA CARTE Lunch Item 1: Grilled Chicken Salad -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Grilled Chicken Salad</p>
-                      <p class="font-medium text-gray-500">
-                        Grilled chicken breast on a bed of fresh mixed greens with cherry tomatoes and balsamic vinaigrette.
-                      </p>
-                      <p class="font-mono text-lg">LKR 680</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Lunch Item 2: Shrimp Pasta Alfredo -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Shrimp Pasta Alfredo</p>
-                      <p class="font-medium text-gray-500">
-                        Succulent shrimp with fettuccine pasta in a creamy Alfredo sauce.
-                      </p>
-                      <p class="font-mono text-lg">LKR 750</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Lunch Item 3: Caprese Panini -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Caprese Panini</p>
-                      <p class="font-medium text-gray-500">
-                        Tomato, mozzarella, and fresh basil pressed in a ciabatta panini.
-                      </p>
-                      <p class="font-mono text-lg">LKR 620</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- À LA CARTE Lunch Item 4: Quinoa Salad -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Quinoa Salad</p>
-                      <p class="font-medium text-gray-500">
-                        Nutrient-packed quinoa with mixed vegetables, feta cheese, and a lemon vinaigrette.
-                      </p>
-                      <p class="font-mono text-lg">LKR 680</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Lunch Item 5: Chicken Caesar Wrap -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Chicken Caesar Wrap</p>
-                      <p class="font-medium text-gray-500">
-                        Grilled chicken, crisp romaine lettuce, and Caesar dressing wrapped in a whole-grain tortilla.
-                      </p>
-                      <p class="font-mono text-lg">LKR 620</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Lunch Item 6: Margherita Pizza -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Margherita Pizza</p>
-                      <p class="font-medium text-gray-500">
-                        Classic pizza with tomato sauce, fresh mozzarella, tomatoes, and basil.
-                      </p>
-                      <p class="font-mono text-lg">LKR 700</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
-              </mat-tab>
-
-              <!-- À LA CARTE Dinner Tab -->
-              <mat-tab label="Dinner">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- À LA CARTE Dinner Item 1: Filet Mignon -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Filet Mignon</p>
-                      <p class="font-medium text-gray-500">
-                        Tender filet mignon steak seasoned and grilled to perfection, served with garlic mashed potatoes.
-                      </p>
-                      <p class="font-mono text-lg">LKR 1200</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Dinner Item 2: Lobster Linguine -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Lobster Linguine</p>
-                      <p class="font-medium text-gray-500">
-                        Succulent lobster meat tossed with linguine in a rich garlic butter sauce.
-                      </p>
-                      <p class="font-mono text-lg">LKR 1500</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Dinner Item 3: Vegetarian Risotto -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Vegetarian Risotto</p>
-                      <p class="font-medium text-gray-500">
-                        Arborio rice cooked to creamy perfection with a medley of seasonal vegetables.
-                      </p>
-                      <p class="font-mono text-lg">LKR 1100</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- À LA CARTE Dinner Item 4: Salmon Teriyaki -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Salmon Teriyaki</p>
-                      <p class="font-medium text-gray-500">
-                        Grilled salmon fillet glazed with teriyaki sauce, served with steamed jasmine rice.
-                      </p>
-                      <p class="font-mono text-lg">LKR 1300</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Dinner Item 5: Beef Stroganoff -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Beef Stroganoff</p>
-                      <p class="font-medium text-gray-500">
-                        Sliced beef in a creamy mushroom sauce, served over egg noodles.
-                      </p>
-                      <p class="font-mono text-lg">LKR 1150</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- À LA CARTE Dinner Item 6: Chicken Piccata -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Chicken Piccata</p>
-                      <p class="font-medium text-gray-500">
-                        Breaded and pan-fried chicken cutlets in a lemon and caper sauce, served with roasted vegetables.
-                      </p>
-                      <p class="font-mono text-lg">LKR 1250</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
-              </mat-tab>
-
 
             </mat-tab-group>
-
           </div>
         </mat-tab>
 
-        <mat-tab label="Beverage Menu">
+        <mat-tab label="Drinks">
           <div class="">
-
             <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-              <!-- Beverage Breakfast Tab -->
-              <mat-tab label="Breakfast">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
+              <mat-tab label="Cokctails">
 
-                  <!-- Beverage Breakfast Item 1: Fresh Orange Juice -->
-                  <div class="flex items-center justify-between" >
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Fresh Orange Juice</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[24].name}}</p>
                       <p class="font-medium text-gray-500">
-                        100% pure orange juice, freshly squeezed for a refreshing start to your day.
+                        {{propChoicesList[24].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 250</p>
+                      <p class="font-mono text-lg">{{propChoicesList[24].amountCurrency}} {{propChoicesList[24].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[24]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Beverage Breakfast Item 2: Classic Coffee -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Classic Coffee</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[25].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A rich and aromatic cup of classic brewed coffee, served with your choice of cream and sugar.
+                        {{propChoicesList[25].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 200</p>
+                      <p class="font-mono text-lg">{{propChoicesList[25].amountCurrency}} {{propChoicesList[25].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[25]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Beverage Breakfast Item 3: Berry Smoothie -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Berry Smoothie</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[26].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A refreshing blend of mixed berries, yogurt, and a hint of honey for a delightful smoothie experience.
+                        {{propChoicesList[26].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 300</p>
+                      <p class="font-mono text-lg">{{propChoicesList[26].amountCurrency}} {{propChoicesList[26].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- Beverage Breakfast Item 4: Iced Caramel Latte -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Iced Caramel Latte</p>
-                      <p class="font-medium text-gray-500">
-                        Espresso mixed with cold milk, ice, and a swirl of caramel for a cool and indulgent treat.
-                      </p>
-                      <p class="font-mono text-lg">LKR 350</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Beverage Breakfast Item 5: Green Tea Frappuccino -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Green Tea Frappuccino</p>
-                      <p class="font-medium text-gray-500">
-                        Matcha green tea blended with ice and milk, a sweet and energizing frozen beverage.
-                      </p>
-                      <p class="font-mono text-lg">LKR 320</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Beverage Breakfast Item 6: Mango-Pineapple Smoothie -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Mango-Pineapple Smoothie</p>
-                      <p class="font-medium text-gray-500">
-                        A tropical blend of mango and pineapple with yogurt, creating a vibrant and fruity smoothie.
-                      </p>
-                      <p class="font-mono text-lg">LKR 280</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[26]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[27].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[27].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[27].amountCurrency}} {{propChoicesList[27].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[27]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[28].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[28].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[28].amountCurrency}} {{propChoicesList[28].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[28]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[29].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[29].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[29].amountCurrency}} {{propChoicesList[29].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[29]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
               </mat-tab>
 
-              <!-- Beverage Lunch Tab -->
-              <mat-tab label="Lunch">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
+              <mat-tab label="MockTails">
+                <div class="flex justify-between mt-4">
 
-                  <!-- Beverage Lunch Item 1: Iced Tea -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 6-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Iced Tea</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[30].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Refreshing iced tea served with a slice of lemon, a classic choice to accompany your lunch.
+                        {{propChoicesList[30].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 220</p>
+                      <p class="font-mono text-lg">{{propChoicesList[30].amountCurrency}} {{propChoicesList[30].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[30]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Beverage Lunch Item 2: Sparkling Lemonade -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Sparkling Lemonade</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[31].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Bubbly lemonade with a touch of fizz, a delightful and effervescent beverage choice.
+                        {{propChoicesList[31].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 250</p>
+                      <p class="font-mono text-lg">{{propChoicesList[31].amountCurrency}} {{propChoicesList[31].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[31]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Beverage Lunch Item 3: Cranberry Spritzer -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Cranberry Spritzer</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[32].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A mix of cranberry juice and sparkling water for a light and tangy spritzer.
+                        {{propChoicesList[32].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 280</p>
+                      <p class="font-mono text-lg">{{propChoicesList[32].amountCurrency}} {{propChoicesList[32].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- Beverage Lunch Item 4: Mint Mojito -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Mint Mojito</p>
-                      <p class="font-medium text-gray-500">
-                        A refreshing combination of fresh mint, lime, and soda water, perfect for a light lunch.
-                      </p>
-                      <p class="font-mono text-lg">LKR 300</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Beverage Lunch Item 5: Peach Iced Tea -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Peach Iced Tea</p>
-                      <p class="font-medium text-gray-500">
-                        Iced tea infused with the sweet flavor of ripe peaches, a delightful and fruity choice.
-                      </p>
-                      <p class="font-mono text-lg">LKR 270</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Beverage Lunch Item 6: Cucumber Mint Cooler -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Cucumber Mint Cooler</p>
-                      <p class="font-medium text-gray-500">
-                        Crisp cucumber and fresh mint blended with chilled water, a cool and hydrating option.
-                      </p>
-                      <p class="font-mono text-lg">LKR 260</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[32]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
-              </mat-tab>
 
-              <!-- Beverage Dinner Tab -->
-              <mat-tab label="Dinner">
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
+                <div class="flex justify-between mt-4">
 
-                  <!-- Beverage Dinner Item 1: Classic Lemonade -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Classic Lemonade</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[33].name}}</p>
                       <p class="font-medium text-gray-500">
-                        Freshly squeezed lemonade served with ice, a timeless and refreshing choice for dinner.
+                        {{propChoicesList[33].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 240</p>
+                      <p class="font-mono text-lg">{{propChoicesList[33].amountCurrency}} {{propChoicesList[33].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[33]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Beverage Dinner Item 2: Berry Bliss Smoothie -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Berry Bliss Smoothie</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[34].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A blend of mixed berries, yogurt, and honey, creating a smooth and delightful dinner beverage.
+                        {{propChoicesList[34].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 280</p>
+                      <p class="font-mono text-lg">{{propChoicesList[34].amountCurrency}} {{propChoicesList[34].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[34]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Beverage Dinner Item 3: Tropical Punch -->
-                  <div class="flex items-center justify-between" >
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
                     <!-- Description -->
                     <div>
-                      <p class="text-md font-medium text-gray-700">Tropical Punch</p>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[35].name}}</p>
                       <p class="font-medium text-gray-500">
-                        A refreshing blend of tropical fruits and juices, a fruity and exotic option for your dinner table.
+                        {{propChoicesList[35].description}}
                       </p>
-                      <p class="font-mono text-lg">LKR 260</p>
+                      <p class="font-mono text-lg">{{propChoicesList[35].amountCurrency}} {{propChoicesList[35].amount}}</p>
                     </div>
                     <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="flex flex-col md:flex-row w-[300px] md:w-[600px] 2xl:w-[1200px]  justify-between mt-4">
-
-                  <!-- Beverage Dinner Item 4: Caramel Macchiato -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Caramel Macchiato</p>
-                      <p class="font-medium text-gray-500">
-                        Espresso with steamed milk and a drizzle of caramel, a perfect pick-me-up for the evening.
-                      </p>
-                      <p class="font-mono text-lg">LKR 300</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Beverage Dinner Item 5: Green Tea Infusion -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Green Tea Infusion</p>
-                      <p class="font-medium text-gray-500">
-                        Lightly steeped green tea with a hint of jasmine, a soothing and calming choice for dinner.
-                      </p>
-                      <p class="font-mono text-lg">LKR 250</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Beverage Dinner Item 6: Vanilla Chai Latte -->
-                  <div class="flex items-center justify-between" >
-                    <!-- Description -->
-                    <div>
-                      <p class="text-md font-medium text-gray-700">Vanilla Chai Latte</p>
-                      <p class="font-medium text-gray-500">
-                        Chai tea with steamed milk and a touch of vanilla, a warm and aromatic beverage for the night.
-                      </p>
-                      <p class="font-mono text-lg">LKR 280</p>
-                    </div>
-                    <!-- Button -->
-                    <div>
-                      <button (click)="openEnd(content)">
-                        <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[35]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
                       </button>
                     </div>
                   </div>
 
                 </div>
-                <button mat-button color="primary" class="mb-2">See All</button>
+
+
               </mat-tab>
 
             </mat-tab-group>
-
           </div>
         </mat-tab>
 
@@ -1213,3 +834,14 @@
 
 
 </div>
+
+<ng-template #loadingTemplate>
+
+  <div class="block">
+    <p-skeleton width="800px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="800px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="400px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton height="220px"  styleClass="mb-2"></p-skeleton>
+  </div>
+
+</ng-template>

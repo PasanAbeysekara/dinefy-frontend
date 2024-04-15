@@ -10,7 +10,7 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class PromotionsService {
-  private baseUrl = environment.apiUrl; // Use environment variable for base URL
+  private baseUrl = environment.apiDataUrl; // Use environment variable for base URL
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +24,7 @@ export class PromotionsService {
       );
   }
 
-  getPromotionById(promotionId: bigint): Observable<Promotion> {
+  getPromotionById(promotionId: number): Observable<Promotion> {
     const url = `${this.baseUrl}/promotions/${promotionId.toString()}`; // Convert bigint to string
     return this.http.get<Promotion>(url)
       .pipe(

@@ -13,6 +13,7 @@ import {SharedModule} from "primeng/api";
 import {finalize, forkJoin, Observable, of, Subject} from "rxjs";
 import {mergeMap, tap} from "rxjs/operators";
 import {SkeletonModule} from "primeng/skeleton";
+import {PromotionsService} from "../../../../services/promotions.service";
 
 @Component({
   selector: 'app-promotions',
@@ -30,7 +31,7 @@ import {SkeletonModule} from "primeng/skeleton";
 })
 
 export class PromotionsComponent implements OnInit {
-  constructor(config: NgbRatingConfig,private router: Router) {
+  constructor(private promotionsService:PromotionsService,config: NgbRatingConfig,private router: Router) {
     config.max = 5;
     config.readonly = true;
   }
@@ -84,7 +85,7 @@ export class PromotionsComponent implements OnInit {
   }
 
   fetchPromotionData(): Observable<any> {
-    return this.httpClient.get('http://localhost:8081/data/promotions').pipe(
+    return this.promotionsService.getPromotions().pipe(
       tap((data: any) => {
         data.data.content.forEach((promo: any) => {
           this.promotionPropIds.push(promo.propId);
@@ -94,7 +95,7 @@ export class PromotionsComponent implements OnInit {
   }
 
   fetchPropertyData(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8081/data/properties/${id}`).pipe(
+    return this.promotionsService.getPromotionById(id).pipe(
       tap((data: any) => {
         this.property = data.data;
         this.products.push({

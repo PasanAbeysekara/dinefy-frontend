@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MenuComponent} from "../../../checkout/components/menu/menu.component";
+import {MenuComponent} from "../../../../shared/menu/menu.component";
 import {MatDividerModule} from "@angular/material/divider";
 
 @Component({

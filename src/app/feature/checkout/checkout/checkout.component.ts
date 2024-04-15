@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, Output, TemplateRef, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output, TemplateRef, ViewEncapsulation} from '@angular/core';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -6,8 +6,25 @@ import {FormsModule} from "@angular/forms";
 import {MatTabsModule} from "@angular/material/tabs";
 import {LocationMapComponent} from "../components/location-map/location-map.component";
 import {ProductMenuComponent} from "../../product/components/product-menu/product-menu.component";
-import {MenuComponent} from "../components/menu/menu.component";
 import {OrderSummaryComponent} from "../components/order-summary/order-summary.component";
+import {HttpClient} from "@angular/common/http";
+import {MenuService} from "../../../services/menu.service";
+import {PropChoicesService} from "../../../services/prop-choices.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ProductService} from "../../../services/product.service";
+import {tap} from "rxjs/operators";
+import {NgForOf, NgIf} from "@angular/common";
+import {SkeletonModule} from "primeng/skeleton";
+
+export interface CartItem {
+  id: number;
+  name: string;
+  amount: number;
+  amountCurrency: string;
+  description: string;
+  quantity: number;
+}
+
 
 @Component({
   selector: 'app-checkout',
@@ -19,94 +36,119 @@ import {OrderSummaryComponent} from "../components/order-summary/order-summary.c
     MatTabsModule,
     LocationMapComponent,
     ProductMenuComponent,
-    MenuComponent,
     OrderSummaryComponent,
+    NgIf,
+    SkeletonModule,
+    NgForOf,
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
   encapsulation: ViewEncapsulation.None,
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit{
+
+  menus:any;
+  propChoicesList:any;
+  httpClient = inject(HttpClient)
+  propCode:string = "";
+  property:any;
+  propId:number=0;
+  isLoading:number= 0;
+  cart: CartItem[] = [];
+  totalItems: number = 0;
+  totalPrice: number = 0;
+  amountCurrency:string = "";
+
+  addToCart(item: any): void {
+    const existingItem = this.cart.find(cartItem => cartItem.name === item.name);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      this.cart.push({ ...item, quantity: 1 });
+    }
+    this.updateCartSummary();
+  }
+
+  decrementCartItem(item: any): void {
+    const existingItem = this.cart.find(cartItem => cartItem.name === item.name);
+    if (existingItem && existingItem.quantity > 1) {
+      existingItem.quantity -= 1;
+    } else {
+      this.cart = this.cart.filter(cartItem => cartItem.name !== item.name);
+    }
+    this.updateCartSummary();
+  }
+
+  incrementCartItem(item: any): void {
+    const existingItem = this.cart.find(cartItem => cartItem.name === item.name);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    }
+    this.updateCartSummary();
+  }
+
+  updateCartSummary(): void {
+    this.totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+    this.totalPrice = this.cart.reduce((sum, item) => sum + (item.amount * item.quantity), 0);
+  }
+
+  removeFromCart(item: any): void {
+    const existingItem = this.cart.find(cartItem => cartItem.name === item.name);
+    if (existingItem && existingItem.quantity > 1) {
+      existingItem.quantity -= 1;
+    } else {
+      this.cart = this.cart.filter(cartItem => cartItem.name !== item.name);
+    }
+    this.updateCartSummary();
+  }
+
+  findCartItem(name: string): CartItem | undefined {
+    return this.cart.find(item => item.name === name);
+  }
+
+  isItemInCart(name: string): boolean {
+    const item = this.findCartItem(name);
+    return item ? item.quantity > 0 : false;
+  }
+
+  constructor(private menuService:MenuService,private propChoicesService:PropChoicesService,private route: ActivatedRoute, private productService: ProductService,private router: Router) {
+  }
 
   private offcanvasService = inject(NgbOffcanvas);
   openEnd(content: TemplateRef<any>) {
     this.offcanvasService.open(content, { position: 'end' });
   }
 
-  // @Input() valueProduct: number = 0;
-  // @Output() valueChangeProduct = new EventEmitter<number>();
-  // incrementProduct() {
-  //   this.valueProduct++;
-  //   this.emitValueChangeProduct();
-  // }
-  //
-  // decrementProduct() {
-  //   if (this.valueProduct > 0) {
-  //     this.valueProduct--;
-  //     this.emitValueChangeProduct();
-  //   }
-  // }
-  //
-  // private emitValueChangeProduct() {
-  //   this.valueChangeProduct.emit(this.valueProduct);
-  // }
+  ngOnInit(): void {
 
+    this.route.params.subscribe(params => {
+      this.propCode = params['propCode'];
+      this.isLoading++;
+    });
 
+    this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
+      this.property = data.data;
+      this.propId = data.propId;
+    })).subscribe(()=>{
+      this.amountCurrency = this.property.amountCurrency;
+      this.isLoading++;
+    });
 
-  @Input() valueProduct1: number = 0;
-  @Output() valueChangeProduct1 = new EventEmitter<number>();
-  incrementProduct1() {
-    this.valueProduct1++;
-    this.emitValueChangeProduct1();
+    this.menuService.getAllMenus().pipe(tap((data:any)=>{
+      this.menus = data.data.content;
+    })).subscribe(()=>{
+      this.isLoading++;
+    });
+
+    this.propChoicesService.getPropChoicesByProperty(66).pipe(tap((propChoiceData:any)=>{
+      this.propChoicesList = propChoiceData;
+    })).subscribe(()=>{
+      this.isLoading++;
+    })
+
   }
 
-  decrementProduct1() {
-    if (this.valueProduct1 > 0) {
-      this.valueProduct1--;
-      this.emitValueChangeProduct1();
-    }
+  redirectPayment() {
+    this.router.navigate([`/`]);
   }
-
-  private emitValueChangeProduct1() {
-    this.valueChangeProduct1.emit(this.valueProduct1);
-  }
-
-
-  @Input() valueProduct2: number = 0;
-  @Output() valueChangeProduct2 = new EventEmitter<number>();
-  incrementProduct2() {
-    this.valueProduct2++;
-    this.emitValueChangeProduct2();
-  }
-
-  decrementProduct2() {
-    if (this.valueProduct2 > 0) {
-      this.valueProduct2--;
-      this.emitValueChangeProduct2();
-    }
-  }
-
-  private emitValueChangeProduct2() {
-    this.valueChangeProduct2.emit(this.valueProduct2);
-  }
-
-  @Input() valueProduct3: number = 0;
-  @Output() valueChangeProduct3 = new EventEmitter<number>();
-  incrementProduct3() {
-    this.valueProduct3++;
-    this.emitValueChangeProduct3();
-  }
-
-  decrementProduct3() {
-    if (this.valueProduct3 > 0) {
-      this.valueProduct3--;
-      this.emitValueChangeProduct3();
-    }
-  }
-
-  private emitValueChangeProduct3() {
-    this.valueChangeProduct3.emit(this.valueProduct3);
-  }
-
-
 }
