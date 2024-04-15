@@ -3,7 +3,7 @@ import {MatDialog, MatDialogClose, MatDialogContent, MatDialogRef} from '@angula
 import { Router } from '@angular/router';
 import {LoginService} from "../../../../services/login.service";
 import {AuthService} from "../../../../services/auth.service";
-import {GoogleApiService} from "../../../../services/google-api.service";
+import {GoogleApiService, UserInfo} from "../../../../services/google-api.service";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
@@ -41,6 +41,7 @@ export class RegisterComponent
   passwordError: string = '';
   confirmPasswordError: string = '';
   userExistError: string = '';
+  userInfo?: UserInfo;
 
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
@@ -85,22 +86,19 @@ export class RegisterComponent
     if (this.isValid()) {
       this.authService.register(this.firstName, this.lastName, this.email, this.password).subscribe(
         (response) => {
-         // if (response == "User registered successfully!") {
-            this.dialogRef.close();
-            alert("Registration successful!");
-            //this.loginService.setIsLogged(true);
-            //this.router.navigate(['/profile']);
-         // }
-          /* else{
-          alert("0");
-                    if (response.error.includes('Username already exists')) {
-                      this.userExistError = "Email already exists";
-                       alert("1"+this.userExistError);
+                    if (response === 'Username already exists') {
+                        this.emailError  = 'Username already exists';
                     }
-          } */
+                    else
+                    {
+                          this.dialogRef.close();
+                          //alert("Registration successful!");
+                          //this.router.navigate(['/userprofile']);
+                    }
+
         },
         (error) => {
-            console.error('Registration failed:', error);
+            console.error(error);
         }
       );
     }
@@ -124,10 +122,8 @@ export class RegisterComponent
     this.confirmPasswordError = '';
   }
 
-  signInWithGoogle(): void {
-
-    this.googleApiService.signIn();
-
+  async signUpWithGoogle(): Promise<void> {
+    await this.googleApiService.signIn();
   }
 
   openLoginDialog(): void {

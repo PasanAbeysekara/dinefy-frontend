@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     private loginService: LoginService,
-    private authService: AuthService, // Inject the AuthService
+    private authService: AuthService, 
     private router: Router,
     private dialog: MatDialog,
     private googleApiService: GoogleApiService
@@ -53,17 +53,16 @@ export class LoginComponent implements OnInit {
 
 onClick(username: string, password: string): void {
   this.authService.login(username, password).subscribe(
-    (token: string | null) => {
-      if (token) {
-       this.dialogRef.close();
-       //this.router.navigate(['/profile']);
-       this.loginService.setIsLogged(true);
-       this.loginService.setToken(token);
+    (response) => {
+      if(response?.accessToken)
+        {
+          this.dialogRef.close();
+          //this.router.navigate(['/profile']);
+        }
+      else{
+          this.authenticationError=true;
       }
-      else
-      {
-        this.authenticationError = true;
-      }
+
     },
     (error) => {
       console.error('Login error:', error.message);
@@ -75,9 +74,9 @@ togglePasswordVisibility(): void {
   this.hide = !this.hide;
 }
 
-signInWithGoogle(): void {
+async signInWithGoogle(): Promise<void> {
 
-  this.googleApiService.signIn();
+  await this.googleApiService.signIn();
 
 }
 
