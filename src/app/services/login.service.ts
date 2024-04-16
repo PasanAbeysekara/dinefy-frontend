@@ -8,11 +8,12 @@ export class LoginService {
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  
+
   constructor() {
   }
 
   setIsLogged(isLoggedIn: boolean): void{
+    console.log("Hi");
     sessionStorage.setItem('isLoggedIn', isLoggedIn.toString());
     this.isLoggedInSubject.next(isLoggedIn);
   }
@@ -22,7 +23,8 @@ export class LoginService {
   }
 
   setToken(token:any): void{
-    sessionStorage.setItem('token', token.accessToken);
+    console.log("Pi");
+    sessionStorage.setItem('token', token);
   }
 
   getToken(): string{

@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
 })
 
 export class PromotionsService {
-  private baseUrl = environment.apiDataUrl; // Use environment variable for base URL
+  private baseUrl = environment.apiDataUrl;
   private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
 
   constructor(private http: HttpClient) {
@@ -20,7 +20,6 @@ export class PromotionsService {
   fetchPromotionData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/promotions`, {headers: this.headers}).pipe(
       tap((data: any) => {
-        // Processing or logging can be done here if needed
       })
     );
   }
@@ -28,7 +27,6 @@ export class PromotionsService {
   fetchPropertyData(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/properties/${id}`, {headers: this.headers}).pipe(
       tap((data: any) => {
-        // Processing or logging can be done here if needed
       })
     );
   }

@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     private loginService: LoginService,
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
     private googleApiService: GoogleApiService
@@ -58,6 +58,11 @@ onClick(username: string, password: string): void {
         {
           this.dialogRef.close();
           //this.router.navigate(['/profile']);
+          console.log("response: ",response);
+          console.log(response.accessToken);
+          this.loginService.setIsLogged(true);
+          this.loginService.setToken(response.accessToken);
+          console.log(sessionStorage);
         }
       else{
           this.authenticationError=true;
