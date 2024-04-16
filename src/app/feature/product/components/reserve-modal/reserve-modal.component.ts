@@ -21,7 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ItemsSummaryComponent } from '../items-summary/items-summary.component'
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 
@@ -46,6 +46,8 @@ import {ToastModule} from "primeng/toast";
   styleUrl: './reserve-modal.component.css'
 })
 export class ReserveModalComponent implements OnInit {
+
+  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
 
   constructor(
     public dialogRef: MatDialogRef<ReserveModalComponent>,
@@ -179,7 +181,7 @@ export class ReserveModalComponent implements OnInit {
 
     this.data.reservationPayload.specialRequest = this.specialRequests;
 
-    this.httpClient.post('http://localhost:8081/res/reservations',this.data.reservationPayload).subscribe({
+    this.httpClient.post('http://localhost:8081/res/reservations',this.data.reservationPayload,{headers:this.headers}).subscribe({
       next: (response) => {
         console.log('Reservation successful', response);
         this.dialogRef.close('Reservation made successfully');

@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -10,16 +10,17 @@ export class PropChoicesService {
 
   private baseUrl = environment.apiDataUrl;
   httpClient = inject(HttpClient);
-  protected propChoicesList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`);
+  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  protected propChoicesList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`,{headers: this.headers});
 
   constructor() { }
 
   getAllPropChoices(){
-    return this.httpClient.get(`${this.baseUrl}/prop-choices`)
+    return this.httpClient.get(`${this.baseUrl}/prop-choices`,{headers: this.headers});
   }
 
   getPropChoicesByProperty(propId:number){
-    return this.httpClient.get(`${this.baseUrl}/prop-choices/by-property/${propId}`)
+    return this.httpClient.get(`${this.baseUrl}/prop-choices/by-property/${propId}`,{headers: this.headers});
   }
 
 }

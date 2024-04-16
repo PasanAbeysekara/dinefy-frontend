@@ -29,7 +29,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class MenuComponent implements OnInit{
   menus:any;
-  propChoicesList:any;
+  propChoicesList:any=[];
   httpClient = inject(HttpClient)
   propCode:string = "";
   property:any;
@@ -46,10 +46,19 @@ export class MenuComponent implements OnInit{
     });
 
     this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
-      this.property = data;
-      this.propId = data.propId;
+      this.property = data.data;
+      this.propId = data.data.propId;
+
+      console.log("Eka")
+      console.log(data);
+      this.propChoicesService.getPropChoicesByProperty(this.propId).pipe(tap((propChoiceData:any)=>{
+        this.propChoicesList = propChoiceData;
+      })).subscribe(()=>{
+        console.log((this.propChoicesList));
+      })
+      console.log("Deka");
+      this.isLoading = false;
     })).subscribe(()=>{
-      console.log(this.propId);
     });
 
     this.menuService.getAllMenus().pipe(tap((data:any)=>{
@@ -59,11 +68,7 @@ export class MenuComponent implements OnInit{
       console.log(this.menus);
     });
 
-    this.propChoicesService.getPropChoicesByProperty(66).pipe(tap((propChoiceData:any)=>{
-      this.propChoicesList = propChoiceData;
-    })).subscribe(()=>{
-      console.log((this.propChoicesList));
-    })
+
 
     // this.propChoicesService.getPropChoicesByProperty()
 

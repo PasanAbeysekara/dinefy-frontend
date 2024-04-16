@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 
@@ -9,10 +9,9 @@ import {environment} from "../../environments/environment";
 export class ReservationService {
 
   private baseUrl = environment.apiResUrl;
-
+  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
   httpClient = inject(HttpClient);
-  protected reservationList:Observable<any> = this.httpClient.get(`${this.baseUrl}/reservations`);
-
+  protected reservationList:Observable<any> = this.httpClient.get(`${this.baseUrl}/reservations`,{headers: this.headers});
   protected reservation:any;
   constructor() { }
 
@@ -21,12 +20,17 @@ export class ReservationService {
   }
 
   getProductById(id:Number):any{
-    this.reservation = this.httpClient.get(`${this.baseUrl}/reservations/${id}`);
+    this.reservation = this.httpClient.get(`${this.baseUrl}/reservations/${id}`,{headers: this.headers});
     return this.reservation;
   }
 
   getProductByCode(reserveCode:string):any{
-    this.reservation = this.httpClient.get(`${this.baseUrl}/reservations/code/${reserveCode}`);
+    this.reservation = this.httpClient.get(`${this.baseUrl}/reservations/code/${reserveCode}`,{headers: this.headers});
     return this.reservation;
   }
+
+  postReservation(reservationPayload:any):any{
+    this.httpClient.post('http://localhost:8081/res/reservations',reservationPayload)
+  }
+
 }

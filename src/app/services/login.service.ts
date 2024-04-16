@@ -16,11 +16,12 @@ export class LoginService {
     return sessionStorage.getItem('isLoggedIn') == 'true' ? true : false;
   }
 
-  setToken(token: string): void{
-    sessionStorage.setItem('token', token);
+  setToken(token:any): void{
+    sessionStorage.setItem('token', token.accessToken);
   }
 
   getToken(): string{
+    console.log(sessionStorage);
     return sessionStorage.getItem('token') as string;
   }
 

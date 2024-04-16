@@ -1,704 +1,699 @@
 <ng-container>
 <div class="flex justify-center mt-10 w-[350px] md:w-[720px]">
-  <div class="w-[320px] md:w-[720px]">
-    <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+  <div *ngIf="!isLoading!;else loadingTemplate" class="w-[320px] md:w-[720px]">
+      <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-      <mat-tab label="Main Menu">
+        <mat-tab label="Main Menu">
 
-        <div class="">
-          <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+          <div class="">
+            <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-            <mat-tab label="Starters">
-              <div class="flex justify-between mt-4">
+              <mat-tab label="Starters">
+                <div class="flex justify-between mt-4">
 
-                <!-- Choice 0-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[0].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[0].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[0].amountCurrency}} {{propChoicesList[0].amount}}</p>
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[0].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[0].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[0].amountCurrency}} {{propChoicesList[0].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+  <!--                    <button (click)="openEnd(content)">-->
+  <!--                      <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>-->
+  <!--                    </button>-->
+                    </div>
                   </div>
-                  <!-- Button -->
-                  <div>
 
-<!--                    <button (click)="openEnd(content)">-->
-<!--                      <mat-icon style="font-size: 36px;width: 50px;height: 50px">add_circle</mat-icon>-->
-<!--                    </button>-->
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[1].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[1].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[1].amountCurrency}} {{propChoicesList[1].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[2].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[2].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[2].amountCurrency}} {{propChoicesList[2].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 1-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[1].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[1].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[1].amountCurrency}} {{propChoicesList[1].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
+                <div class="flex justify-between mt-4">
 
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[3].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[3].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[3].amountCurrency}} {{propChoicesList[3].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[4].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[4].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[4].amountCurrency}} {{propChoicesList[4].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[5].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[5].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[5].amountCurrency}} {{propChoicesList[5].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 2 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[2].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[2].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[2].amountCurrency}} {{propChoicesList[2].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
 
+              </mat-tab>
+
+              <mat-tab label="Mains">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 6-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[6].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[6].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[6].amountCurrency}} {{propChoicesList[6].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[7].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[7].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[7].amountCurrency}} {{propChoicesList[7].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[8].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[8].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[8].amountCurrency}} {{propChoicesList[8].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-              </div>
+                <div class="flex justify-between mt-4">
 
-              <div class="flex justify-between mt-4">
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[9].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[9].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[9].amountCurrency}} {{propChoicesList[9].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
 
-                <!-- Choice 3-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[3].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[3].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[3].amountCurrency}} {{propChoicesList[3].amount}}</p>
+                    </div>
                   </div>
-                  <!-- Button -->
-                  <div>
 
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[10].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[10].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[10].amountCurrency}} {{propChoicesList[10].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[11].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[11].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[11].amountCurrency}} {{propChoicesList[11].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 4-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[4].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[4].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[4].amountCurrency}} {{propChoicesList[4].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
 
+              </mat-tab>
+
+              <mat-tab label="Deserts">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[12].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[12].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[12].amountCurrency}} {{propChoicesList[12].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[13].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[13].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[13].amountCurrency}} {{propChoicesList[13].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[14].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[14].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[14].amountCurrency}} {{propChoicesList[14].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 5 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[5].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[5].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[5].amountCurrency}} {{propChoicesList[5].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
+                <div class="flex justify-between mt-4">
 
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[15].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[15].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[15].amountCurrency}} {{propChoicesList[15].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[16].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[16].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[16].amountCurrency}} {{propChoicesList[16].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[17].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[17].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[17].amountCurrency}} {{propChoicesList[17].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-              </div>
+
+              </mat-tab>
 
 
-            </mat-tab>
+            </mat-tab-group>
+          </div>
+        </mat-tab>
 
-            <mat-tab label="Mains">
-              <div class="flex justify-between mt-4">
+        <mat-tab label="Deserts">
+          <div class="">
+            <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
 
-                <!-- Choice 6-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[6].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[6].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[6].amountCurrency}} {{propChoicesList[6].amount}}</p>
+              <mat-tab label="Cakes">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[18].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[18].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[18].amountCurrency}} {{propChoicesList[18].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
-                  <!-- Button -->
-                  <div>
 
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[19].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[19].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[19].amountCurrency}} {{propChoicesList[19].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[20].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[20].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[20].amountCurrency}} {{propChoicesList[20].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 1-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[7].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[7].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[7].amountCurrency}} {{propChoicesList[7].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
+                <div class="flex justify-between mt-4">
 
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[21].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[21].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[21].amountCurrency}} {{propChoicesList[21].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[22].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[22].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[22].amountCurrency}} {{propChoicesList[22].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[23].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[23].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[23].amountCurrency}} {{propChoicesList[23].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 2 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[8].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[8].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[8].amountCurrency}} {{propChoicesList[8].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
 
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Drinks">
+          <div class="">
+            <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+
+              <mat-tab label="Cokctails">
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[24].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[24].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[24].amountCurrency}} {{propChoicesList[24].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[25].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[25].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[25].amountCurrency}} {{propChoicesList[25].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[26].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[26].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[26].amountCurrency}} {{propChoicesList[26].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-              </div>
+                <div class="flex justify-between mt-4">
 
-              <div class="flex justify-between mt-4">
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[27].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[27].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[27].amountCurrency}} {{propChoicesList[27].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
 
-                <!-- Choice 3-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[9].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[9].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[9].amountCurrency}} {{propChoicesList[9].amount}}</p>
+                    </div>
                   </div>
-                  <!-- Button -->
-                  <div>
 
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[28].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[28].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[28].amountCurrency}} {{propChoicesList[28].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[29].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[29].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[29].amountCurrency}} {{propChoicesList[29].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 4-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[10].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[10].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[10].amountCurrency}} {{propChoicesList[10].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
+              </mat-tab>
 
+              <mat-tab label="MockTails">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 6-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[30].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[30].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[30].amountCurrency}} {{propChoicesList[30].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[31].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[31].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[31].amountCurrency}} {{propChoicesList[31].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[32].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[32].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[32].amountCurrency}} {{propChoicesList[32].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <!-- Choice 5 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[11].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[11].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[11].amountCurrency}} {{propChoicesList[11].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
+                <div class="flex justify-between mt-4">
 
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[33].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[33].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[33].amountCurrency}} {{propChoicesList[33].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
                   </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[34].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[34].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[34].amountCurrency}} {{propChoicesList[34].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[35].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[35].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[35].amountCurrency}} {{propChoicesList[35].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-              </div>
 
+              </mat-tab>
 
-            </mat-tab>
+            </mat-tab-group>
+          </div>
+        </mat-tab>
 
-            <mat-tab label="Deserts">
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 0-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[12].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[12].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[12].amountCurrency}} {{propChoicesList[12].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 1-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[13].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[13].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[13].amountCurrency}} {{propChoicesList[13].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 2 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[14].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[14].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[14].amountCurrency}} {{propChoicesList[14].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 3-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[15].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[15].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[15].amountCurrency}} {{propChoicesList[15].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 4-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[16].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[16].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[16].amountCurrency}} {{propChoicesList[16].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 5 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[17].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[17].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[17].amountCurrency}} {{propChoicesList[17].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-
-            </mat-tab>
-
-
-          </mat-tab-group>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="Deserts">
-        <div class="">
-          <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
-
-            <mat-tab label="Cakes">
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 0-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[18].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[18].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[18].amountCurrency}} {{propChoicesList[18].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 1-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[19].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[19].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[19].amountCurrency}} {{propChoicesList[19].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 2 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[20].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[20].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[20].amountCurrency}} {{propChoicesList[20].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 3-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[21].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[21].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[21].amountCurrency}} {{propChoicesList[21].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 4-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[22].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[22].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[22].amountCurrency}} {{propChoicesList[22].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 5 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[23].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[23].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[23].amountCurrency}} {{propChoicesList[23].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-
-            </mat-tab>
-
-          </mat-tab-group>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="Drinks">
-        <div class="">
-          <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
-
-            <mat-tab label="Cokctails">
-
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 0-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[24].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[24].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[24].amountCurrency}} {{propChoicesList[24].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 1-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[25].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[25].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[25].amountCurrency}} {{propChoicesList[25].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 2 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[26].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[26].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[26].amountCurrency}} {{propChoicesList[26].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 3-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[27].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[27].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[27].amountCurrency}} {{propChoicesList[27].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 4-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[28].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[28].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[28].amountCurrency}} {{propChoicesList[28].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 5 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[29].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[29].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[29].amountCurrency}} {{propChoicesList[29].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-            </mat-tab>
-
-            <mat-tab label="MockTails">
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 6-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[30].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[30].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[30].amountCurrency}} {{propChoicesList[30].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 1-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[31].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[31].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[31].amountCurrency}} {{propChoicesList[31].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 2 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[32].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[32].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[32].amountCurrency}} {{propChoicesList[32].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="flex justify-between mt-4">
-
-                <!-- Choice 3-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[33].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[33].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[33].amountCurrency}} {{propChoicesList[33].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 4-->
-                <div class="flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[34].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[34].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[34].amountCurrency}} {{propChoicesList[34].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-                <!-- Choice 5 -->
-                <div class="hidden md:flex items-center justify-between">
-                  <!-- Description -->
-                  <div>
-                    <p class="text-md font-medium text-gray-700">{{propChoicesList[35].name}}</p>
-                    <p class="font-medium text-gray-500">
-                      {{propChoicesList[35].description}}
-                    </p>
-                    <p class="font-mono text-lg">{{propChoicesList[35].amountCurrency}} {{propChoicesList[35].amount}}</p>
-                  </div>
-                  <!-- Button -->
-                  <div>
-
-                  </div>
-                </div>
-
-              </div>
-
-
-            </mat-tab>
-
-          </mat-tab-group>
-        </div>
-      </mat-tab>
-
-    </mat-tab-group>
+      </mat-tab-group>
 
   </div>
 </div>
 </ng-container>
 
+
 <ng-template #loadingTemplate>
-  <div class="mt-24 md:hidden ml-5">
-    <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="2rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="20rem" height="2rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="10rem" height="4rem"></p-skeleton>
+
+  <div class="block">
+    <p-skeleton width="720px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="720px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="400px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton height="220px"  styleClass="mb-2"></p-skeleton>
   </div>
-  <div class="mt-10 hidden md:block">
-    <p-skeleton styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
-    <p-skeleton width="10rem" height="4rem"></p-skeleton>
-  </div>
+
 </ng-template>

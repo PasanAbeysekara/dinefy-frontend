@@ -128,10 +128,15 @@ export class CheckoutComponent implements OnInit{
 
     this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
       this.property = data.data;
-      this.propId = data.propId;
+      this.propId = this.property.propId;
     })).subscribe(()=>{
       this.amountCurrency = this.property.amountCurrency;
       this.isLoading++;
+      this.propChoicesService.getPropChoicesByProperty(this.propId).pipe(tap((propChoiceData:any)=>{
+        this.propChoicesList = propChoiceData;
+      })).subscribe(()=>{
+        this.isLoading++;
+      })
     });
 
     this.menuService.getAllMenus().pipe(tap((data:any)=>{
@@ -139,12 +144,6 @@ export class CheckoutComponent implements OnInit{
     })).subscribe(()=>{
       this.isLoading++;
     });
-
-    this.propChoicesService.getPropChoicesByProperty(66).pipe(tap((propChoiceData:any)=>{
-      this.propChoicesList = propChoiceData;
-    })).subscribe(()=>{
-      this.isLoading++;
-    })
 
   }
 

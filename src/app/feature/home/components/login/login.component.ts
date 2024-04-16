@@ -59,6 +59,7 @@ onClick(username: string, password: string): void {
        //this.router.navigate(['/profile']);
        this.loginService.setIsLogged(true);
        this.loginService.setToken(token);
+       console.log(sessionStorage);
       }
       else
       {

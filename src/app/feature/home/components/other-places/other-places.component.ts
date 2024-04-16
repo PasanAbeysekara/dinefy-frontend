@@ -14,6 +14,7 @@ import {Otherplace} from "./model/other-place";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SkeletonModule} from "primeng/skeleton";
+import {ProductService} from "../../../../services/product.service";
 
 @Component({
   selector: 'app-other-places',
@@ -65,6 +66,9 @@ export class OtherPlacesComponent implements OnInit{
   isLoading: boolean = true;
   image: any;
 
+  constructor(private productService:ProductService) {
+  }
+
   ngOnInit() {
     this.fetchOtherProperties().subscribe((data: any) => {
       data.forEach((prop: any) => {
@@ -85,7 +89,7 @@ export class OtherPlacesComponent implements OnInit{
   }
 
   fetchOtherProperties(): Observable<any> {
-    return this.httpClient.get('http://localhost:8081/data/properties');
+    return this.productService.getAllProducts();
   }
 }
 

@@ -7,7 +7,7 @@
     <ngb-rating [rate]="restaurantDetails.avgRating" class="text-red-500 text-md" />
     <p>({{ restaurantDetails.totalRating }})</p>
   </div>
-  <p class="text-gray-600"><span class="font-sans text-xl text-gray-900"> LKR{{ restaurantDetails.amount }}</span> / Approx 4 People</p>
+  <p class="text-gray-600"><span class="font-sans text-xl text-gray-900"> {{ restaurantDetails.amountCurrency }} {{ restaurantDetails.amount }}</span> / Approx 4 People</p>
 
   <!-- description -->
   <div class="font-sans text-[15px] mt-4">
