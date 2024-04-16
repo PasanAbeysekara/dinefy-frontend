@@ -1,8 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse  } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, Subject, throwError  } from 'rxjs';
+import { tap, catchError, exhaustMap, take } from 'rxjs/operators';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { LoginService } from "./login.service";
+import {jwtDecode} from 'jwt-decode';
+import {JwtHelperService} from "@auth0/angular-jwt";
+import { HeaderComponent } from '../shared/header/header.component';
+
+export interface UserInfo {
+  info: {
+    sub: string,
+    email: string,
+    name: string,
+    firstName: string;
+    lastName: string;
+    picture: string
+  }
+}
+
+export interface UserDto {
+  username: string;
+  firstName: string;
+  lastName: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +31,69 @@ import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
 export class AuthService {
   private apiUrl = 'http://localhost:8081/data';
+  //private userInfoSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) {}
+  token = new BehaviorSubject<String | null>(null);
 
-  login(username: string, password: string): Observable<string | null> {
+  private userInfoSubject = new BehaviorSubject<any>(null);
+  userInfo$: Observable<any> = this.userInfoSubject.asObservable();
+  jwtHelperService = new JwtHelperService();
+
+  constructor(private http: HttpClient, private loginService: LoginService,) {}
+
+  setUserInfo(userInfo: any): void {
+    this.userInfoSubject.next(userInfo);
+    console.log("userInfoSubject set with:", userInfo);
+  }
+
+  async setUserInfoFromToken(){
+  this.token.pipe(
+      take(1),
+      exhaustMap(token => {
+        if (!token) {
+          console.log('Not logged in');
+          return this.userInfoSubject.asObservable();
+        }
+
+        const decodedToken = this.jwtHelperService.decodeToken(token.toString());
+
+        if (!decodedToken) {
+          console.error('Error decoding token');
+          return this.userInfoSubject.asObservable();
+        }
+        
+        const userInfo = {
+          info: {
+            sub:'',
+            email: decodedToken.sub,
+            name: `${decodedToken.firstName} ${decodedToken.lastName}`,
+            firstName: decodedToken.firstName,
+            lastName: decodedToken.lastName,
+            picture: '',
+          },
+        };
+
+
+        this.setUserInfo(userInfo);
+        
+        return of(userInfo);
+      })
+
+    ).subscribe()
+   
+  }
+
+  login(username: string, password: string): Observable<any | null> {
       const credentialsDto = { username, password };
       return this.http.post<any>(this.apiUrl + '/login', credentialsDto).pipe(
+        tap(response => {
+          if (response.accessToken) { 
+            this.token.next(response.accessToken);
+           // this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf())
+            localStorage.setItem('accessToken', response.accessToken);
+            this.loginService.setIsLogged(true);
+          }
+        }),
         catchError(error => {
           console.error('Error During Login:', error);
           return of(null);
@@ -23,13 +101,37 @@ export class AuthService {
       );
   }
 
- register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    const userData = { firstName, lastName, email, password };
-    return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
+  autoLogin() {
+    const token: string | null = localStorage.getItem('accessToken');
+    if (!token) return;
+    this.token.next(token);
+     // this.autoLogout(loadedUser._expiration.valueOf() - new Date().valueOf());
+    
+  }
+
+ register(firstName: string, lastName: string, username: string, password: string): Observable<any> {
+    const userData = { firstName, lastName, username: username, password };
+    return this.http.post<any>(`${this.apiUrl}/register`, userData,{responseType: 'text' as 'json'}).pipe(
+      tap(response => {
+        if (response === "User registered successfully!") {
+          this.login(username,password).subscribe(
+            (response) => {
+               //this.loginService.setIsLogged(true);
+            },
+            (error) => {
+              console.error('Login error:', error.message);
+            }
+         // this.loginService.setIsLogged(true);
+      )}
+      }),
       catchError(error => {
-        console.error('Error during user registration:', error);
-        return of(null);
-      })
+        if (error.status === 400 && error.error === 'Username already exists') {
+          return of('Username already exists');
+        } else{
+          console.error('Registration error:', error);
+          return of(error.error);
+        }
+     })
     );
   }
 
@@ -41,5 +143,15 @@ export class AuthService {
         })
       );
     }
+    
+
+  getUserDto(): Observable<UserDto | null> {
+        return this.http.get<UserDto>(`${this.apiUrl}/decode`,{responseType: 'text' as 'json'}).pipe(
+          catchError(error => {
+            console.error('Error fetching UserDto:', error);
+            return of(null);
+          })
+        );
+      }
 
 }

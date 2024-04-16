@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, Renderer2, signal} from '@angular/core';
+import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../feature/home/components/login/login.component';
 import { RegisterComponent } from '../../feature/home/components/register/register.component';
@@ -6,12 +6,14 @@ import { HeaderService } from './header.service';
 import {Router, RouterLinkActive} from '@angular/router';
 import { LoginService } from "../../services/login.service";
 import { GoogleApiService, UserInfo } from "../../services/google-api.service";
+import { AuthService } from "../../services/auth.service";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { MatListModule } from '@angular/material/list';
 import {MatLineModule, MatRippleModule} from "@angular/material/core";
+import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -38,9 +40,16 @@ import {MatLineModule, MatRippleModule} from "@angular/material/core";
 export class HeaderComponent implements OnInit {
   headerClass: string = "";
   isTransparent = true;
-  initialHeight = '100px'; // Set your initial height here
+  initialHeight = '100px'; 
   userInfo?: UserInfo;
   cacheBuster?: number;
+  name?: string;
+  email?: string;
+
+  isLoggedInSubject = new BehaviorSubject<boolean>(false); 
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  
+  destroy$ = new Subject<void>();
 
   redirectToUserProfile(){
     this.router.navigate(['/userprofile']);
@@ -50,13 +59,50 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private headerData: HeaderService,
     public loginService: LoginService,
+    private authService: AuthService,
     private readonly googleApiService: GoogleApiService,
     private router: Router,
-    private renderer: Renderer2) {
-     googleApiService.userProfileSubject.subscribe( info => {
-          this.userInfo = info
-        })
-  }
+    private renderer: Renderer2) {}
+
+    async ngOnInit() {
+      await this.googleApiService.initializeGoogleAuth();
+      if(!this.googleApiService.isLoggedIn()){
+        this.authService.autoLogin();
+      }
+      
+      await this.loadHeader();
+
+      if(this.googleApiService.isLoggedIn()){
+        this.authService.userInfo$.subscribe(userInfo => {  
+          if (userInfo !== null) {
+            this.authService.register(userInfo.info.firstName, userInfo.info.lastName, userInfo.info.email, '').subscribe(
+              (response) => {
+                          if (response === 'Username already exists') {
+                            
+                          }
+              },
+              (error) => {
+                  console.error(error);
+              }
+            );
+          } 
+        });
+  
+        
+      }
+      
+      this.isLoggedInSubject.next(this.loginService.getIsLoggedIn());
+
+      interval(1000) 
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          const updatedIsLoggedIn = this.loginService.getIsLoggedIn();
+          if ((updatedIsLoggedIn !== this.isLoggedInSubject.getValue()) && !this.googleApiService.isLoggedIn()) {
+            this.isLoggedInSubject.next(updatedIsLoggedIn);
+            this.loadHeader();
+          }
+        });
+    }
 
   signin(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
@@ -66,7 +112,6 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
@@ -78,31 +123,42 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
-  ngOnInit(): void {
-    this.googleApiService.initializeGoogleAuth().then(() => {
-      this.loginService.setIsLogged(this.googleApiService.isLoggedIn());
-      this.googleApiService.userProfileSubject.subscribe( info => {
-            this.userInfo = info;
-            this.cacheBuster = Math.random();
-          })
-
-      if(sessionStorage.getItem('logType') == 'normal')
+  async loadHeader(): Promise<void>  {
+    if(this.googleApiService.isLoggedIn())
       {
-        //get first name, last name
+        this.loginService.setIsLogged(true);
+        this.authService.userInfo$.subscribe(userInfo => {
+          
+          if (userInfo !== null) {
+            this.userInfo = userInfo;
+          } 
+          this.cacheBuster = Math.random();
+        });
+        return;
       }
+      
+    await this.authService.setUserInfoFromToken();
+    this.authService.userInfo$.subscribe(userInfo => {
+      if (userInfo !== null) {
+        this.userInfo = userInfo;
+      } 
+      this.cacheBuster = Math.random();
+    });
 
-      })
+      /*  this.googleApiService.userProfileSubject.subscribe( info => {
+                  this.userInfo = info;
+                  this.cacheBuster = Math.random();
+                }) */
 
     this.headerData.currentHeader.subscribe(headerClass => this.headerClass = headerClass);
   }
 
   logout() {
-    this.loginService.setIsLogged(false);
-    sessionStorage.setItem('logType', '');
+    sessionStorage.clear();
+    localStorage.clear();
     this.googleApiService.signOut();
     this.router.navigate(['/home']);
   }

@@ -2,14 +2,23 @@ declare var google: any;
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface UserInfo {
   info: {
     sub: string //identifier to user
     email: string,
     name: string,
+    firstName: string;
+    lastName: string;
     picture: string
   }
+}
+interface UserProfile {
+  sub: string;
+  email: string;
+  name: string;
+  picture: string;
 }
 
 @Injectable({
@@ -18,11 +27,14 @@ export interface UserInfo {
 
 export class GoogleApiService {
 
-  userProfileSubject = new Subject<UserInfo>();
+  //userProfileSubject = new Subject<UserInfo>();
 
-  constructor(private readonly oAuthService: OAuthService) {}
+  constructor(
+  private readonly oAuthService: OAuthService,
+  private authService: AuthService,
+  ) {}
 
-  initializeGoogleAuth(): Promise<void> {
+  async initializeGoogleAuth(): Promise<void> {
 
       const oAuthConfig: AuthConfig = {
       // Url of the Identity Provider
@@ -61,19 +73,35 @@ export class GoogleApiService {
 
           // load user profile
           if (this.oAuthService.hasValidAccessToken()) {
-              this.oAuthService.loadUserProfile().then( (userProfile) => {
-              this.userProfileSubject.next(userProfile as UserInfo);
-              //console.log(JSON.stringify(userProfile));
+              this.oAuthService.loadUserProfile().then( (userProfile:any) => {
+
+                const nameParts = userProfile.info.name.split(' ');
+                const firstName = nameParts[0];
+                const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+                const userInfo: UserInfo = {
+                  info: {
+                    sub: userProfile.info.sub,
+                    email: userProfile.info.email,
+                    name: userProfile.info.name,
+                    firstName: firstName,
+                    lastName: lastName,
+                    picture: userProfile.info.picture
+                  }
+                };
+
+                this.authService.setUserInfo(userInfo);
+              //this.userProfileSubject.next(userInfo);
+              //console.log(JSON.stringify(userInfo));
               })
           }
       })
   }
 
-  signIn(): void {
+  async signIn(): Promise<void> {
         // redirect to google for login
-        this.initializeGoogleAuth().then(() => {
-          this.oAuthService.initLoginFlow();
-        });
+        await this.initializeGoogleAuth()
+        this.oAuthService.initLoginFlow();
+
   }
 
   isLoggedIn(): boolean {
