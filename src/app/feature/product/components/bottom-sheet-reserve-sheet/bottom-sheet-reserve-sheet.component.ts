@@ -29,6 +29,8 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {ProductService} from "../../../../services/product.service";
 import {SkeletonModule} from "primeng/skeleton";
 import {restaurant} from "ionicons/icons";
+import { LoginService } from "../../../../services/login.service";
+import { LoginComponent } from '../../../home/components/login/login.component';
 
 @Component({
   selector: 'app-bottom-sheet-reserve-sheet',
@@ -52,7 +54,7 @@ import {restaurant} from "ionicons/icons";
   ],
   templateUrl: './bottom-sheet-reserve-sheet.component.html',
   styleUrl: './bottom-sheet-reserve-sheet.component.css',
-  providers: [
+  providers: [LoginService,
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ]
 })
@@ -75,6 +77,7 @@ export class BottomSheetReserveSheetComponent implements OnInit {
   public restaurant:any;
 
   constructor(
+    public loginService: LoginService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -146,39 +149,63 @@ export class BottomSheetReserveSheetComponent implements OnInit {
     this.valueChangeChildren.emit(this.valueChildren);
   }
 
+  openReserveWindow():void{
+    const formattedDate = this.formatDate(this.selectedDate); // Formats date to 'YYYY-MM-DD'
+              const formattedTime = this.formatTime(this.favoriteSeason); // Formats time to 'HH:00:00'
+          
+              const payload = {
+                propId:this.restaurant.propId,
+                availableUnitId: this.availabilities.value ? this.availabilityList.indexOf(this.availabilities.value) + 1 : 1,
+                date: formattedDate,
+                time: formattedTime,
+                status: 'Pending',
+                headCount: this.valueAdults + this.valueChildren,
+                option1: this.selectedSeatType,
+                reserveCode:generateReserveCode(this.restaurant.propId,"2024")
+            }
+      
+            const restuData = this.restaurant;
+      
+            // this.httpClient.post('http://localhost:8081/res/reservations', payload).subscribe({
+            //   next: (response) => console.log('Reservation successful', response),
+            //   error: (error) => console.error('Error making reservation', error)
+            // });
+        
+            const isSmallScreen = window.innerWidth < 600;
+            this.dialogRef = this.dialog.open(ReserveModalComponent, {
+              width: isSmallScreen ? '100%' : '60%',
+              panelClass: ['modal--medium', 'modal--stepper'],
+              data: {restaurantDatas:restuData,reservationPayload: payload}
+            });
+        
+            this.dialogRef.afterClosed().subscribe(result => {
+              console.log('The dialog was closed');
+            });
+  }
+
   reserve(): void {
 
-    const formattedDate = this.formatDate(this.selectedDate); // Formats date to 'YYYY-MM-DD'
-    const formattedTime = this.formatTime(this.favoriteSeason); // Formats time to 'HH:00:00'
+    if(!this.loginService.getIsLoggedIn())
+      {
+        const dialogRef = this.dialog.open(LoginComponent, {
+          panelClass: ['modal--small', 'user-modal'],
+          data: {}
+        });
 
-    const payload = {
-      propId:this.restaurant.propId,
-      availableUnitId: this.availabilities.value ? this.availabilityList.indexOf(this.availabilities.value) + 1 : 1,
-      date: formattedDate,
-      time: formattedTime,
-      status: 'Pending',
-      headCount: this.valueAdults + this.valueChildren,
-      option1: this.selectedSeatType,
-      reserveCode:generateReserveCode(this.restaurant.propId,"2024")
-    };
+        dialogRef.afterClosed().subscribe(result => {
+          if(this.loginService.getIsLoggedIn())
+            {
+              this.openReserveWindow();
+            };
+        });
+    
+      }
+    else if(this.loginService.getIsLoggedIn())
+      {
+        this.openReserveWindow();
+      };
 
-    const restuData = this.restaurant;
-
-    // this.httpClient.post('http://localhost:8081/res/reservations', payload).subscribe({
-    //   next: (response) => console.log('Reservation successful', response),
-    //   error: (error) => console.error('Error making reservation', error)
-    // });
-
-    const isSmallScreen = window.innerWidth < 600;
-    this.dialogRef = this.dialog.open(ReserveModalComponent, {
-      width: isSmallScreen ? '100%' : '60%',
-      panelClass: ['modal--medium', 'modal--stepper'],
-      data: {restaurantDatas:restuData,reservationPayload: payload}
-    });
-
-    this.dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+   
   }
 
   ngOnInit(): void {

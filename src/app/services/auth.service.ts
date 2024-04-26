@@ -6,6 +6,7 @@ import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { LoginService } from "./login.service";
 import {jwtDecode} from 'jwt-decode';
 import {JwtHelperService} from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
 
 
 export interface UserInfo {
@@ -34,12 +35,13 @@ export class AuthService {
   //private userInfoSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
   public token = new BehaviorSubject<String | null>(null);
+  tokenExpirationTimer: any;
 
   private userInfoSubject = new BehaviorSubject<any>(null);
   userInfo$: Observable<any> = this.userInfoSubject.asObservable();
   jwtHelperService = new JwtHelperService();
 
-  constructor(private http: HttpClient, private loginService: LoginService,) {}
+  constructor(private http: HttpClient, private loginService: LoginService, private router: Router) {}
 
   setUserInfo(userInfo: any): void {
     this.userInfoSubject.next(userInfo);
@@ -89,7 +91,8 @@ export class AuthService {
         tap(response => {
           if (response.accessToken) { 
             this.token.next(response.accessToken);
-           // this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf())
+            const decodedAccessToken = this.jwtHelperService.decodeToken(response.accessToken);
+            this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf())
             localStorage.setItem('accessToken', response.accessToken);
             this.loginService.setIsLogged(true);
           }
@@ -106,9 +109,34 @@ export class AuthService {
     if (!token) return;
     this.token.next(token);
     console.log("autologged"+token);
-     // this.autoLogout(loadedUser._expiration.valueOf() - new Date().valueOf());
+    const decodedAccessToken = this.jwtHelperService.decodeToken(token);
+    this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf());
     
   }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration)
+  }
+
+  getExpirationDate(exp: number) {
+    const date = new Date(0);
+    date.setUTCSeconds(exp)
+    return date;
+  }
+
+  logout() {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.userInfoSubject.next(null);
+    this.router.navigate(['/'])
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
 
  register(firstName: string, lastName: string, username: string, password: string): Observable<any> {
     const userData = { firstName, lastName, username: username, password };

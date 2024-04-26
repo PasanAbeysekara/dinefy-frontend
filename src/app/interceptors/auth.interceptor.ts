@@ -9,7 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   authService.autoLogin();
    return authService.token.pipe(take(1), exhaustMap(token => {
-    if (!token) {
+    if (!token || token==null) {
       console.log("no token:", req.url);
       return next(req);
       
