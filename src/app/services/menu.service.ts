@@ -10,8 +10,8 @@ export class MenuService {
 
   private baseUrl = environment.apiDataUrl;
   httpClient = inject(HttpClient);
-  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
-  protected menuList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`,{headers: this.headers});
+  //private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  protected menuList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`);
   protected menu:any;
 
   constructor() { }

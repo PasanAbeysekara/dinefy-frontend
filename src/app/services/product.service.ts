@@ -11,28 +11,26 @@ export class ProductService {
   private baseUrl = environment.apiDataUrl;
   httpClient = inject(HttpClient);
   protected product:any;
-  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
-  constructor() {
-    // console.log("Headers from product: ",this.headers);
-    // console.log("Access Token form product: ",localStorage.getItem('accessToken'));
-    // console.log("local storage from productService: ",localStorage);
-  }
+
+
   protected productList:Observable<any>= new Observable<any>();
+  //private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  constructor() {}
+  //protected productList:Observable<any> = this.httpClient.get(`${this.baseUrl}/properties`);
 
   getAllProducts(): Observable<any>{
     console.log("Access Token form get All products product: ",localStorage.getItem('accessToken'));
-    this.productList = this.httpClient.get(`${this.baseUrl}/properties`,{headers: this.headers});
+    this.productList = this.httpClient.get(`${this.baseUrl}/properties`);
     return this.productList;
   }
 
   getProductById(id:Number):any{
-    this.product = this.httpClient.get(`${this.baseUrl}/properties/${id}`,{headers: this.headers});
+    this.product = this.httpClient.get(`${this.baseUrl}/properties/${id}`);
     return this.product;
   }
 
   getProductByCode(code:string):any{
-    console.log("Authorization",this.headers.get('Authorization'));  // Add this line to debug the token
-    this.product = this.httpClient.get(`${this.baseUrl}/properties/code/${code}`,{headers: this.headers});
+    this.product = this.httpClient.get(`${this.baseUrl}/properties/code/${code}`);
     return this.product;
   }
 

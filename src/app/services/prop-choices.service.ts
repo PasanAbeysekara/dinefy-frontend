@@ -10,17 +10,17 @@ export class PropChoicesService {
 
   private baseUrl = environment.apiDataUrl;
   httpClient = inject(HttpClient);
-  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
-  protected propChoicesList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`,{headers: this.headers});
+ // private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  protected propChoicesList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`);
 
   constructor() { }
 
   getAllPropChoices(){
-    return this.httpClient.get(`${this.baseUrl}/prop-choices`,{headers: this.headers});
+    return this.httpClient.get(`${this.baseUrl}/prop-choices`);
   }
 
   getPropChoicesByProperty(propId:number){
-    return this.httpClient.get(`${this.baseUrl}/prop-choices/by-property/${propId}`,{headers: this.headers});
+    return this.httpClient.get(`${this.baseUrl}/prop-choices/by-property/${propId}`);
   }
 
 }
