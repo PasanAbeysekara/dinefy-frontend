@@ -6,18 +6,22 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
   private baseUrl = environment.apiDataUrl;
   httpClient = inject(HttpClient);
   protected product:any;
-  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
   constructor() {
-    console.log(this.headers);
-    console.log(this.headers.get('Authorization'));
+    // console.log("Headers from product: ",this.headers);
+    // console.log("Access Token form product: ",localStorage.getItem('accessToken'));
+    // console.log("local storage from productService: ",localStorage);
   }
-  protected productList:Observable<any> = this.httpClient.get(`${this.baseUrl}/properties`,{headers: this.headers});
+  protected productList:Observable<any>= new Observable<any>();
 
   getAllProducts(): Observable<any>{
+    console.log("Access Token form get All products product: ",localStorage.getItem('accessToken'));
+    this.productList = this.httpClient.get(`${this.baseUrl}/properties`,{headers: this.headers});
     return this.productList;
   }
 

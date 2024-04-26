@@ -61,7 +61,7 @@ export class AuthService {
           console.error('Error decoding token');
           return this.userInfoSubject.asObservable();
         }
-        
+
         const userInfo = {
           info: {
             sub:'',
@@ -75,23 +75,25 @@ export class AuthService {
 
 
         this.setUserInfo(userInfo);
-        
+
         return of(userInfo);
       })
 
     ).subscribe()
-   
+
   }
 
   login(username: string, password: string): Observable<any | null> {
       const credentialsDto = { username, password };
       return this.http.post<any>(this.apiUrl + '/login', credentialsDto).pipe(
         tap(response => {
-          if (response.accessToken) { 
+          if (response.accessToken) {
+            console.log("------------------");
             this.token.next(response.accessToken);
            // this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf())
             localStorage.setItem('accessToken', response.accessToken);
             this.loginService.setIsLogged(true);
+            window.location.reload();
           }
         }),
         catchError(error => {
@@ -106,7 +108,7 @@ export class AuthService {
     if (!token) return;
     this.token.next(token);
      // this.autoLogout(loadedUser._expiration.valueOf() - new Date().valueOf());
-    
+
   }
 
  register(firstName: string, lastName: string, username: string, password: string): Observable<any> {
@@ -143,7 +145,7 @@ export class AuthService {
         })
       );
     }
-    
+
 
   getUserDto(): Observable<UserDto | null> {
         return this.http.get<UserDto>(`${this.apiUrl}/decode`,{responseType: 'text' as 'json'}).pipe(

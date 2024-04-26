@@ -1,12 +1,13 @@
 <header
   [ngClass]="{
-    'bg-transparent': isTransparent,
-    'bg-gray-100 shadow-lg': !isTransparent
+    'bg-gray-100 shadow-lg': isTransparent
   }"
   class="fixed top-0 left-0 w-full transition-all duration-300 ease-in-out flex items-center justify-between z-50"
   [style.height]="isTransparent ? initialHeight : '50px'"
+  [style.background]="isTransparent ? 'rgba(243, 244, 246, 0.7)' : ''"
 >
-  <div class="container mx-auto p-1 md:p-4 w-full">
+
+<div class="container mx-auto p-1 md:p-4 w-full">
     <div class="">
       <div class="logo">
         <a routerLink="/home" routerLinkActive="active" class="logo-link">

@@ -10,7 +10,7 @@ export class PropChoicesService {
 
   private baseUrl = environment.apiDataUrl;
   httpClient = inject(HttpClient);
-  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
   protected propChoicesList:Observable<any> = this.httpClient.get(`${this.baseUrl}/menus`,{headers: this.headers});
 
   constructor() { }

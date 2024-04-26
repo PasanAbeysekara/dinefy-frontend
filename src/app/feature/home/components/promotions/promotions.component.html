@@ -14,7 +14,7 @@
       <ng-container *ngIf="(productsSubject | async) as products; else loadingTemplate">
         <p-carousel [value]="products?.length ? products : []" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
           <ng-template let-product pTemplate="item">
-            <div (click)="redirectToRestaurantDetails()" class="border-1 surface-border border-round m-2 text-center px-3 flex border-orange-400 border-solid rounded-md cursor-pointer hover:bg-gray-200 py-3">
+            <div (click)="redirectToRestaurantDetails(product.code)" class="border-1 surface-border border-round m-2 text-center px-3 flex border-orange-400 border-solid rounded-md cursor-pointer hover:bg-gray-200 py-3">
               <div class="mb-3">
                 <img [src]="product.image" [alt]="product.name" class="shadow-2 h-[200px] mt-2 md:mt-0"/>
               </div>

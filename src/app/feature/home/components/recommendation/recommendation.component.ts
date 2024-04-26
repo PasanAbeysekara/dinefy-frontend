@@ -111,7 +111,6 @@ export class RecommendationComponent implements OnInit{
 
   constructor(private productService: ProductService) {}
 
-
   ngOnInit() {
     this.productService.getAllProducts().subscribe((data: any) => {
       data.forEach((prop: any) => {

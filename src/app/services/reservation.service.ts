@@ -9,7 +9,7 @@ import {environment} from "../../environments/environment";
 export class ReservationService {
 
   private baseUrl = environment.apiResUrl;
-  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
   httpClient = inject(HttpClient);
   protected reservationList:Observable<any> = this.httpClient.get(`${this.baseUrl}/reservations`,{headers: this.headers});
   protected reservation:any;

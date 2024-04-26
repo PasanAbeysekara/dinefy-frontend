@@ -12,7 +12,7 @@ import {environment} from "../../environments/environment";
 
 export class PromotionsService {
   private baseUrl = environment.apiDataUrl;
-  private headers = new HttpHeaders({'Authorization': `Bearer ${sessionStorage.getItem('token')}`});
+  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('accessToken')}`});
 
   constructor(private http: HttpClient) {
   }
@@ -20,6 +20,7 @@ export class PromotionsService {
   fetchPromotionData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/promotions`, {headers: this.headers}).pipe(
       tap((data: any) => {
+        console.log("headers from promotions.service :",this.headers);
       })
     );
   }
