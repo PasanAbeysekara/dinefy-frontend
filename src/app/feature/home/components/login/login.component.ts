@@ -61,7 +61,7 @@ onClick(username: string, password: string): void {
           console.log("response: ",response);
           console.log(response.accessToken);
           this.loginService.setIsLogged(true);
-          this.loginService.setToken(response.accessToken);
+         // this.loginService.setToken(response.accessToken);
           console.log(sessionStorage);
         }
       else{

@@ -6,7 +6,7 @@ import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { LoginService } from "./login.service";
 import {jwtDecode} from 'jwt-decode';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import { HeaderComponent } from '../shared/header/header.component';
+
 
 export interface UserInfo {
   info: {
@@ -33,7 +33,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8081/data';
   //private userInfoSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  token = new BehaviorSubject<String | null>(null);
+  public token = new BehaviorSubject<String | null>(null);
 
   private userInfoSubject = new BehaviorSubject<any>(null);
   userInfo$: Observable<any> = this.userInfoSubject.asObservable();
@@ -107,6 +107,7 @@ export class AuthService {
     const token: string | null = localStorage.getItem('accessToken');
     if (!token) return;
     this.token.next(token);
+    console.log("autologged"+token);
      // this.autoLogout(loadedUser._expiration.valueOf() - new Date().valueOf());
 
   }
@@ -135,6 +136,7 @@ export class AuthService {
         }
      })
     );
+    
   }
 
     signInWithFacebook(): Observable<any> {
