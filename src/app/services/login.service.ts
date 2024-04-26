@@ -21,15 +21,16 @@ export class LoginService {
   getIsLoggedIn(): boolean{
     return sessionStorage.getItem('isLoggedIn') == 'true' ? true : false;
   }
-
+  
+/*
   setToken(token:any): void{
     console.log("Pi");
-    sessionStorage.setItem('token', token);
+    //sessionStorage.setItem('token', token);
   }
 
   getToken(): string{
     console.log(sessionStorage);
     return sessionStorage.getItem('token') as string;
   }
-
+*/
 }
