@@ -20,6 +20,7 @@ export class PromotionsService {
   fetchPromotionData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/promotions`, ).pipe(
       tap((data: any) => {
+        console.log("promo");
       })
     );
   }

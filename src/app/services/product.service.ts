@@ -19,7 +19,7 @@ export class ProductService {
   //protected productList:Observable<any> = this.httpClient.get(`${this.baseUrl}/properties`);
 
   getAllProducts(): Observable<any>{
-    console.log("Access Token form get All products product: ",localStorage.getItem('accessToken'));
+    //console.log("Access Token form get All products product: ",localStorage.getItem('accessToken'));
     this.productList = this.httpClient.get(`${this.baseUrl}/properties`);
     return this.productList;
   }
