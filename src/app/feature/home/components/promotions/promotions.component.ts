@@ -67,7 +67,8 @@ export class PromotionsComponent implements OnInit {
           inventoryStatus: 'In Stock',
           rating: property.data.avgRating,
           reviewCount: property.data.totalRating,
-          approxPeople: 2
+          approxPeople: 2,
+          code : property.data.code
         });
       });
       this.productsSubject.next(this.products);
