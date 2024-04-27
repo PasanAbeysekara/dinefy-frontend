@@ -45,6 +45,7 @@ export class AuthService {
 
   setUserInfo(userInfo: any): void {
     this.userInfoSubject.next(userInfo);
+    this.token.next(userInfo.info.token);
     console.log("userInfoSubject set with:", userInfo);
   }
 
@@ -52,33 +53,41 @@ export class AuthService {
   this.token.pipe(
       take(1),
       exhaustMap(token => {
+
+        const periodCount = (token?.match(/\./g) || []).length;
         if (!token) {
           console.log('Not logged in');
           return this.userInfoSubject.asObservable();
         }
+        else if(periodCount==2){
+          const decodedToken = this.jwtHelperService.decodeToken(token.toString());
 
-        const decodedToken = this.jwtHelperService.decodeToken(token.toString());
-
-        if (!decodedToken) {
-          console.error('Error decoding token');
+          if (!decodedToken) {
+            console.error('Error decoding token');
+            return this.userInfoSubject.asObservable();
+          }
+  
+          const userInfo = {
+            info: {
+              sub:'',
+              email: decodedToken.sub,
+              name: `${decodedToken.firstName} ${decodedToken.lastName}`,
+              firstName: decodedToken.firstName,
+              lastName: decodedToken.lastName,
+              picture: '',
+            },
+          };
+  
+  
+          this.setUserInfo(userInfo);
+  
+          return of(userInfo);
+        }
+        else{
+          console.log('Google logged in');
           return this.userInfoSubject.asObservable();
         }
-
-        const userInfo = {
-          info: {
-            sub:'',
-            email: decodedToken.sub,
-            name: `${decodedToken.firstName} ${decodedToken.lastName}`,
-            firstName: decodedToken.firstName,
-            lastName: decodedToken.lastName,
-            picture: '',
-          },
-        };
-
-
-        this.setUserInfo(userInfo);
-
-        return of(userInfo);
+       
       })
 
     ).subscribe()
@@ -96,7 +105,7 @@ export class AuthService {
             this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf())
             localStorage.setItem('accessToken', response.accessToken);
             this.loginService.setIsLogged(true);
-            window.location.reload();
+            //window.location.reload();
           }
         }),
         catchError(error => {
@@ -110,10 +119,12 @@ export class AuthService {
     const token: string | null = localStorage.getItem('accessToken');
     if (!token) return;
     this.token.next(token);
-    console.log("autologged"+token);
-    const decodedAccessToken = this.jwtHelperService.decodeToken(token);
-    this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf());
-    
+    console.log("autologged "+token);
+    const periodCount = (token?.match(/\./g) || []).length;
+    if(periodCount==2){
+      const decodedAccessToken = this.jwtHelperService.decodeToken(token);
+      this.autoLogout(this.getExpirationDate(decodedAccessToken.exp).valueOf() - new Date().valueOf());
+    }
   }
 
   autoLogout(expirationDuration: number) {

@@ -14,8 +14,8 @@ body { margin: 0;
   font-family: Calibri, serif }
 /* Define color variables */
 :root {
-  --color1: #4b2870; /* Dark purple */
-  --color2: #eee8f6; /* Light purple */
+  --color1: #172562; 
+  --color2: #eee8f6; 
   --color3: #666; /* Dark gray */
   --foreground: #000000; /* Black text color for foreground */
   --divider: #bdbdbd; /* Grey divider color */

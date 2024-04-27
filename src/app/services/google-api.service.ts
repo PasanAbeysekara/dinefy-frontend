@@ -6,7 +6,8 @@ import { AuthService } from './auth.service';
 
 export interface UserInfo {
   info: {
-    sub: string //identifier to user
+    sub: string, //identifier to user
+    token: string,
     email: string,
     name: string,
     firstName: string;
@@ -14,6 +15,7 @@ export interface UserInfo {
     picture: string
   }
 }
+
 interface UserProfile {
   sub: string;
   email: string;
@@ -32,7 +34,13 @@ export class GoogleApiService {
   constructor(
   private readonly oAuthService: OAuthService,
   private authService: AuthService,
-  ) {}
+  ) {
+    this.oAuthService.events.subscribe((event) => {
+      if (event.type === 'token_received') {
+        console.log('Access token:',  this.oAuthService.getAccessToken());
+      }
+    });
+  }
 
   async initializeGoogleAuth(): Promise<void> {
 
@@ -85,10 +93,12 @@ export class GoogleApiService {
                     name: userProfile.info.name,
                     firstName: firstName,
                     lastName: lastName,
-                    picture: userProfile.info.picture
+                    picture: userProfile.info.picture,
+                    token: this.oAuthService.getAccessToken(),
                   }
                 };
 
+                localStorage.setItem('accessToken', this.oAuthService.getAccessToken());
                 this.authService.setUserInfo(userInfo);
               //this.userProfileSubject.next(userInfo);
               //console.log(JSON.stringify(userInfo));
