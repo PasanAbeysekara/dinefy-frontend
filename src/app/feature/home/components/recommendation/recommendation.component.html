@@ -15,8 +15,9 @@
 
       <div class="cards-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 md:gap-10 ml-9 md:ml-10 2xl:-ml-5">
         <app-recommendation-card *ngFor="let card of recommendationCards" [cardImage]="card.cardImage" [cardAvatar]="card.cardAvatar"
-                                 [restaurantName]="card.restaurantName" [reservationPrice]="card.reservationPrice" [reservePeopleCount]="card.reservePeopleCount"
-                                 [reviewsCount]="card.reviewsCount" [reservationPriceCurrency]="card.reservationPriceCurrency" [ratingsCount]="card.ratingsCount" [propCode]="card.propCode" class="w-[300px]">
+                                 [restaurantName]="card.restaurantName" [reservationPrice]="card.reservationPrice"
+                                 [reviewsCount]="card.reviewsCount" [reservationPriceCurrency]="card.reservationPriceCurrency"
+                                 [ratingsCount]="card.ratingsCount" [propCode]="card.propCode" class="w-[300px]">
         </app-recommendation-card>
       </div>
     </ng-container>

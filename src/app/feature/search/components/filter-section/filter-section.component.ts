@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {CustomComponent} from "../../../../shared/search-widget/custom/custom.component";
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -30,6 +30,8 @@ import {
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatInputModule} from "@angular/material/input";
+import {FacilityService} from "../../../../services/facility.service";
+import {TagService} from "../../../../services/tag.service";
 
 
 const states = [...new Set(["Colombo", "Dehiwala", "Mount Lavinia", "Nugegoda", "Rajagiriya", "Battaramulla", "Kotte", "Malabe", "Maharagama", "Moratuwa", "Panadura", "Negombo", "Gampaha", "Kadawatha", "Kandy", "Peradeniya", "Katunayake", "Wattala", "Ja-Ela", "Ragama", "Kelaniya", "Peliyagoda", "Kaduwela", "Homagama", "Pannipitiya", "Boralesgamuwa", "Athurugiriya", "Kurunegala", "Galle", "Matara", "Hikkaduwa", "Kalutara", "Ambalangoda", "Gampola", "Nuwara Eliya", "Badulla", "Bandarawela", "Ratnapura", "Kegalle", "Avissawella", "Haputale", "Ella", "Tangalle", "Tissamaharama", "Ampara", "Trincomalee", "Batticaloa", "Jaffna", "Vavuniya", "Mannar", "Anuradhapura", "Polonnaruwa", "Dambulla", "Sigiriya", "Kurunegala", "Chilaw", "Puttalam", "Anuradhapura", "Polonnaruwa", "Dambulla", "Sigiriya", "Tissamaharama", "Hambantota", "Ambalantota", "Monaragala", "Weligama", "Ambalangoda", "Matugama", "Kalutara", "Horana", "Panadura", "Beruwala", "Bentota", "Aluthgama", "Koggala", "Hikkaduwa", "Ahangama", "Weligama", "Mirissa", "Dickwella", "Tangalle", "Ambalantota", "Tissamaharama", "Kataragama", "Ampara", "Kalmunai", "Batticaloa", "Arugam Bay", "Trincomalee", "Nilaveli", "Jaffna", "Kilinochchi", "Vavuniya", "Mannar", "Puttalam", "Chilaw", "Kuliyapitiya", "Kurunegala", "Nikaweratiya", "Mawanella", "Hatton", "Nawalapitiya", "Ginigathhena", "Maskeliya", "Nuwara Eliya", "Bandarawela", "Haputale", "Badulla", "Ella", "Mahiyangana", "Ampara", "Monaragala", "Buttala", "Embilipitiya", "Ratnapura", "Balangoda", "Pelmadulla", "Embilipitiya", "Pelmadulla", "Embilipitiya", "Ratnapura", "Balangoda", "Pelmadulla", "Embilipitiya", "Matara", "Akuressa", "Deniyaya", "Matara", "Kamburugamuwa", "Thihagoda", "Devinuwara", "Dikwella", "Tangalle", "Beliatta", "Hambantota", "Ambalantota", "Tissamaharama", "Kataragama", "Udawalawe", "Embilipitiya", "Monaragala", "Bibile", "Ampara", "Kalmunai", "Batticaloa", "Valaichchenai", "Trincomalee", "Nilaveli", "Kuchchaveli", "Rajagama", "Divulapitiya", "Katana", "Seeduwa", "Mahara", "Kahathuduwa", "Kottawa", "Piliyandala", "Padukka", "Kesbewa", "Kahawatta", "Balangoda", "Godakawela", "Eheliyagoda", "Rakwana", "Nivitigala", "Agalawatta", "Palindanuwara", "Bandaragama", "Wadduwa", "Waskaduwa", "Lunawa", "Ratmalana", "Angoda", "Maharagama", "Mount Lavinia", "Attidiya", "Rathmalgoda", "Padukka", "Pamunugama", "Kochchikade", "Wennappuwa", "Marawila", "Chilaw", "Madampe", "Mundalama", "Anamaduwa", "Nawagattegama", "Kuliyapitiya", "Narammala", "Nikaweratiya", "Polgahawela", "Panduwasnuwara", "Mawathagama", "Giriulla", "Dankotuwa", "Nattandiya", "Alawwa", "Warakapola", "Mawanella", "Aranayake", "Rambukkana", "Ruwanwella", "Doluwa", "Galewela", "Inamaluwa"])];
@@ -46,13 +48,14 @@ const states = [...new Set(["Colombo", "Dehiwala", "Mount Lavinia", "Nugegoda", 
   providers: [NgbTypeaheadConfig],
 })
 
-export class FilterSectionComponent {
+export class FilterSectionComponent implements OnInit{
   model: any;
   facilities = new FormControl('');
-  facilityList: string[] = ['Smoking', 'Vehicle Parking2', 'Vehicle Parking', 'Booze'];
+  facilityList: string[] = [];
   tags = new FormControl('');
-  tagList: string[] = ['Sea View', 'Rooftop','Music'];
+  tagList: string[] = [];
   sortOptionList: string[] = ['Sort By Price' , 'Sort By Rating' , 'Sort By Popularity'];
+
 
 
   hide = true;
@@ -73,7 +76,7 @@ export class FilterSectionComponent {
     this.router.navigate(['/search']);
   }
 
-  constructor(private router: Router,public dialog: MatDialog,config: NgbTypeaheadConfig) {
+  constructor(private router: Router,public dialog: MatDialog,config: NgbTypeaheadConfig, private facilityService: FacilityService, private tagService: TagService){
     // customize default values of typeaheads used by this component tree
     config.showHint = true;
   }
@@ -139,6 +142,16 @@ export class FilterSectionComponent {
   }
   private emitValueChangeChildren() {
     this.valueChangeChildren.emit(this.valueChildren);
+  }
+
+  ngOnInit(): void {
+    this.facilityService.getAllFacilities().subscribe((data:any)=>{
+      this.facilityList = data.data.content.map((each: { name: string; }) => each.name);
+    })
+    this.tagService.getAllTags().subscribe((data:any)=>{
+      this.tagList = data.data.content.map((each: { name: string; }) => each.name);
+    })
+
   }
 }
 

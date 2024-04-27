@@ -1,7 +1,7 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ProductComponent} from "../../product/product/product.component";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SearchWidgetComponent} from "../../../shared/search-widget/search-widget.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
@@ -17,7 +17,7 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {JsonPipe} from '@angular/common';
+import {JsonPipe, NgForOf, NgIf} from '@angular/common';
 import {MatSliderModule} from "@angular/material/slider";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
@@ -26,6 +26,8 @@ import {RestaurentResultComponent} from "../components/restaurent-result/restaur
 import {SkeletonModule} from "primeng/skeleton";
 import {PaginatorModule} from "primeng/paginator";
 import {FilterSectionComponent} from "../components/filter-section/filter-section.component";
+import {SearchService} from "../../../services/search.service";
+import {ProductService} from "../../../services/product.service";
 
 
 @Component({
@@ -53,91 +55,41 @@ import {FilterSectionComponent} from "../components/filter-section/filter-sectio
     SkeletonModule,
     RouterLink,
     PaginatorModule,
-    FilterSectionComponent
+    FilterSectionComponent,
+    NgForOf,
+    NgIf
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 
 
-export class SearchComponent {
+export class SearchComponent implements OnInit{
 
-  hide = true;
-  constructor(private router: Router,public dialog: MatDialog) { }
+  searchResultRestaurantList: any;
 
-  openDialogFilters(): void {
-    this.dialog.open(DialogMoreFilter, {
-      width: '450px',
+  constructor(private productService: ProductService,private router: Router,public dialog: MatDialog, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      console.log("params['where']",params['where']);
+      // this.searchService.getPropertyByCity(params['where']).subscribe((data: any) => {
+      //   // this.searchResultRestaurantList =  data;
+      //   // console.log("searchResultRestaurantList",this.searchResultRestaurantList);
+      //   console.log("QQQQQQQQQQQQQQQ");
+      //   console.log("data", data);
+      //   console.log("Wwwwwwwwwwwwwwwww");
+      // });
+
+     this.productService.getAllProducts().subscribe((data:any)=>{
+       console.log(params['where'], "searching began");
+       this.searchResultRestaurantList = data.filter((product: { basedLocation: { name: string; }; }) => product.basedLocation.name === params['where']);
+       console.log(params['where'], "searching end");
+       console.log("this.productsByCityList",this.searchResultRestaurantList);
+     })
+
     });
   }
-
-  openDialogPrice(): void {
-    this.dialog.open(DialogPrice, {
-      width: '450px',
-    });
-  }
-
-  redirectToRestaurant(){
-    const linkToRedirect = '/product/rest-code-1'; // Replace with the actual link
-    this.router.navigateByUrl(linkToRedirect);
-  };
-
-  facilities = new FormControl('');
-  facilityList: string[] = ['Smoking', 'Vehicle Parking2', 'Vehicle Parking', 'Booze'];
-  tags = new FormControl('');
-  tagList: string[] = ['Sea View', 'Rooftop','Music'];
-  sortOptionList: string[] = ['Sort By Price' , 'Sort By Rating' , 'Sort By Popularity'];
-
-}
-@Component({
-  selector: 'dialog-more-filter',
-  templateUrl: 'dialog-more-filter.html',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatCheckboxModule, FormsModule,ReactiveFormsModule, JsonPipe],
-})
-
-export class DialogMoreFilter {
-  filters = this._formBuilder.group({
-    filteroption1: false,
-    filteroption2: false,
-    filteroption3: false,
-    filteroption4: false,
-    filteroption5: false,
-    filteroption6: false,
-  });
-
-  constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
-
-  clearFilters() {
-    // Reset all checkboxes to their default state
-    this.filters.reset();
-  }
-
-}
-@Component({
-  selector: 'dialog-price',
-  templateUrl: 'dialog-price.html',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatCheckboxModule, FormsModule,ReactiveFormsModule, JsonPipe,
-    MatFormFieldModule,
-    MatSliderModule,MatInputModule, MatIconModule],
-})
-
-export class DialogPrice {
-  hide = true;
-  sliderValue: number = 0;
-  minValue: number = 2000;
-  maxValue: number = 4000;
-
-  updateSlider() {
-    // Ensure the min and max values are within bounds
-    this.minValue = Math.min(this.minValue, this.maxValue);
-    this.maxValue = Math.max(this.minValue, this.maxValue);
-
-    // Map the min and max values to the slider range
-    this.sliderValue = this.minValue;
-  }
-
-  constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
 
 }

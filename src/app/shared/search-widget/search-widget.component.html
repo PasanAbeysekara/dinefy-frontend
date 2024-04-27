@@ -1,13 +1,14 @@
 <div class=" bg-white rounded-[10px] xl:flex w-[330px] md:w-[600px] xl:w-[1200px] h-[340px] md:h-[160px] xl:h-[80px] ml-2">
 
   <div class="md:flex">
+
     <!--  what ? -->
     <div class="ml-4">
       <app-custom></app-custom>
     </div>
 
     <!--  Where ? -->
-    <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control mt-3 ml-4 md:ml-2 py-[12px] xl:my-4 w-[300px]" [(ngModel)]="model" [ngbTypeahead]="search"  />
+    <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control mt-3 ml-4 md:ml-2 py-[12px] xl:my-4 w-[300px]" [(ngModel)]="where" [ngbTypeahead]="search"  />
   </div>
 
   <div class="md:flex">
@@ -16,10 +17,12 @@
            placeholder="When ? (Today)"
            class="form-control mt-3  ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]"
            bsDatepicker
-           [bsConfig]="{ isAnimated: true }">
+           [bsConfig]="{ isAnimated: true }"
+           [(ngModel)]="dateInputModel"
+    >
 
     <!--  Time ? -->
-    <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]" [ngxTimepicker]="picker">
+    <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]" [ngxTimepicker]="picker" [(ngModel)]="timeInputModel">
     <ngx-material-timepicker #picker></ngx-material-timepicker>
 
     <!--  People ? -->

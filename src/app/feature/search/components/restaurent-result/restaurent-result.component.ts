@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
@@ -26,19 +26,33 @@ import {NgIf} from "@angular/common";
 })
 export class RestaurentResultComponent implements OnInit {
   rating = 0;
-  property:any;
-  isLoaded:boolean = false;
+  // property:any;
+  // isLoaded:boolean = false;
+
+  restaurantName!: string;
+  restaurantDescription!: string;
+  reservationPrice!: string;
+  reservationPriceCurrency!: string;
+  reviewsCount!: string;
+  ratingsCount!: number;
+  @Input() restaurant: any;
 
   constructor(private productService:ProductService,config: NgbRatingConfig) {
-    // customize default values of ratings used by this component tree
     config.max = 5;
   }
 
   ngOnInit(): void {
-    this.property = this.productService.getProductById(54).subscribe((data:any)=>{
-      this.property = data.data;
-      this.isLoaded = true;
-    })
+    // this.property = this.productService.getProductById(54).subscribe((data:any)=>{
+    //   this.property = data.data;
+    //   this.isLoaded = true;
+    // })
+    this.restaurantName = this.restaurant.name;
+    this.restaurantDescription = this.restaurant.description;
+    this.reservationPrice = this.restaurant.amount.toString();
+    this.reservationPriceCurrency = this.restaurant.amountCurrency;
+    this.ratingsCount = this.restaurant.avgRating.toString();
+    this.reviewsCount = this.restaurant.totalRating.toString();
   }
 
+  protected readonly Number = Number;
 }

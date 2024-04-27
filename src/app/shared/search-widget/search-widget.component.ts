@@ -33,14 +33,28 @@ const states = [...new Set(["Colombo", "Dehiwala", "Mount Lavinia", "Nugegoda", 
 })
 
 export class SearchWidgetComponent {
-  model: any;
+  where: string = "";
+  dateInputModel: any;
+  timeInputModel: any;
 
-  redirectToSearchResults(){
-    this.router.navigate(['/search']);
+  @Input() valueAdults: number = 0;
+  @Output() valueChangeAdults = new EventEmitter<number>();
+  @Input() valueChildren: number = 0;
+  @Output() valueChangeChildren = new EventEmitter<number>();
+
+  redirectToSearchResults() {
+    const queryParams: any = {
+      where: this.where || 'Anywhere',
+      when: this.dateInputModel || 'Today',
+      time: this.timeInputModel || 'Anytime',
+      adults: this.valueAdults,
+      children: this.valueChildren
+    };
+
+    this.router.navigate(['/search'], { queryParams });
   }
 
   constructor(private router: Router,config: NgbTypeaheadConfig) {
-    // customize default values of typeaheads used by this component tree
     config.showHint = true;
   }
 
@@ -70,12 +84,6 @@ export class SearchWidgetComponent {
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
     );
-  @Input() valueAdults: number = 0;
-  @Output() valueChangeAdults = new EventEmitter<number>();
-
-  @Input() valueChildren: number = 0;
-  @Output() valueChangeChildren = new EventEmitter<number>();
-
 
   incrementAdults() {
     this.valueAdults++;
