@@ -1,23 +1,22 @@
-<div class="mb-3">
-  <mat-card style="border: 1px solid #ccc;" class="cursor-pointer w-[1250px]" >
+<div class="mb-3" >
+  <mat-card style="border: 1px solid #ccc;" class="cursor-pointer w-[1250px]" *ngIf="isLoaded;else loadingTemplate">
 
     <div class="flex">
-
-      <div>
-        <img src="https://cf.bstatic.com/images/hotel/max1024x768/170/170102675.jpg" class="my-3 pl-2 rounded-b-md" alt="">
-      </div>
+      <!--      <div>-->
+      <!--        <img src="https://d3plttq4n63nzt.cloudfront.net/Property-col-image-5.png" class="h-[200px] w-[400px] rounded-b-md" alt="">-->
+      <!--      </div>-->
 
       <div>
         <mat-divider class="w-full"></mat-divider>
         <div class="flex justify-between">
           <div>
             <div class="flex space-x-2 my-0 ml-3" style="margin-bottom: 10px">
-              <p class="my-1 mt-2">4/5</p>
+              <p class="my-1 mt-2">{{property.avgRating}}/5</p>
               <ngb-rating class="text-red-500 my-1 text-xl" [rate]="4" />
-              <p class="my-1 mt-2">(396)</p>
+              <p class="my-1 mt-2">({{property.totalRating}})</p>
             </div>
             <div class="ml-3">
-              <p class="text-lg font-bold text-gray-700">A Minute by Tuk Tuk Colombo</p>
+              <p class="text-lg font-bold text-gray-700">{{property.name}}</p>
             </div>
           </div>
           <div class="mt-4 mr-3 text-gray-400">
@@ -32,6 +31,27 @@
           </p>
         </div>
       </div>
+
     </div>
   </mat-card>
 </div>
+
+<ng-template #loadingTemplate>
+  <div class="card w-[1250px]">
+    <div class="border-round border-1 surface-border p-4 surface-card">
+      <div class="flex mb-3">
+        <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+        <div>
+          <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton height=".5rem"></p-skeleton>
+        </div>
+      </div>
+      <p-skeleton width="100%" height="150px"></p-skeleton>
+      <div class="flex justify-content-between mt-3">
+        <p-skeleton width="4rem" height="2rem"></p-skeleton>
+        <p-skeleton width="4rem" height="2rem"></p-skeleton>
+      </div>
+    </div>
+  </div>
+</ng-template>

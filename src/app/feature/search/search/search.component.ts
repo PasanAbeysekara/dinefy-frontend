@@ -24,6 +24,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {RestaurentResultComponent} from "../components/restaurent-result/restaurent-result.component";
 import {SkeletonModule} from "primeng/skeleton";
+import {PaginatorModule} from "primeng/paginator";
+import {FilterSectionComponent} from "../components/filter-section/filter-section.component";
 
 
 @Component({
@@ -49,11 +51,14 @@ import {SkeletonModule} from "primeng/skeleton";
     MatCardModule,
     RestaurentResultComponent,
     SkeletonModule,
-    RouterLink
+    RouterLink,
+    PaginatorModule,
+    FilterSectionComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
+
 
 export class SearchComponent {
 
@@ -71,7 +76,6 @@ export class SearchComponent {
       width: '450px',
     });
   }
-
 
   redirectToRestaurant(){
     const linkToRedirect = '/product/rest-code-1'; // Replace with the actual link
@@ -91,6 +95,7 @@ export class SearchComponent {
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatCheckboxModule, FormsModule,ReactiveFormsModule, JsonPipe],
 })
+
 export class DialogMoreFilter {
   filters = this._formBuilder.group({
     filteroption1: false,
@@ -107,8 +112,8 @@ export class DialogMoreFilter {
     // Reset all checkboxes to their default state
     this.filters.reset();
   }
-}
 
+}
 @Component({
   selector: 'dialog-price',
   templateUrl: 'dialog-price.html',
@@ -117,6 +122,7 @@ export class DialogMoreFilter {
     MatFormFieldModule,
     MatSliderModule,MatInputModule, MatIconModule],
 })
+
 export class DialogPrice {
   hide = true;
   sliderValue: number = 0;
@@ -135,4 +141,3 @@ export class DialogPrice {
   constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
 
 }
-

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Price</h2>
+<mat-dialog-content>
+  <div class="flex justify-between">
+    <div>Min: {{ minValue }}</div>
+    <div>Max: {{ maxValue }}</div>
+  </div>
+  <mat-slider min="1000" max="5000" style="width: 390px;" [(ngModel)]="sliderValue">
+    <input [(ngModel)]="minValue" matSliderStartThumb>
+    <input [(ngModel)]="maxValue" matSliderEndThumb>
+  </mat-slider>
+
+  <div class="example-container flex justify-between space-x-2">
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Min Price</mat-label>
+      <input matInput type="number" class="example-right-align" placeholder="0" [(ngModel)]="minValue" (input)="updateSlider()">
+      <span matTextPrefix>LKR&nbsp;</span>
+      <span matTextSuffix>.00</span>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Max Price</mat-label>
+      <input matInput type="number" class="example-right-align" placeholder="0" [(ngModel)]="maxValue" (input)="updateSlider()">
+      <span matTextPrefix>LKR&nbsp;</span>
+      <span matTextSuffix>.00</span>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="flex justify-between space-x-6">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Apply</button>
+</mat-dialog-actions>
