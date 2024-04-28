@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {CustomComponent} from "../../../../shared/search-widget/custom/custom.component";
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -20,6 +20,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
   MatDialogClose,
@@ -33,6 +34,12 @@ import {MatInputModule} from "@angular/material/input";
 import {FacilityService} from "../../../../services/facility.service";
 import {TagService} from "../../../../services/tag.service";
 
+interface Restaurant {
+  name: string;
+  amount?: number;
+  avgRating?: number;
+  totalRating?: number;
+}
 
 const states = [...new Set(["Colombo", "Dehiwala", "Mount Lavinia", "Nugegoda", "Rajagiriya", "Battaramulla", "Kotte", "Malabe", "Maharagama", "Moratuwa", "Panadura", "Negombo", "Gampaha", "Kadawatha", "Kandy", "Peradeniya", "Katunayake", "Wattala", "Ja-Ela", "Ragama", "Kelaniya", "Peliyagoda", "Kaduwela", "Homagama", "Pannipitiya", "Boralesgamuwa", "Athurugiriya", "Kurunegala", "Galle", "Matara", "Hikkaduwa", "Kalutara", "Ambalangoda", "Gampola", "Nuwara Eliya", "Badulla", "Bandarawela", "Ratnapura", "Kegalle", "Avissawella", "Haputale", "Ella", "Tangalle", "Tissamaharama", "Ampara", "Trincomalee", "Batticaloa", "Jaffna", "Vavuniya", "Mannar", "Anuradhapura", "Polonnaruwa", "Dambulla", "Sigiriya", "Kurunegala", "Chilaw", "Puttalam", "Anuradhapura", "Polonnaruwa", "Dambulla", "Sigiriya", "Tissamaharama", "Hambantota", "Ambalantota", "Monaragala", "Weligama", "Ambalangoda", "Matugama", "Kalutara", "Horana", "Panadura", "Beruwala", "Bentota", "Aluthgama", "Koggala", "Hikkaduwa", "Ahangama", "Weligama", "Mirissa", "Dickwella", "Tangalle", "Ambalantota", "Tissamaharama", "Kataragama", "Ampara", "Kalmunai", "Batticaloa", "Arugam Bay", "Trincomalee", "Nilaveli", "Jaffna", "Kilinochchi", "Vavuniya", "Mannar", "Puttalam", "Chilaw", "Kuliyapitiya", "Kurunegala", "Nikaweratiya", "Mawanella", "Hatton", "Nawalapitiya", "Ginigathhena", "Maskeliya", "Nuwara Eliya", "Bandarawela", "Haputale", "Badulla", "Ella", "Mahiyangana", "Ampara", "Monaragala", "Buttala", "Embilipitiya", "Ratnapura", "Balangoda", "Pelmadulla", "Embilipitiya", "Pelmadulla", "Embilipitiya", "Ratnapura", "Balangoda", "Pelmadulla", "Embilipitiya", "Matara", "Akuressa", "Deniyaya", "Matara", "Kamburugamuwa", "Thihagoda", "Devinuwara", "Dikwella", "Tangalle", "Beliatta", "Hambantota", "Ambalantota", "Tissamaharama", "Kataragama", "Udawalawe", "Embilipitiya", "Monaragala", "Bibile", "Ampara", "Kalmunai", "Batticaloa", "Valaichchenai", "Trincomalee", "Nilaveli", "Kuchchaveli", "Rajagama", "Divulapitiya", "Katana", "Seeduwa", "Mahara", "Kahathuduwa", "Kottawa", "Piliyandala", "Padukka", "Kesbewa", "Kahawatta", "Balangoda", "Godakawela", "Eheliyagoda", "Rakwana", "Nivitigala", "Agalawatta", "Palindanuwara", "Bandaragama", "Wadduwa", "Waskaduwa", "Lunawa", "Ratmalana", "Angoda", "Maharagama", "Mount Lavinia", "Attidiya", "Rathmalgoda", "Padukka", "Pamunugama", "Kochchikade", "Wennappuwa", "Marawila", "Chilaw", "Madampe", "Mundalama", "Anamaduwa", "Nawagattegama", "Kuliyapitiya", "Narammala", "Nikaweratiya", "Polgahawela", "Panduwasnuwara", "Mawathagama", "Giriulla", "Dankotuwa", "Nattandiya", "Alawwa", "Warakapola", "Mawanella", "Aranayake", "Rambukkana", "Ruwanwella", "Doluwa", "Galewela", "Inamaluwa"])];
 
@@ -57,24 +64,29 @@ export class FilterSectionComponent implements OnInit{
   sortOptionList: string[] = ['Sort By Price' , 'Sort By Rating' , 'Sort By Popularity'];
   searchResultRestaurantList:any;
   viewRestaurantList:any;
-
-
+  sortBy = new FormControl('');
   hide = true;
 
-  openDialogFilters(): void {
-    this.dialog.open(DialogMoreFilter, {
-      width: '450px',
-    });
-  }
+  minValue: any;
+  maxValue: any;
 
   openDialogPrice(): void {
-    this.dialog.open(DialogPrice, {
+    const dialogRef = this.dialog.open(DialogPrice, {
       width: '450px',
+      data: {
+        minValue: 2000,
+        maxValue: 4000,
+      }
     });
-  }
 
-  redirectToSearchResults(){
-    this.router.navigate(['/search']);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.minValue && result.maxValue) {
+        // console.log('Min value:', result.minValue);
+        // console.log('Max value:', result.maxValue);
+        this.minValue = result.minValue;
+        this.maxValue = result.maxValue;
+      }
+    });
   }
 
   constructor(private router: Router, public dialog: MatDialog, config: NgbTypeaheadConfig, private facilityService: FacilityService, private tagService: TagService) {
@@ -82,6 +94,11 @@ export class FilterSectionComponent implements OnInit{
   }
 
   applyFilters(): void {
+
+    // console.log('applyFilters Min value:', this.minValue);
+    // console.log('applyFilters Max value:', this.maxValue);
+
+    // alert(this.minValue+" "+this.maxValue);
 
     try {
       const searchResultJson = localStorage.getItem("searchResultRestaurantList");
@@ -99,11 +116,6 @@ export class FilterSectionComponent implements OnInit{
     this.viewRestaurantList = this.searchResultRestaurantList.filter((item: { facilities: any[]; tags: any[]; }) => {
       let facilitiesMatch = selectedFacilities.length === 0 || selectedFacilities.some(facility => item.facilities.map(each => each.description).includes(facility));
       let tagsMatch = selectedTags.length === 0 || selectedTags.some(tag => item.tags.map(each => each.name).includes(tag));
-      // console.log("selectedFacilities, selectedTags", selectedFacilities, selectedTags);
-      // console.log("item.facilities",item.facilities.map(each => each.description));
-      // console.log("item.facilities.includes('Pets Welcome')", item.facilities.includes("Pets Welcome"));
-      // console.log("facilitiesMatch , tagsMatch",facilitiesMatch, tagsMatch);
-
       console.log("selectedFacilities.length, selectedTags.length",selectedFacilities.length, selectedTags.length);
       if(selectedFacilities.length === 0 && selectedTags.length === 0) {
         console.log("res",true);
@@ -121,12 +133,30 @@ export class FilterSectionComponent implements OnInit{
       return facilitiesMatch && tagsMatch;
     });
 
-    // Update the display result in localStorage
+    // Sorting logic
+    switch (this.sortBy.value) {
+      case "Sort By Price":
+        this.viewRestaurantList.sort((a: Restaurant, b: Restaurant) => (b.amount || 0) - (a.amount || 0));
+        break;
+      case "Sort By Rating":
+        this.viewRestaurantList.sort((a: Restaurant, b: Restaurant) => (b.avgRating || 0) - (a.avgRating || 0));
+        break;
+      case "Sort By Popularity":
+        this.viewRestaurantList.sort((a: Restaurant, b: Restaurant) => (b.totalRating || 0) - (a.totalRating || 0));
+        break;
+    }
+
+    // Price Logic
+    if(this.minValue && this.maxValue) {
+      this.viewRestaurantList = this.viewRestaurantList.filter((item: { amount: number; }) => item.amount >= this.minValue && item.amount <= this.maxValue);
+    }
+
     localStorage.setItem("viewRestaurantList", JSON.stringify(this.viewRestaurantList));
     localStorage.setItem("isFilterClicked", "yes");
     localStorage.setItem("selectedFacilities", JSON.stringify(selectedFacilities));
     localStorage.setItem("selectedTags", JSON.stringify(selectedTags));
     window.location.reload();
+
   }
 
   search = (text$: Observable<string>) =>
@@ -137,60 +167,6 @@ export class FilterSectionComponent implements OnInit{
         term.length < 2 ? [] : states.filter((v) => v.toLowerCase().startsWith(term.toLocaleLowerCase())).splice(0, 10),
       ),
     );
-
-  search_what: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((term) =>
-        term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
-      ),
-    );
-
-  search_where: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map((term) =>
-        term.length < 2 ? [] : states.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
-      ),
-    );
-  @Input() valueAdults: number = 0;
-  @Output() valueChangeAdults = new EventEmitter<number>();
-
-  @Input() valueChildren: number = 0;
-  @Output() valueChangeChildren = new EventEmitter<number>();
-
-
-  incrementAdults() {
-    this.valueAdults++;
-    this.emitValueChangeAdults();
-  }
-
-  decrementAdults() {
-    if (this.valueAdults> 0) {
-      this.valueAdults--;
-      this.emitValueChangeAdults();
-    }
-  }
-  incrementChildren() {
-    this.valueChildren++;
-    this.emitValueChangeChildren();
-  }
-
-  decrementChildren() {
-    if (this.valueChildren > 0) {
-      this.valueChildren--;
-      this.emitValueChangeChildren();
-    }
-  }
-
-  private emitValueChangeAdults() {
-    this.valueChangeChildren.emit(this.valueAdults);
-  }
-  private emitValueChangeChildren() {
-    this.valueChangeChildren.emit(this.valueChildren);
-  }
 
   ngOnInit(): void {
     this.facilityService.getAllFacilities().subscribe((data:any)=>{
@@ -203,24 +179,6 @@ export class FilterSectionComponent implements OnInit{
   }
 }
 
-export class DialogMoreFilter {
-  filters = this._formBuilder.group({
-    filteroption1: false,
-    filteroption2: false,
-    filteroption3: false,
-    filteroption4: false,
-    filteroption5: false,
-    filteroption6: false,
-  });
-
-  constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
-
-  clearFilters() {
-    // Reset all checkboxes to their default state
-    this.filters.reset();
-  }
-
-}
 
 @Component({
   selector: 'dialog-price',
@@ -230,21 +188,22 @@ export class DialogMoreFilter {
     MatFormFieldModule,
     MatSliderModule,MatInputModule, MatIconModule],
 })
+
 export class DialogPrice {
   hide = true;
   sliderValue: number = 0;
   minValue: number = 2000;
   maxValue: number = 4000;
 
-  updateSlider() {
-    // Ensure the min and max values are within bounds
-    this.minValue = Math.min(this.minValue, this.maxValue);
-    this.maxValue = Math.max(this.minValue, this.maxValue);
-
-    // Map the min and max values to the slider range
-    this.sliderValue = this.minValue;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogPrice>) {
+    console.log('minValue value:', this.data.minValue);
+    console.log('maxValue value:', this.data.maxValue);
   }
 
-  constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
+  updateSlider() {
+    this.minValue = Math.min(this.minValue, this.maxValue);
+    this.maxValue = Math.max(this.minValue, this.maxValue);
+    this.sliderValue = this.minValue;
+  }
 
 }

@@ -24,7 +24,7 @@ export class LocationService {
   getLocationIdByName(cityName: string): Observable<any> {
     return this.locationsList.pipe(
       map(locations => {
-        const location = locations.data.content.find((location: any) => location.name === cityName);
+        const location = locations.data.content.find((location: any) => location.name.toLowerCase() === cityName.toLowerCase());
         return location ? location.locationId : null;
       })
     );

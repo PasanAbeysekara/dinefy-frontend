@@ -106,7 +106,7 @@
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Sort by</mat-label>
-      <mat-select>
+      <mat-select [formControl]="sortBy">
         @for (sortOption of sortOptionList; track sortOption) {
           <mat-option [value]="sortOption">{{sortOption}}</mat-option>
         }

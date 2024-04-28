@@ -27,6 +27,9 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions class="flex justify-between space-x-6">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Apply</button>
+<!--  <button mat-button mat-dialog-close>Cancel</button>-->
+<!--  <button mat-button mat-dialog-close cdkFocusInitial>Apply</button>-->
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button (click)="dialogRef.close({minValue: minValue, maxValue: maxValue})" cdkFocusInitial>Apply</button>
+
 </mat-dialog-actions>
