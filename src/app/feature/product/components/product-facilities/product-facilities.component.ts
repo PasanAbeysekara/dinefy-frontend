@@ -50,7 +50,7 @@ export class ProductFacilitiesComponent implements OnInit{
 
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
       // this.locationPath = this.sanitizer.bypassSecurityTrustResourceUrl(`https://maps.google.com/maps?q=${data.data.latitude},${data.data.longitude}&hl=es&z=14&amp;output=embed`);
-      this.facilities = data.data.facilities.map((facility: any) => {
+      this.facilities = data.facilities.map((facility: any) => {
         return {
           icon: facility.sysFacility.icon,
           description: facility.description

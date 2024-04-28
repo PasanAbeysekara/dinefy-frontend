@@ -24,7 +24,6 @@ export class ProductService {
   //   this.productList = this.httpClient.get(`${this.baseUrl}/properties`);
   //   return this.productList;
   // }
-  //
 
   getAllProducts(): Observable<any> {
     const products = localStorage.getItem('allProductList');
@@ -39,14 +38,51 @@ export class ProductService {
     }
   }
 
-  getProductById(id:Number):any{
-    this.product = this.httpClient.get(`${this.baseUrl}/properties/${id}`);
-    return this.product;
+  // getProductById(id:Number):any{
+  //   this.product = this.httpClient.get(`${this.baseUrl}/properties/${id}`);
+  //   return this.product;
+  // }
+
+  getProductById(id: Number): Observable<any> {
+    const products = localStorage.getItem('allProductList');
+    if (products) {
+      const productList = JSON.parse(products);
+      const product = productList.find((p: { id: Number; }) => p.id === id);
+      if (product) {
+        return of(product);
+      }
+    }
+    return this.httpClient.get(`${this.baseUrl}/properties/${id}`).pipe(
+      tap(fetchedProduct => {
+        const productList = products ? JSON.parse(products) : [];
+        productList.push(fetchedProduct);
+        localStorage.setItem('allProductList', JSON.stringify(productList));
+      })
+    );
   }
 
-  getProductByCode(code:string):any{
+  getProductByCodeExplicit(code:string):any{
     this.product = this.httpClient.get(`${this.baseUrl}/properties/code/${code}`);
     return this.product;
   }
+
+  getProductByCode(code: string): Observable<any> {
+    const products = localStorage.getItem('allProductList');
+    if (products) {
+      const productList = JSON.parse(products);
+      const product = productList.find((p: { code: string; }) => p.code === code);
+      if (product) {
+        return of(product);
+      }
+    }
+    return this.httpClient.get(`${this.baseUrl}/properties/code/${code}`).pipe(
+      tap(fetchedProduct => {
+        const productList = products ? JSON.parse(products) : [];
+        productList.push(fetchedProduct);
+        localStorage.setItem('allProductList', JSON.stringify(productList));
+      })
+    );
+  }
+
 
 }

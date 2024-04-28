@@ -39,7 +39,7 @@ export class ProductOverviewComponent implements OnInit{
     });
 
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
-      this.restaurantDetails = data.data;
+      this.restaurantDetails = data;
     });
   }
 

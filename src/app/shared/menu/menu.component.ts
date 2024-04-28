@@ -46,8 +46,8 @@ export class MenuComponent implements OnInit{
     });
 
     this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
-      this.property = data.data;
-      this.propId = data.data.propId;
+      this.property = data;
+      this.propId = data.propId;
 
       console.log("Eka")
       console.log(data);

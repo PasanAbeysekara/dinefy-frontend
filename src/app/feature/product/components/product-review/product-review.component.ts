@@ -44,19 +44,7 @@ export class ProductReviewComponent {
       rating: 4,
       reviews: 1402,
       description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.'
-    },
-    {
-      name: 'John Doe',
-      rating: 4,
-      reviews: 1402,
-      description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.'
-    },
-    {
-      name: 'John Doe',
-      rating: 4,
-      reviews: 1402,
-      description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.'
-    },
+    }
   ];
 
 }

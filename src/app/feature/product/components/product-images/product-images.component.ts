@@ -32,8 +32,9 @@ export class ProductImagesComponent implements OnInit {
   }
 
   fetchProductData() {
-    this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
+    this.productService.getProductByCodeExplicit(this.propCode).subscribe((data: any) => {
       this.restaurantDetails = data.data;
+      console.log("product-images this.restaurantDetails",this.restaurantDetails);
       console.log(this.restaurantDetails.propertyMediaWrapper.coverImages[1].mediaUrl);
       this.images['diga'] = [];
       this.images['usa'] = [];
