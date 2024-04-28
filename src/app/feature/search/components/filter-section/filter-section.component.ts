@@ -67,15 +67,15 @@ export class FilterSectionComponent implements OnInit{
   sortBy = new FormControl('');
   hide = true;
 
-  minValue: any;
-  maxValue: any;
+  minValue: any = 2000;
+  maxValue: any = 4000;
 
   openDialogPrice(): void {
     const dialogRef = this.dialog.open(DialogPrice, {
       width: '450px',
       data: {
-        minValue: 2000,
-        maxValue: 4000,
+        minValue: this.minValue,
+        maxValue: this.maxValue,
       }
     });
 
@@ -192,12 +192,14 @@ export class FilterSectionComponent implements OnInit{
 export class DialogPrice {
   hide = true;
   sliderValue: number = 0;
-  minValue: number = 2000;
-  maxValue: number = 4000;
+  minValue: number = 0;
+  maxValue: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogPrice>) {
     console.log('minValue value:', this.data.minValue);
     console.log('maxValue value:', this.data.maxValue);
+    this.minValue = this.data.minValue;
+    this.maxValue = this.data.maxValue;
   }
 
   updateSlider() {

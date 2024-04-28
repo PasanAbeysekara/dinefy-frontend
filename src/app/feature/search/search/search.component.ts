@@ -84,15 +84,24 @@ export class SearchComponent implements OnInit{
     else{
       this.route.queryParams.subscribe(params => {
         this.productService.getAllProducts().subscribe((data:any)=>{
-          this.locationService.getLocationIdByName(params['where']).subscribe((locId:any)=>{
-            // console.log("tempLocationId",locId)
-            this.viewRestaurantList = data.filter((product: { basedLocationId: any; }) => product.basedLocationId === locId);
-            // console.log("data",data);
-            // console.log("this.viewRestaurantList",this.viewRestaurantList);
-            this.searchResultRestaurantList = this.viewRestaurantList;
-            localStorage.setItem("viewRestaurantList", JSON.stringify(this.viewRestaurantList));
-            localStorage.setItem("searchResultRestaurantList", JSON.stringify(this.searchResultRestaurantList));
-          });
+          if(params['where']==="Anywhere"){
+            localStorage.setItem("viewRestaurantList", JSON.stringify(data));
+            localStorage.setItem("searchResultRestaurantList", JSON.stringify(data));
+            this.viewRestaurantList = data;
+            this.searchResultRestaurantList = data;
+            console.log(data);
+          }
+          else{
+            this.locationService.getLocationIdByName(params['where']).subscribe((locId:any)=>{
+              // console.log("tempLocationId",locId)
+              this.viewRestaurantList = data.filter((product: { basedLocationId: any; }) => product.basedLocationId === locId);
+              // console.log("data",data);
+              // console.log("this.viewRestaurantList",this.viewRestaurantList);
+              this.searchResultRestaurantList = this.viewRestaurantList;
+              localStorage.setItem("viewRestaurantList", JSON.stringify(this.viewRestaurantList));
+              localStorage.setItem("searchResultRestaurantList", JSON.stringify(this.searchResultRestaurantList));
+            });
+          }
         })
       });
     }
