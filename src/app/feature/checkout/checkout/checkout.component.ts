@@ -90,6 +90,7 @@ export class CheckoutComponent implements OnInit{
   updateCartSummary(): void {
     this.totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
     this.totalPrice = this.cart.reduce((sum, item) => sum + (item.amount * item.quantity), 0);
+    sessionStorage.setItem('cartItems', JSON.stringify(this.cart));
   }
 
   removeFromCart(item: any): void {
@@ -120,6 +121,12 @@ export class CheckoutComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    const cartData = sessionStorage.getItem('cartItems');
+    if (cartData) {
+      this.cart = JSON.parse(cartData);
+      this.totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
 
     this.route.params.subscribe(params => {
       this.propCode = params['propCode'];
