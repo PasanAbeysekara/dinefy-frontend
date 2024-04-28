@@ -6,7 +6,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
 import {SkeletonModule} from "primeng/skeleton";
 import {ProductService} from "../../../../services/product.service";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import {MatChipsModule} from "@angular/material/chips";
 
 @Component({
   selector: 'app-restaurent-result',
@@ -18,7 +19,9 @@ import {NgIf} from "@angular/common";
     MatIconModule,
     NgbRating,
     SkeletonModule,
-    NgIf
+    NgIf,
+    NgForOf,
+    MatChipsModule
   ],
   templateUrl: './restaurent-result.component.html',
   styleUrl: './restaurent-result.component.css',
@@ -35,6 +38,8 @@ export class RestaurentResultComponent implements OnInit {
   reservationPriceCurrency!: string;
   reviewsCount!: string;
   ratingsCount!: number;
+  restaurantFacilities!: any;
+  restaurantTags!: any;
   @Input() restaurant: any;
 
   constructor(private productService:ProductService,config: NgbRatingConfig) {
@@ -52,6 +57,8 @@ export class RestaurentResultComponent implements OnInit {
     this.reservationPriceCurrency = this.restaurant.amountCurrency;
     this.ratingsCount = this.restaurant.avgRating.toString();
     this.reviewsCount = this.restaurant.totalRating.toString();
+    this.restaurantFacilities = this.restaurant.facilities;
+    this.restaurantTags = this.restaurant.tags;
   }
 
   protected readonly Number = Number;

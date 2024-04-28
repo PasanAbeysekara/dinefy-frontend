@@ -26,8 +26,9 @@ import {RestaurentResultComponent} from "../components/restaurent-result/restaur
 import {SkeletonModule} from "primeng/skeleton";
 import {PaginatorModule} from "primeng/paginator";
 import {FilterSectionComponent} from "../components/filter-section/filter-section.component";
-import {SearchService} from "../../../services/search.service";
 import {ProductService} from "../../../services/product.service";
+import {LocationService} from "../../../services/location.service";
+import {ResultRestaurantsComponent} from "../components/result-restaurants/result-restaurants.component";
 
 
 @Component({
@@ -57,7 +58,8 @@ import {ProductService} from "../../../services/product.service";
     PaginatorModule,
     FilterSectionComponent,
     NgForOf,
-    NgIf
+    NgIf,
+    ResultRestaurantsComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
@@ -67,29 +69,33 @@ import {ProductService} from "../../../services/product.service";
 export class SearchComponent implements OnInit{
 
   searchResultRestaurantList: any;
+  viewRestaurantList: any;
 
-  constructor(private productService: ProductService,private router: Router,public dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(private locationService: LocationService,private productService: ProductService,private router: Router,public dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      console.log(params);
-      console.log("params['where']",params['where']);
-      // this.searchService.getPropertyByCity(params['where']).subscribe((data: any) => {
-      //   // this.searchResultRestaurantList =  data;
-      //   // console.log("searchResultRestaurantList",this.searchResultRestaurantList);
-      //   console.log("QQQQQQQQQQQQQQQ");
-      //   console.log("data", data);
-      //   console.log("Wwwwwwwwwwwwwwwww");
-      // });
 
-     this.productService.getAllProducts().subscribe((data:any)=>{
-       console.log(params['where'], "searching began");
-       this.searchResultRestaurantList = data.filter((product: { basedLocation: { name: string; }; }) => product.basedLocation.name === params['where']);
-       console.log(params['where'], "searching end");
-       console.log("this.productsByCityList",this.searchResultRestaurantList);
-     })
+    if(localStorage.getItem("isFilterClicked")=="yes"){
+      localStorage.setItem("isFilterClicked","no");
+      // @ts-ignore
+      this.viewRestaurantList = JSON.parse(localStorage.getItem("viewRestaurantList"));
 
-    });
+    }
+    else{
+      this.route.queryParams.subscribe(params => {
+        this.productService.getAllProducts().subscribe((data:any)=>{
+          this.locationService.getLocationIdByName(params['where']).subscribe((locId:any)=>{
+            // console.log("tempLocationId",locId)
+            this.viewRestaurantList = data.filter((product: { basedLocationId: any; }) => product.basedLocationId === locId);
+            // console.log("data",data);
+            // console.log("this.viewRestaurantList",this.viewRestaurantList);
+            this.searchResultRestaurantList = this.viewRestaurantList;
+            localStorage.setItem("viewRestaurantList", JSON.stringify(this.viewRestaurantList));
+            localStorage.setItem("searchResultRestaurantList", JSON.stringify(this.searchResultRestaurantList));
+          });
+        })
+      });
+    }
   }
 
 }

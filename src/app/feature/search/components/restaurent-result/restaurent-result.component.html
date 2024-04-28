@@ -10,18 +10,32 @@
         <mat-divider class="w-full"></mat-divider>
         <div class="flex justify-between">
           <div>
-            <div class="flex space-x-2 my-0 ml-3" style="margin-bottom: 10px">
-              <p class="my-1 mt-2">{{ratingsCount}}/5</p>
-              <ngb-rating class="text-red-500 my-1 text-xl" [rate]="Number(reviewsCount)" />
-              <p class="my-1 mt-2">({{reviewsCount}})</p>
+            <div class="m-3 mb-0">
+              <p class="text-lg font-bold text-gray-700 mb-0">{{restaurantName}}</p>
+              <div class="flex space-x-2 my-0">
+                <p class="my-1 mt-2">{{ratingsCount}}/5</p>
+                <ngb-rating class="text-red-500 my-1 text-xl" [rate]="Number(reviewsCount)" />
+                <p class="my-1 mt-2">({{reviewsCount}})</p>
+              </div>
             </div>
-            <div class="ml-3">
-              <p class="text-lg font-bold text-gray-700">{{restaurantName}}</p>
+            <div class="flex">
+              <div class="flex ml-3">
+                <p class="font-bold mt-2 mx-2">Facilities</p>
+                <mat-chip-set *ngFor="let facility of restaurantFacilities">
+                  <mat-chip>{{facility.description}}</mat-chip>
+                </mat-chip-set>
+              </div>
+              <div class="flex ml-3">
+                <p class="font-bold mt-2 mx-2">Tags</p>
+                <mat-chip-set *ngFor="let tag of restaurantTags">
+                  <mat-chip>{{tag.name}}</mat-chip>
+                </mat-chip-set>
+              </div>
             </div>
           </div>
           <div class="mt-4 mr-3 flex">
             <p class="text-2xl font-mono" style="margin-bottom: 0">{{reservationPriceCurrency}} {{ reservationPrice }}</p>
-            <p class="text-gray-400 mt-2 mx-2">Approx 2 People</p>
+            <p class="text-gray-400 mt-2 mx-2">Per Person</p>
           </div>
         </div>
         <!--Paragraph-->

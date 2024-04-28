@@ -12,7 +12,7 @@ import {
   NgbTypeaheadModule
 } from "@ng-bootstrap/ng-bootstrap";
 import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
-import {JsonPipe} from "@angular/common";
+import {JsonPipe, NgForOf} from "@angular/common";
 import {Router} from "@angular/router";
 import {Observable, OperatorFunction} from "rxjs";
 import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
@@ -42,7 +42,7 @@ const states = [...new Set(["Colombo", "Dehiwala", "Mount Lavinia", "Nugegoda", 
   imports: [
     MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatCheckboxModule, ReactiveFormsModule,
     NgbTypeaheadModule, FormsModule, JsonPipe, BsDatepickerModule, NgxMaterialTimepickerModule, MatIconModule, MatButtonModule, NgbDropdownModule,
-    CustomComponent, MatFormFieldModule, MatOptionModule, MatSelectModule],
+    CustomComponent, MatFormFieldModule, MatOptionModule, MatSelectModule, NgForOf],
   templateUrl: './filter-section.component.html',
   styleUrl: './filter-section.component.css',
   providers: [NgbTypeaheadConfig],
@@ -55,7 +55,8 @@ export class FilterSectionComponent implements OnInit{
   tags = new FormControl('');
   tagList: string[] = [];
   sortOptionList: string[] = ['Sort By Price' , 'Sort By Rating' , 'Sort By Popularity'];
-
+  searchResultRestaurantList:any;
+  viewRestaurantList:any;
 
 
   hide = true;
@@ -76,9 +77,56 @@ export class FilterSectionComponent implements OnInit{
     this.router.navigate(['/search']);
   }
 
-  constructor(private router: Router,public dialog: MatDialog,config: NgbTypeaheadConfig, private facilityService: FacilityService, private tagService: TagService){
-    // customize default values of typeaheads used by this component tree
+  constructor(private router: Router, public dialog: MatDialog, config: NgbTypeaheadConfig, private facilityService: FacilityService, private tagService: TagService) {
     config.showHint = true;
+  }
+
+  applyFilters(): void {
+
+    try {
+      const searchResultJson = localStorage.getItem("searchResultRestaurantList");
+      if (searchResultJson) {
+        this.searchResultRestaurantList = JSON.parse(searchResultJson);
+        this.viewRestaurantList = [...this.searchResultRestaurantList];
+      }
+    } catch (error) {
+      console.error("Failed to parse restaurant list from localStorage", error);
+    }
+
+    const selectedFacilities = Array.isArray(this.facilities.value) ? this.facilities.value : [this.facilities.value].filter(Boolean);
+    const selectedTags = Array.isArray(this.tags.value) ? this.tags.value : [this.tags.value].filter(Boolean);
+
+    this.viewRestaurantList = this.searchResultRestaurantList.filter((item: { facilities: any[]; tags: any[]; }) => {
+      let facilitiesMatch = selectedFacilities.length === 0 || selectedFacilities.some(facility => item.facilities.map(each => each.description).includes(facility));
+      let tagsMatch = selectedTags.length === 0 || selectedTags.some(tag => item.tags.map(each => each.name).includes(tag));
+      // console.log("selectedFacilities, selectedTags", selectedFacilities, selectedTags);
+      // console.log("item.facilities",item.facilities.map(each => each.description));
+      // console.log("item.facilities.includes('Pets Welcome')", item.facilities.includes("Pets Welcome"));
+      // console.log("facilitiesMatch , tagsMatch",facilitiesMatch, tagsMatch);
+
+      console.log("selectedFacilities.length, selectedTags.length",selectedFacilities.length, selectedTags.length);
+      if(selectedFacilities.length === 0 && selectedTags.length === 0) {
+        console.log("res",true);
+        return true;
+      }
+      else if(selectedFacilities.length === 0 && selectedTags.length!==0){
+        console.log("res tagsMatch",tagsMatch)
+        return tagsMatch;
+      }
+      else if(selectedFacilities.length !== 0 && selectedTags.length===0){
+        console.log("res facilitiesMatch",facilitiesMatch);
+        return facilitiesMatch;
+      }
+      console.log("res facilitiesMatch && tagsMatch",facilitiesMatch && tagsMatch);
+      return facilitiesMatch && tagsMatch;
+    });
+
+    // Update the display result in localStorage
+    localStorage.setItem("viewRestaurantList", JSON.stringify(this.viewRestaurantList));
+    localStorage.setItem("isFilterClicked", "yes");
+    localStorage.setItem("selectedFacilities", JSON.stringify(selectedFacilities));
+    localStorage.setItem("selectedTags", JSON.stringify(selectedTags));
+    window.location.reload();
   }
 
   search = (text$: Observable<string>) =>
@@ -146,7 +194,7 @@ export class FilterSectionComponent implements OnInit{
 
   ngOnInit(): void {
     this.facilityService.getAllFacilities().subscribe((data:any)=>{
-      this.facilityList = data.data.content.map((each: { name: string; }) => each.name);
+      this.facilityList = data.data.content.map((each: { description: string; }) => each.description);
     })
     this.tagService.getAllTags().subscribe((data:any)=>{
       this.tagList = data.data.content.map((each: { name: string; }) => each.name);

@@ -11,14 +11,14 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 20px;
+  /*padding: 20px;*/
   background-color: transparent;
   transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
 }
 
 .header.scrolled {
   background-color: #f3f3f3; /* Use your preferred light gray color code */
-  padding: 10px;
+  /*padding: 10px;*/
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
