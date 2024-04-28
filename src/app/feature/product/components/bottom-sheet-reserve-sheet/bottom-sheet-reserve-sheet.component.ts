@@ -30,6 +30,7 @@ import {ProductService} from "../../../../services/product.service";
 import {SkeletonModule} from "primeng/skeleton";
 import {restaurant} from "ionicons/icons";
 import { LoginService } from "../../../../services/login.service";
+import { AuthService,UserInfo } from "../../../../services/auth.service";
 import { LoginComponent } from '../../../home/components/login/login.component';
 
 @Component({
@@ -75,9 +76,11 @@ export class BottomSheetReserveSheetComponent implements OnInit {
   public isLoading: boolean = true;
   public propCode: string = "";
   public restaurant:any;
+  userInfo: UserInfo| null = null;
 
   constructor(
     public loginService: LoginService,
+    public authService: AuthService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -154,6 +157,8 @@ export class BottomSheetReserveSheetComponent implements OnInit {
               const formattedTime = this.formatTime(this.favoriteSeason); // Formats time to 'HH:00:00'
           
               const payload = {
+                name:this.userInfo?.info.name,
+                email:this.userInfo?.info.email,
                 propId:this.restaurant.propId,
                 availableUnitId: this.availabilities.value ? this.availabilityList.indexOf(this.availabilities.value) + 1 : 1,
                 date: formattedDate,
@@ -217,6 +222,11 @@ export class BottomSheetReserveSheetComponent implements OnInit {
       this.availabilityList = data.data.availabilityUnits.map((avail: any) => avail.name);
       this.restaurant = data.data;
       this.isLoading = false;
+    });
+
+    this.authService.userInfo$.subscribe(userInfo => {
+      this.userInfo = userInfo;
+      console.log('UserInfo:', this.userInfo);
     });
   }
 }

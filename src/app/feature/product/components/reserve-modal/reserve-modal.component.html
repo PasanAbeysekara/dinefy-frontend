@@ -177,7 +177,7 @@
         <div class="labeledFormGroup">
           <div class="labledForemItems">
             <div class="labledForemItems__label">Name</div>
-            <div class="labledForemItems__Value">Thomas Shelby</div>
+            <div class="labledForemItems__Value">{{ data?.reservationPayload?.name }}</div>
           </div>
           <div class="labledForemItems">
             <div class="labledForemItems__label">Email</div>
@@ -199,11 +199,11 @@
               <textarea matInput placeholder="Ex. 100 Main St"  [(ngModel)]="specialRequests" name="specialRequests">1600 Amphitheatre Pkwy</textarea>
             </mat-form-field>
 
-            <section class="example-section">
+           <!-- <section class="example-section">
               <mat-checkbox class="example-margin" color="primary" (change)="setOptions($event, 'child')" >Children</mat-checkbox>
               <mat-checkbox style="margin-left: 16px" class="example-margin" color="primary" (change)="setOptions($event, 'veg')" >Veg
               </mat-checkbox>
-            </section>
+            </section> -->
           </div>
         </div>
 
@@ -388,19 +388,19 @@
         <div class="labeledFormGroup">
           <div class="labledForemItems">
             <div class="labledForemItems__label">Name</div>
-            <div class="labledForemItems__Value">Thomas Shelby</div>
+            <div class="labledForemItems__Value">{{ data?.reservationPayload?.name }}</div>
           </div>
           <div class="labledForemItems">
             <div class="labledForemItems__label">Email</div>
-            <div class="labledForemItems__Value">thomas&#64;shelby.com</div>
+            <div class="labledForemItems__Value">{{ data?.reservationPayload?.email }}</div>
           </div>
           <div class="labledForemItems">
             <div class="labledForemItems__label">Phone Number</div>
-            <div class="labledForemItems__Value">+0012345678</div>
+            <div class="labledForemItems__Value">{{ data?.reservationPayload?.phoneNumber }}</div>
           </div>
           <div class="labledForemItems">
             <div class="labledForemItems__label">Address</div>
-            <div class="labledForemItems__Value">Small Heath, Birmingham, England</div>
+            <div class="labledForemItems__Value">{{ data?.reservationPayload?.address }}</div>
           </div>
         </div>
         <div class="row">
@@ -409,11 +409,11 @@
               <mat-label>Special Requests</mat-label>
               <textarea matInput placeholder="Ex. 100 Main St" [(ngModel)]="specialRequests" name="specialRequests">1600 Amphitheatre Pkwy</textarea>
             </mat-form-field>
-            <section class="example-section">
+            <!--<section class="example-section">
               <mat-checkbox color="primary" class="example-margin" (change)="setOptions($event, 'child')" >Children</mat-checkbox>
               <mat-checkbox style="margin-left: 16px" color="primary" class="example-margin" (change)="setOptions($event, 'veg')" >Veg
               </mat-checkbox>
-            </section>
+            </section>-->
           </div>
         </div>
         <div class="erg-btn--list--between">
