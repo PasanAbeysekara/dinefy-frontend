@@ -1,7 +1,6 @@
 declare var google: any;
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
-import { Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 
 export interface UserInfo {
@@ -43,7 +42,7 @@ export class GoogleApiService {
   }
 
   async initializeGoogleAuth(): Promise<void> {
-
+       
       const oAuthConfig: AuthConfig = {
       // Url of the Identity Provider
       issuer: 'https://accounts.google.com',
@@ -66,7 +65,6 @@ export class GoogleApiService {
       //showDebugInformation: true,
 
       };
-
       // confiure oauth2 service
       this.oAuthService.configure(oAuthConfig);
 
@@ -111,7 +109,6 @@ export class GoogleApiService {
         // redirect to google for login
         await this.initializeGoogleAuth()
         this.oAuthService.initLoginFlow();
-
   }
 
   isLoggedIn(): boolean {

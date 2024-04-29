@@ -10,14 +10,17 @@ import {OrderSummaryComponent} from "../components/order-summary/order-summary.c
 import {HttpClient} from "@angular/common/http";
 import {MenuService} from "../../../services/menu.service";
 import {PropChoicesService} from "../../../services/prop-choices.service";
+import {OrderService} from "../../../services/order.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../../services/product.service";
 import {tap} from "rxjs/operators";
 import {NgForOf, NgIf} from "@angular/common";
 import {SkeletonModule} from "primeng/skeleton";
+import { Order, OrderChoice } from "../../../models/order";
+import { ReservationService } from '../../../services/reservation.service';
 
 export interface CartItem {
-  id: number;
+  propChoiceId: any;
   name: string;
   amount: number;
   amountCurrency: string;
@@ -58,6 +61,8 @@ export class CheckoutComponent implements OnInit{
   totalItems: number = 0;
   totalPrice: number = 0;
   amountCurrency:string = "";
+  reserveCode: string = "";
+  reservationId: any;
 
   addToCart(item: any): void {
     const existingItem = this.cart.find(cartItem => cartItem.name === item.name);
@@ -90,7 +95,16 @@ export class CheckoutComponent implements OnInit{
   updateCartSummary(): void {
     this.totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
     this.totalPrice = this.cart.reduce((sum, item) => sum + (item.amount * item.quantity), 0);
-    sessionStorage.setItem('cartItems', JSON.stringify(this.cart));
+    
+    const cartData = {
+      cart: this.cart,
+      totalItems: this.totalItems,
+      totalPrice: this.totalPrice,
+      amountCurrency: this.amountCurrency,
+      propId: this.propId
+    };
+  
+    sessionStorage.setItem('cartData', JSON.stringify(cartData));
   }
 
   removeFromCart(item: any): void {
@@ -112,7 +126,7 @@ export class CheckoutComponent implements OnInit{
     return item ? item.quantity > 0 : false;
   }
 
-  constructor(private menuService:MenuService,private propChoicesService:PropChoicesService,private route: ActivatedRoute, private productService: ProductService,private router: Router) {
+  constructor(private menuService:MenuService,private propChoicesService:PropChoicesService,private route: ActivatedRoute, private productService: ProductService,private reservationService: ReservationService, private orderService: OrderService, private router: Router) {
   }
 
   private offcanvasService = inject(NgbOffcanvas);
@@ -122,16 +136,26 @@ export class CheckoutComponent implements OnInit{
 
   ngOnInit(): void {
 
-    const cartData = sessionStorage.getItem('cartItems');
+    const cartData = sessionStorage.getItem('cartData');
     if (cartData) {
-      this.cart = JSON.parse(cartData);
-      this.totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+      const { cart, totalItems, totalPrice, amountCurrency, propId } = JSON.parse(cartData);
+      this.cart = cart;
+      this.totalItems = totalItems;
+      this.totalPrice = totalPrice;
+      this.amountCurrency = amountCurrency;
+      this.propId = propId;
     }
 
     this.route.params.subscribe(params => {
       this.propCode = params['propCode'];
+      this.reserveCode = params['reserveCode'];
       this.isLoading++;
     });
+
+    this.reservationService.getProductByCode(this.reserveCode).subscribe((data:any)=>{
+      console.log("reserve:"+JSON.stringify(data));
+      this.reservationId = data.data.reservationId;
+    })
 
     this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
       this.property = data.data;
@@ -154,7 +178,43 @@ export class CheckoutComponent implements OnInit{
 
   }
 
-  redirectPayment() {
-    this.router.navigate([`/`]);
-  }
+  saveToDatabase() {
+
+    this.orderService.getMaxOrderIds().subscribe((maxIds: any) => {
+      const maxOrderId = maxIds.orderId ?? 0;
+      var maxOrderChoiceSubId = maxIds.orderChoiceSubId ?? 0;
+
+    const order: Order = {
+      orderId: {
+        reservationId: this.reservationId, 
+        orderId: maxOrderId+1 
+      },
+      totalAmount: this.totalPrice,
+      amountCurrency: this.amountCurrency,
+      orderChoices: [] 
+    };
+  
+    this.cart.forEach(item => {
+      const orderChoice: OrderChoice = {
+        orderChoiceId: {
+          reservationId: this.reservationId, 
+          propId: this.propId, 
+          orderId: maxOrderId+1,
+          choiceId: item.propChoiceId.choiceId, 
+          orderChoiceSubId: maxOrderChoiceSubId+1
+        },
+        quantity: item.quantity,
+        subAmount: item.amount * item.quantity,
+        amountCurrency: item.amountCurrency,
+        size: ""
+      };
+      order.orderChoices.push(orderChoice);
+      maxOrderChoiceSubId++;
+    });
+  
+    this.orderService.saveOrder(order);
+  });
+  
+}
+
 }
