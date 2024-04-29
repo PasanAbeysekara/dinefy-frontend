@@ -33,15 +33,14 @@ export class ProductImagesComponent implements OnInit {
 
   fetchProductData() {
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
-      this.restaurantDetails = data.data;
-      console.log(this.restaurantDetails.propertyMediaWrapper.coverImages[1].mediaUrl);
+      this.restaurantDetails = data;
       this.images['diga'] = [];
       this.images['usa'] = [];
-      this.restaurantDetails.propertyMediaWrapper.coverImages.forEach((value: any) => {
-        if (value.mediaType == 'diga') {
+      this.restaurantDetails.propertyMedia.filter((each: { category: string; }) => each.category=="cover").forEach((value: any) => {
+        if (value.type == 'diga') {
           this.images['diga'].push(value.mediaUrl);
         }
-        if (value.mediaType == 'usa') {
+        if (value.type == 'usa') {
           this.images['usa'].push(value.mediaUrl);
         }
       });

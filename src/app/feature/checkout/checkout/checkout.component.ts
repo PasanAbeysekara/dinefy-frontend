@@ -158,7 +158,7 @@ export class CheckoutComponent implements OnInit{
     })
 
     this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
-      this.property = data.data;
+      this.property = data;
       this.propId = this.property.propId;
     })).subscribe(()=>{
       this.amountCurrency = this.property.amountCurrency;

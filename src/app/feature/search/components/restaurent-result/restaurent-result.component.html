@@ -1,37 +1,72 @@
-<div class="mb-3">
-  <mat-card style="border: 1px solid #ccc;" class="cursor-pointer w-[1250px]" >
+<div class="mb-3" >
+  <mat-card style="border: 1px solid #ccc;" class="cursor-pointer w-[1250px]">
 
     <div class="flex">
-
-      <div>
-        <img src="https://cf.bstatic.com/images/hotel/max1024x768/170/170102675.jpg" class="my-3 pl-2 rounded-b-md" alt="">
-      </div>
+      <!--      <div>-->
+      <!--        <img src="https://d3plttq4n63nzt.cloudfront.net/Property-col-image-5.png" class="h-[200px] w-[400px] rounded-b-md" alt="">-->
+      <!--      </div>-->
 
       <div>
         <mat-divider class="w-full"></mat-divider>
         <div class="flex justify-between">
           <div>
-            <div class="flex space-x-2 my-0 ml-3" style="margin-bottom: 10px">
-              <p class="my-1 mt-2">4/5</p>
-              <ngb-rating class="text-red-500 my-1 text-xl" [rate]="4" />
-              <p class="my-1 mt-2">(396)</p>
+            <div class="m-3 mb-0">
+              <p class="text-lg font-bold text-gray-700 mb-0">{{restaurantName}}</p>
+              <div class="flex space-x-2 my-0">
+                <p class="my-1 mt-2">{{ratingsCount}}/5</p>
+                <ngb-rating class="text-red-500 my-1 text-xl" [rate]="Number(reviewsCount)" />
+                <p class="my-1 mt-2">({{reviewsCount}})</p>
+              </div>
             </div>
-            <div class="ml-3">
-              <p class="text-lg font-bold text-gray-700">A Minute by Tuk Tuk Colombo</p>
+            <div class="flex">
+              <div class="flex ml-3">
+                <p class="font-bold mt-2 mx-2">Facilities</p>
+                <mat-chip-set *ngFor="let facility of restaurantFacilities">
+                  <mat-chip>{{facility.description}}</mat-chip>
+                </mat-chip-set>
+              </div>
+              <div class="flex ml-3">
+                <p class="font-bold mt-2 mx-2">Tags</p>
+                <mat-chip-set *ngFor="let tag of restaurantTags">
+                  <mat-chip>{{tag.name}}</mat-chip>
+                </mat-chip-set>
+              </div>
             </div>
           </div>
-          <div class="mt-4 mr-3 text-gray-400">
-            <p>Approx 2 People</p>
+          <div class="mt-4 mr-3 flex">
+            <p class="text-2xl font-mono" style="margin-bottom: 0">{{reservationPriceCurrency}} {{ reservationPrice }}</p>
+            <p class="text-gray-400 mt-2 mx-2">Per Person</p>
           </div>
         </div>
         <!--Paragraph-->
         <mat-divider class="w-full"></mat-divider>
         <div class="my-2 text-gray-500" style="margin-left:10px;margin-right: 10px ">
           <p>
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)
+            {{restaurantDescription}}
           </p>
         </div>
       </div>
+
     </div>
   </mat-card>
 </div>
+
+<ng-template #loadingTemplate>
+  <div class="card w-[1250px]">
+    <div class="border-round border-1 surface-border p-4 surface-card">
+      <div class="flex mb-3">
+        <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+        <div>
+          <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton height=".5rem"></p-skeleton>
+        </div>
+      </div>
+      <p-skeleton width="100%" height="150px"></p-skeleton>
+      <div class="flex justify-content-between mt-3">
+        <p-skeleton width="4rem" height="2rem"></p-skeleton>
+        <p-skeleton width="4rem" height="2rem"></p-skeleton>
+      </div>
+    </div>
+  </div>
+</ng-template>

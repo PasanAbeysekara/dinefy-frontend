@@ -8,23 +8,24 @@
   <div class="flex  2xl:w-[1300px]">
     <!--Left-->
     <div class="md:w-[720px] md:mt-3 flex flex-col justify-center mx-auto">
-      <div class="hidden md:block">
-        <mat-tab-group>
-          <mat-tab label="Overview">  </mat-tab>
-          <mat-tab label="Facilities">  </mat-tab>
-          <mat-tab label="Menu">  </mat-tab>
-          <mat-tab label="Map">  </mat-tab>
-          <mat-tab label="Media">  </mat-tab>
-          <mat-tab label="Reviews">  </mat-tab>
-        </mat-tab-group>
+      <div class="hidden md:block my-3">
+        <div class="tab-container">
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('overview')">Overview</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('facilities')">Facilities</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('menu')">Menu</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('map')">Map</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('media')">Media</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('reviews')">Reviews</button>
+        </div>
       </div>
-      <!--    <mat-divider></mat-divider>-->
-      <app-product-overview></app-product-overview>
-      <app-product-facilities></app-product-facilities>
-      <app-product-menu></app-product-menu>
-      <app-product-map></app-product-map>
-      <app-product-media></app-product-media>
-      <app-product-review></app-product-review>
+      <mat-divider></mat-divider>
+
+      <app-product-overview id="overview"></app-product-overview>
+      <app-product-facilities id="facilities"></app-product-facilities>
+      <app-product-menu id="menu"></app-product-menu>
+      <app-product-map id="map"></app-product-map>
+      <app-product-media id="media"></app-product-media>
+      <app-product-review id="reviews"></app-product-review>
     </div>
 
     <!--Right-->

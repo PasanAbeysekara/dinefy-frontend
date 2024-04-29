@@ -1,5 +1,7 @@
-<div class="w-screen">
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+<div class="min-h-screen flex flex-col">
+  <div class="flex-grow">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer class="mt-auto"></app-footer>
 </div>

@@ -9,10 +9,10 @@ export const routes: Routes = [
 
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
-  {path:'search',component:SearchComponent},
   {path:'product/:propCode',component:ProductComponent},
   {path:'product/:propCode/checkout/:reserveCode',component:CheckoutComponent},
   // {path:'product/rest-code-1/checkout',component:CheckoutComponent},
-  {path:'userprofile',component:UserprofileComponent}
+  {path:'userprofile',component:UserprofileComponent},
+  {path:'search',component:SearchComponent}
 
 ];

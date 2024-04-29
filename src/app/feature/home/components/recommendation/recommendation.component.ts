@@ -127,7 +127,6 @@ export class RecommendationComponent implements OnInit{
           restaurantName: prop.name,
           reservationPrice: prop.amount.toString(),
           reservationPriceCurrency: prop.amountCurrency,
-          reservePeopleCount: '2',
           reviewsCount: prop.totalRating.toString(),
           ratingsCount: prop.avgRating,
           propCode: prop.code

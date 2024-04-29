@@ -1,32 +1,8 @@
-<div class="flex justify-between space-x-6 w-[300px]">
-    <div matRipple class="iconBlock" routerLink="/search">
-      <div class="iconBlock__icon">
-        <mat-icon class="material-icons-outlined">cake</mat-icon>
-      </div>
-      <div class="iconBlock__label">Birthday</div>
+<div class="flex flex-row justify-between space-x-6">
+  <div *ngFor="let tag of systemTags; let i = index" class="iconBlock cursor-pointer" [style.animation-delay]="i * 0.7 + 's'" (click)="redirectToSearchResults(tag)">
+    <div class="">
+      <mat-icon class="material-icons-outlined">{{tag.icon}}</mat-icon>
     </div>
-    <div matRipple class="iconBlock " routerLink="/search">
-      <div class="iconBlock__icon">
-        <mat-icon class="material-icons-outlined">meeting_room</mat-icon>
-      </div>
-      <div class="iconBlock__label">Meeting</div>
-    </div>
-    <div matRipple class="iconBlock " routerLink="/search">
-      <div class="iconBlock__icon">
-        <mat-icon class="material-icons-outlined">local_bar</mat-icon>
-      </div>
-      <div class="iconBlock__label">Drink</div>
-    </div>
-    <div matRipple class="iconBlock " routerLink="/search">
-      <div class="iconBlock__icon">
-        <mat-icon class="material-icons-outlined">favorite_border</mat-icon>
-      </div>
-      <div class="iconBlock__label">Date</div>
-    </div>
-    <div matRipple class="iconBlock " routerLink="/search">
-      <div class="iconBlock__icon">
-        <mat-icon class="material-icons-outlined">restaurant</mat-icon>
-      </div>
-      <div class="iconBlock__label">Dining</div>
-    </div>
+    <div class="">{{tag.name}}</div>
   </div>
+</div>

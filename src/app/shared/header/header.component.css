@@ -1,9 +1,9 @@
-/* app.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 .container {
   position: relative;
   padding-top: 70px; /* Adjust based on the height of your sticky header */
-
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
 .header {
@@ -11,48 +11,44 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 20px;
   background-color: transparent;
   transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
-}
-
-.header.scrolled {
-  background-color: #f3f3f3; /* Use your preferred light gray color code */
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
 .logo {
-  float:left;
-  padding-left:20px;
+  float: left;
+  padding-left: 20px;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
-.btn-container{
-  float:right;
+.btn-container {
+  float: right;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
 .btn {
-  background-color: #3490dc; /* Adjust based on your button color */
+  background-color: #3490dc;
   color: #ffffff;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
 .content {
   margin-top: 90px; /* Adjust based on the height of your sticky header */
-}
-
-.btn-container{
-display: flex; justify-content: flex-end
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
 .user-details {
   display: flex;
   flex-direction: column; /* Stack the elements vertically */
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }
 
 .list-item-content {
   display: flex;
   align-items: center;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
 }

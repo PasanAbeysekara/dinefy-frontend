@@ -1,7 +1,7 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ProductComponent} from "../../product/product/product.component";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SearchWidgetComponent} from "../../../shared/search-widget/search-widget.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
@@ -17,13 +17,18 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {JsonPipe} from '@angular/common';
+import {JsonPipe, NgForOf, NgIf} from '@angular/common';
 import {MatSliderModule} from "@angular/material/slider";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {RestaurentResultComponent} from "../components/restaurent-result/restaurent-result.component";
 import {SkeletonModule} from "primeng/skeleton";
+import {PaginatorModule} from "primeng/paginator";
+import {FilterSectionComponent} from "../components/filter-section/filter-section.component";
+import {ProductService} from "../../../services/product.service";
+import {LocationService} from "../../../services/location.service";
+import {ResultRestaurantsComponent} from "../components/result-restaurants/result-restaurants.component";
 
 
 @Component({
@@ -49,90 +54,57 @@ import {SkeletonModule} from "primeng/skeleton";
     MatCardModule,
     RestaurentResultComponent,
     SkeletonModule,
-    RouterLink
+    RouterLink,
+    PaginatorModule,
+    FilterSectionComponent,
+    NgForOf,
+    NgIf,
+    ResultRestaurantsComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
 
-export class SearchComponent {
 
-  hide = true;
-  constructor(private router: Router,public dialog: MatDialog) { }
+export class SearchComponent implements OnInit{
 
-  openDialogFilters(): void {
-    this.dialog.open(DialogMoreFilter, {
-      width: '450px',
-    });
+  searchResultRestaurantList: any;
+  viewRestaurantList: any;
+
+  constructor(private locationService: LocationService,private productService: ProductService,private router: Router,public dialog: MatDialog, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+
+    if(localStorage.getItem("isFilterClicked")=="yes"){
+      localStorage.setItem("isFilterClicked","no");
+      // @ts-ignore
+      this.viewRestaurantList = JSON.parse(localStorage.getItem("viewRestaurantList"));
+
+    }
+    else{
+      this.route.queryParams.subscribe(params => {
+        this.productService.getAllProducts().subscribe((data:any)=>{
+          if(params['where']==="Anywhere"){
+            localStorage.setItem("viewRestaurantList", JSON.stringify(data));
+            localStorage.setItem("searchResultRestaurantList", JSON.stringify(data));
+            this.viewRestaurantList = data;
+            this.searchResultRestaurantList = data;
+            console.log(data);
+          }
+          else{
+            this.locationService.getLocationIdByName(params['where']).subscribe((locId:any)=>{
+              // console.log("tempLocationId",locId)
+              this.viewRestaurantList = data.filter((product: { basedLocationId: any; }) => product.basedLocationId === locId);
+              // console.log("data",data);
+              // console.log("this.viewRestaurantList",this.viewRestaurantList);
+              this.searchResultRestaurantList = this.viewRestaurantList;
+              localStorage.setItem("viewRestaurantList", JSON.stringify(this.viewRestaurantList));
+              localStorage.setItem("searchResultRestaurantList", JSON.stringify(this.searchResultRestaurantList));
+            });
+          }
+        })
+      });
+    }
   }
-
-  openDialogPrice(): void {
-    this.dialog.open(DialogPrice, {
-      width: '450px',
-    });
-  }
-
-
-  redirectToRestaurant(){
-    const linkToRedirect = '/product/rest-code-1'; // Replace with the actual link
-    this.router.navigateByUrl(linkToRedirect);
-  };
-
-  facilities = new FormControl('');
-  facilityList: string[] = ['Smoking', 'Vehicle Parking2', 'Vehicle Parking', 'Booze'];
-  tags = new FormControl('');
-  tagList: string[] = ['Sea View', 'Rooftop','Music'];
-  sortOptionList: string[] = ['Sort By Price' , 'Sort By Rating' , 'Sort By Popularity'];
 
 }
-@Component({
-  selector: 'dialog-more-filter',
-  templateUrl: 'dialog-more-filter.html',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatCheckboxModule, FormsModule,ReactiveFormsModule, JsonPipe],
-})
-export class DialogMoreFilter {
-  filters = this._formBuilder.group({
-    filteroption1: false,
-    filteroption2: false,
-    filteroption3: false,
-    filteroption4: false,
-    filteroption5: false,
-    filteroption6: false,
-  });
-
-  constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
-
-  clearFilters() {
-    // Reset all checkboxes to their default state
-    this.filters.reset();
-  }
-}
-
-@Component({
-  selector: 'dialog-price',
-  templateUrl: 'dialog-price.html',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatCheckboxModule, FormsModule,ReactiveFormsModule, JsonPipe,
-    MatFormFieldModule,
-    MatSliderModule,MatInputModule, MatIconModule],
-})
-export class DialogPrice {
-  hide = true;
-  sliderValue: number = 0;
-  minValue: number = 2000;
-  maxValue: number = 4000;
-
-  updateSlider() {
-    // Ensure the min and max values are within bounds
-    this.minValue = Math.min(this.minValue, this.maxValue);
-    this.maxValue = Math.max(this.minValue, this.maxValue);
-
-    // Map the min and max values to the slider range
-    this.sliderValue = this.minValue;
-  }
-
-  constructor(public dialogRef: MatDialogRef<DialogMoreFilter>,private _formBuilder: FormBuilder) {}
-
-}
-

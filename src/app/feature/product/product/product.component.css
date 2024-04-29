@@ -34,3 +34,46 @@
   padding: 20px;
   color: #333;
 }
+
+/* Styles for the tab container */
+.tab-container {
+  display: flex;
+}
+
+/* Styles for the tab */
+.tab {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  padding: 10px 15px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Underline effect */
+.tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.tab:hover::after {
+  background-color: #8a2be2; /* Purple color */
+}
+
+/* Active tab */
+.tab.active {
+  color: #8a2be2; /* Purple color */
+}
+
+/* Active tab underline */
+.tab.active::after {
+  background-color: #8a2be2; /* Purple color */
+}

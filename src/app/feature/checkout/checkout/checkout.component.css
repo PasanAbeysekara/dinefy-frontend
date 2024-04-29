@@ -1,9 +1,50 @@
 .special-span{
-  border-color: #718096; /* Replace with the desired color */
+  border-color: #718096;
   border-width: 1px;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.55rem; /* You can adjust the value as needed */
-  font-family: 'Courier New', monospace; /* Use your preferred monospace font */
+  border-radius: 0.55rem;
+  font-family: 'Courier New', monospace;
   margin-right: 2px;
 }
 
+/* Main Menu Tab */
+.mat-mdc-tab-labels .mat-mdc-tab:nth-child(1) .mdc-tab__text-label {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Deserts Tab */
+.mat-mdc-tab-labels .mat-mdc-tab:nth-child(2) .mdc-tab__text-label {
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Drinks Tab */
+.mat-mdc-tab-labels .mat-mdc-tab:nth-child(3) .mdc-tab__text-label {
+  background-color: #d0d0d0;
+  padding: 5px 10px;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Starters Tab */
+.mat-mdc-tab-body-content:nth-child(1) {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Mains Tab */
+.mat-mdc-tab-body-content:nth-child(2) {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Deserts Tab (Nested) */
+.mat-mdc-tab-body-content:nth-child(3) {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+}

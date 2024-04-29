@@ -1,0 +1,131 @@
+<!--<div class=" bg-white rounded-[10px] xl:flex w-[330px] md:w-[600px] xl:w-[1200px] h-[340px] md:h-[160px] xl:h-[80px] ml-2">-->
+<!--  <div class="md:flex">-->
+<!--    &lt;!&ndash;  what ? &ndash;&gt;-->
+<!--    <div class="ml-4">-->
+<!--      <app-custom></app-custom>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;  Where ? &ndash;&gt;-->
+<!--    <input id="where" type="text" placeholder="Where ? (Anywhere)" class="form-control mt-3 ml-4 md:ml-2 py-[12px] xl:my-4 w-[300px]" [(ngModel)]="model" [ngbTypeahead]="search"  />-->
+<!--  </div>-->
+<!--  <div class="md:flex">-->
+<!--    &lt;!&ndash;  Date ? &ndash;&gt;-->
+<!--    <input type="text"-->
+<!--           placeholder="When ? (Today)"-->
+<!--           class="form-control mt-3  ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]"-->
+<!--           bsDatepicker-->
+<!--           [bsConfig]="{ isAnimated: true }">-->
+
+<!--    &lt;!&ndash;  Time ? &ndash;&gt;-->
+<!--    <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]" [ngxTimepicker]="picker">-->
+<!--    <ngx-material-timepicker #picker></ngx-material-timepicker>-->
+
+<!--    &lt;!&ndash;  People ? &ndash;&gt;-->
+<!--    <div ngbDropdown class="my-3 mr-3">-->
+<!--      <button type="button" class="form-control dropdown-toggle flex h-12 w-[300px] md:w-[136px] ml-4 text-gray-600" id="dropdownBasic1" ngbDropdownToggle>-->
+<!--        <mat-icon class="mt-1">people</mat-icon>-->
+<!--        <span class="mt-1 ml-3">People</span>-->
+<!--      </button>-->
+<!--      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
+
+<!--        <div class="flex justify-between">-->
+<!--          <div class="mt-3 mx-4">-->
+<!--            <p>Adults</p>-->
+<!--          </div>-->
+<!--          <div class="flex justify-between h-10 mr-4">-->
+<!--            <button mat-icon-button (click)="decrementAdults()" class="mt-1">-->
+<!--              <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">remove</mat-icon>-->
+<!--            </button>-->
+<!--            <input type="text" [(ngModel)]="valueAdults" class="w-3 h-5 mt-3" readonly/>-->
+<!--            <button mat-icon-button (click)="incrementAdults()" class="mt-1">-->
+<!--              <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="flex justify-between">-->
+<!--          <div class="mt-3 mx-4">-->
+<!--            <p>Children</p>-->
+<!--          </div>-->
+<!--          <div class="flex justify-between h-10 mr-4">-->
+<!--            <button mat-icon-button (click)="decrementChildren()">-->
+<!--              <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%">remove</mat-icon>-->
+<!--            </button>-->
+<!--            <input type="text" [(ngModel)]="valueChildren" class="w-3 h-5 mt-3" readonly/>-->
+<!--            <button mat-icon-button (click)="incrementChildren()">-->
+<!--              <mat-icon style="box-shadow: 0 2px 4px rgba(0, 0, 0, .5); border-radius: 50%;">add</mat-icon>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="flex justify-center space-x-4 ml-4">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Facilities</mat-label>
+      <mat-select [formControl]="facilities" multiple>
+        <mat-select-trigger>
+          {{facilities.value?.[0] || ''}}
+          @if ((facilities.value?.length || 0) > 1) {
+            <span class="example-additional-selection">
+          (+{{(facilities.value?.length || 0) - 1}} {{facilities.value?.length === 2 ? 'other' : 'others'}})
+        </span>
+          }
+        </mat-select-trigger>
+        @for (faclity of facilityList; track faclity) {
+          <mat-option [value]="faclity">{{faclity}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Tags</mat-label>
+      <mat-select [formControl]="tags" multiple>
+        <mat-select-trigger>
+          {{tags.value?.[0] || ''}}
+          @if ((tags.value?.length || 0) > 1) {
+            <span class="example-additional-selection">
+          (+{{(tags.value?.length || 0) - 1}} {{tags.value?.length === 2 ? 'other' : 'others'}})
+        </span>
+          }
+        </mat-select-trigger>
+        @for (tag of tagList; track tag) {
+          <mat-option [value]="tag">{{tag}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Sort by</mat-label>
+      <mat-select [formControl]="sortBy">
+        @for (sortOption of sortOptionList; track sortOption) {
+          <mat-option [value]="sortOption">{{sortOption}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-stroked-button (click)="openDialogPrice()" class="w-52" style="height: 55px;border-color: lightslategray;color: lightslategray">
+      <div class="flex justify-between space-x-28 mt-2">
+        <p class="mt-1">Price</p>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </div>
+    </button>
+  </div>
+
+  <div>
+    <button mat-raised-button class="w-52" style="height: 55px;border-color: lightgreen;color: green" (click)="applyFilters()">Apply</button>
+  </div>
+
+</div>
+

@@ -155,7 +155,7 @@ export class BottomSheetReserveSheetComponent implements OnInit {
   openReserveWindow():void{
     const formattedDate = this.formatDate(this.selectedDate); // Formats date to 'YYYY-MM-DD'
               const formattedTime = this.formatTime(this.favoriteSeason); // Formats time to 'HH:00:00'
-          
+
               const payload = {
                 name:this.userInfo?.info.name,
                 email:this.userInfo?.info.email,
@@ -168,21 +168,21 @@ export class BottomSheetReserveSheetComponent implements OnInit {
                 option1: this.selectedSeatType,
                 reserveCode:generateReserveCode(this.restaurant.propId,"2024")
             }
-      
+
             const restuData = this.restaurant;
-      
+
             // this.httpClient.post('http://localhost:8081/res/reservations', payload).subscribe({
             //   next: (response) => console.log('Reservation successful', response),
             //   error: (error) => console.error('Error making reservation', error)
             // });
-        
+
             const isSmallScreen = window.innerWidth < 600;
             this.dialogRef = this.dialog.open(ReserveModalComponent, {
               width: isSmallScreen ? '100%' : '60%',
               panelClass: ['modal--medium', 'modal--stepper'],
               data: {restaurantDatas:restuData,reservationPayload: payload}
             });
-        
+
             this.dialogRef.afterClosed().subscribe(result => {
               console.log('The dialog was closed');
             });
@@ -203,14 +203,14 @@ export class BottomSheetReserveSheetComponent implements OnInit {
               this.openReserveWindow();
             };
         });
-    
+
       }
     else if(this.loginService.getIsLoggedIn())
       {
         this.openReserveWindow();
       };
 
-   
+
   }
 
   ngOnInit(): void {
@@ -219,8 +219,8 @@ export class BottomSheetReserveSheetComponent implements OnInit {
     });
 
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
-      this.availabilityList = data.data.availabilityUnits.map((avail: any) => avail.name);
-      this.restaurant = data.data;
+      this.availabilityList = data.availabilityUnits.map((avail: any) => avail.name);
+      this.restaurant = data;
       this.isLoading = false;
     });
 

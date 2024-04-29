@@ -1,11 +1,11 @@
-<div class="section w-screen">
+<div class="section w-screen conti">
   <div class="flex justify-center">
     <div class="flex justify-between w-[340px] md:w-[630px] lg:w-[800px] 2xl:w-[1200px]">
       <div>
         <p class="text-lg font-medium text-gray-700">Recommended Places</p>
         <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
       </div>
-      <button mat-button color="primary">See All</button>
+<!--      <button mat-button color="primary">See All</button>-->
     </div>
   </div>
 
@@ -15,8 +15,9 @@
 
       <div class="cards-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 md:gap-10 ml-9 md:ml-10 2xl:-ml-5">
         <app-recommendation-card *ngFor="let card of recommendationCards" [cardImage]="card.cardImage" [cardAvatar]="card.cardAvatar"
-                                 [restaurantName]="card.restaurantName" [reservationPrice]="card.reservationPrice" [reservePeopleCount]="card.reservePeopleCount"
-                                 [reviewsCount]="card.reviewsCount" [reservationPriceCurrency]="card.reservationPriceCurrency" [ratingsCount]="card.ratingsCount" [propCode]="card.propCode" class="w-[300px]">
+                                 [restaurantName]="card.restaurantName" [reservationPrice]="card.reservationPrice"
+                                 [reviewsCount]="card.reviewsCount" [reservationPriceCurrency]="card.reservationPriceCurrency"
+                                 [ratingsCount]="card.ratingsCount" [propCode]="card.propCode" class="w-[300px]">
         </app-recommendation-card>
       </div>
     </ng-container>
