@@ -39,14 +39,14 @@ export class OrderSummaryComponent implements OnInit{
     });
 
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
-      this.restaurantName = data.data.name;
-      this.reserveState = data.data.basedLocation.state.name;
-      this.reserveCity = data.data.basedLocation.name;
+      this.restaurantName = data.name;
+      this.reserveState = data.basedLocation.state.name;
+      this.reserveCity = data.basedLocation.name;
       this.isLoading += 1;
     });
 
     this.reservationService.getProductByCode(this.reserveCode).subscribe((data:any)=>{
-      console.log(data);
+      console.log("AAAAAAAAAAAAAAAAA",data);
       this.headCount = data.data.headCount;
       this.reserveDate = data.data.date;
       this.reserveTime = data.data.time;

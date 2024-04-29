@@ -11,7 +11,7 @@
     <mat-hint class="text-gray-500 mt-2">Date & Time</mat-hint>
     <mat-form-field class="w-80 mt-2">
       <mat-label>Select Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)">
+      <input id="reserveDate" matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="onDateChange($event)">
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

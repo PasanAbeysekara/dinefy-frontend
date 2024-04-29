@@ -1,5 +1,5 @@
 import {Router} from "@angular/router";
-import { Component } from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ViewportRuler} from "@angular/cdk/scrolling";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
@@ -44,12 +44,24 @@ import {ErgMenuComponent} from "../components/erg-menu/erg-menu.component";
 export class ProductComponent {
 
   dialogRef: MatDialogRef<any> | null = null; // Initialize as null
-  constructor(private router: Router,private dialog: MatDialog,private viewportRuler: ViewportRuler) { }
-
+  constructor(private elementRef: ElementRef,private router: Router,private dialog: MatDialog,private viewportRuler: ViewportRuler) { }
 
   redirectToCheckout() {
     const linkToRedirect = '/product/rest-code-1/checkout'; // Replace with the actual link
     this.router.navigateByUrl(linkToRedirect);
+  }
+
+  scrollByPixels(pixels:number){
+    window.scrollBy(0,pixels);
+  }
+
+  scrollToSection(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const yOffset = -100; // Adjust this value as needed
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
   }
 
   reserve(): void {
@@ -67,4 +79,5 @@ export class ProductComponent {
     });
   }
 
+  protected readonly window = window;
 }

@@ -48,15 +48,9 @@ export class MenuComponent implements OnInit{
     this.productService.getProductByCode(this.propCode).pipe(tap((data:any)=>{
       this.property = data;
       this.propId = data.propId;
-
-      console.log("Eka")
-      console.log(data);
       this.propChoicesService.getPropChoicesByProperty(this.propId).pipe(tap((propChoiceData:any)=>{
         this.propChoicesList = propChoiceData;
-      })).subscribe(()=>{
-        console.log((this.propChoicesList));
-      })
-      console.log("Deka");
+      })).subscribe(()=>{})
       this.isLoading = false;
     })).subscribe(()=>{
     });
@@ -67,11 +61,6 @@ export class MenuComponent implements OnInit{
       this.isLoading = false;
       console.log(this.menus);
     });
-
-
-
-    // this.propChoicesService.getPropChoicesByProperty()
-
 
   }
 }

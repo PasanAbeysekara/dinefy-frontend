@@ -22,7 +22,7 @@
     >
 
     <!--  Time ? -->
-    <input placeholder="At what time ? (Anytime)" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]" [ngxTimepicker]="picker" [(ngModel)]="timeInputModel">
+    <input placeholder="At what time ?" class="form-control mt-3 ml-4 py-[12px] md:my-3 xl:my-4 w-[300px] md:w-[200px]" [ngxTimepicker]="picker" [(ngModel)]="timeInputModel">
     <ngx-material-timepicker #picker></ngx-material-timepicker>
 
     <!--  People ? -->
@@ -62,13 +62,9 @@
             </button>
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
-
-
 </div>
 
 <button (click)="redirectToSearchResults()" class="margin--bottom-m my-3" color="primary" mat-flat-button [style.background-color]="'rgb(117,180,119)'">
