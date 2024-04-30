@@ -1,4 +1,4 @@
-/* your-component.component.scss */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :host {
   height: 70vh;
@@ -11,22 +11,36 @@
   url('/assets/home-background.jpg') center/cover no-repeat;
 }
 
-/* Optional: Add some content to see the effect */
 .content {
   margin-top: 100px;
   text-align: center;
   padding: 20px;
   color: #333;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* In your component's styles file */
+.animated-heading {
+  animation: fadeInScale 2s ease-in-out forwards;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .custom-toggle {
-  background-color: #4CAF50; /* Green background color */
-  color: #ffffff; /* White text color */
-  border-radius: 20px; /* Border radius */
-  margin: 5px; /* Optional: Add margin for spacing */
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-radius: 20px;
+  margin: 5px;
 }
 
 .custom-toggle.mat-button-toggle-checked {
-  background-color: #4CAF50; /* Green background color when checked */
+  background-color: #4CAF50;
 }
