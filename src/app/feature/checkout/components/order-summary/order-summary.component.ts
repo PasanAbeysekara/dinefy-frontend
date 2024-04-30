@@ -27,8 +27,9 @@ export class OrderSummaryComponent implements OnInit{
   headCount: any;
   reserveDate: any;
   reserveTime: any;
-  reserveCity: any;
-  reserveState: any;
+  address1: any;
+  address2: any;
+  address3: any;
 
   constructor(private route: ActivatedRoute, private productService: ProductService,private reservationService: ReservationService, sanitizer: DomSanitizer) {}
 
@@ -40,13 +41,14 @@ export class OrderSummaryComponent implements OnInit{
 
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
       this.restaurantName = data.name;
-      this.reserveState = data.basedLocation.state.name;
-      this.reserveCity = data.basedLocation.name;
+      this.address1 = data.contactDetails.address1;
+      this.address2 = data.contactDetails.address2;
+      this.address3 = data.contactDetails.address3;
       this.isLoading += 1;
     });
 
     this.reservationService.getProductByCode(this.reserveCode).subscribe((data:any)=>{
-      console.log("AAAAAAAAAAAAAAAAA",data);
+      // console.log("AAAAAAAAAAAAAAAAA",data);
       this.headCount = data.data.headCount;
       this.reserveDate = data.data.date;
       this.reserveTime = data.data.time;

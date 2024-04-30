@@ -25,10 +25,7 @@ export class ReservationService {
   }
 
   getProductByCode(reserveCode:string):any{
-    this.reservation = this.httpClient.get(`${this.baseUrl}/reservations/code/${reserveCode}`).subscribe(reservation => {
-      console.log("BBBBBBBBBB",reservation);
-    });
-    return this.reservation;
+    return this.httpClient.get(`${this.baseUrl}/reservations/code/${reserveCode}`);
   }
 
   postReservation(reservationPayload:any):any{
