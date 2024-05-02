@@ -12,6 +12,8 @@ import {AsyncPipe, NgForOf} from "@angular/common";
 import {MatRippleModule} from "@angular/material/core";
 import {RatingStarsComponent} from "../../../../shared/rating-stars/rating-stars.component";
 import {NgbRating, NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
+import {HistoryCardComponent} from "../booking-history/history-card/history-card.component";
+import {UpcomingReserveComponent} from "./upcoming-reserve/upcoming-reserve.component";
 
 export interface favPlaces {
   imgUrl: string;
@@ -211,7 +213,9 @@ const DATA: favPlaces[] = [
     NgForOf,
     MatRippleModule,
     RatingStarsComponent,
-    NgbRating
+    NgbRating,
+    HistoryCardComponent,
+    UpcomingReserveComponent
   ],
   templateUrl: './general.component.html',
   styleUrl: './general.component.css',
