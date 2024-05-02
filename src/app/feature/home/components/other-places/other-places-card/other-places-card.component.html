@@ -1,7 +1,10 @@
 <!-- restaurent-card-1.component.html -->
+<p-toast></p-toast>
 <mat-card class="hover:cursor-pointer w-[430px] md:w-[300px] lg:w-[260px] 2xl:w-[280px]" id="promo-mat-card" (click)="redirectToRestaurantDetails()">
-    <mat-icon class="hart-unfilled">favorite_border</mat-icon>
-    <img mat-card-image class="main-image" [src]="cardImage">
+  <mat-icon class="absolute top-2 right-2 z-10 text-gray-200 hover:text-red-500 cursor-pointer" (click)="$event.stopPropagation(); toggleFavorite()" [class.text-red-500]="isFavorite">
+    favorite
+  </mat-icon>
+  <img mat-card-image class="main-image" [src]="cardImage">
     <mat-card-title class="restaurant-name">{{restaurantName}}</mat-card-title>
 </mat-card>
 

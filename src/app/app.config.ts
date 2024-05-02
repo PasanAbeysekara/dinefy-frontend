@@ -5,7 +5,8 @@ import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient , withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import {MessageService} from "primeng/api";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,6 @@ export const appConfig: ApplicationConfig = {
   ),
   provideOAuthClient(),
   HttpClientModule,
+    MessageService
   ]
 };

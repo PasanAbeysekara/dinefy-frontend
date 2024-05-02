@@ -29,7 +29,8 @@ export class LocationMapComponent implements OnInit {
 
     this.productService.getProductByCode(this.propCode).subscribe((data: any) => {
       // this.locationPath = this.sanitizer.bypassSecurityTrustResourceUrl(`https://maps.google.com/maps?q=${data.data.latitude},${data.data.longitude}&hl=es&z=14&amp;output=embed`);
-      this.locationPath = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.google.com/maps/embed/v1/view?key=AIzaSyD__g3F8b2y48-T86cXJsasB2Ovn-QcS7A&center=${data.latitude},${data.longitude}&zoom=14`);
+      // this.locationPath = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.google.com/maps/embed/v1/view?key=AIzaSyD__g3F8b2y48-T86cXJsasB2Ovn-QcS7A&center=${data.latitude},${data.longitude}&zoom=14`);
+      this.locationPath = this.sanitizer.bypassSecurityTrustResourceUrl(`https://maps.google.com/maps?q=${data.latitude},${data.longitude}&z=15&output=embed`);
       console.log(this.locationPath);
       this.isLoading = false;
     });

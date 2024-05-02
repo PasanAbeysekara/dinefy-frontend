@@ -82,6 +82,8 @@ export class PromotionsComponent implements OnInit {
   }
 
   redirectToRestaurantDetails(propertyCode: string) {
-    this.router.navigate([`/product/${propertyCode}`]);
+    this.router.navigate([`/product/${propertyCode}`]).then(()=>{
+      window.scrollTo(0,0);
+    });
   }
 }
