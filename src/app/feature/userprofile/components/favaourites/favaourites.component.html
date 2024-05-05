@@ -1,0 +1,21 @@
+<!--&lt;!&ndash; Loyalty&ndash;&gt;-->
+<!--<p class="text-3xl font-medium text-gray-600">Loyalty</p>-->
+<!--<mat-divider style="margin:10px 0 20px 0;width: 40vw"></mat-divider>-->
+
+<!--<div>-->
+
+<!--</div>-->
+
+
+<div class="ml-10 md:ml-0">
+  <div class="mt-10">
+    <p class="text-3xl font-medium text-gray-600">Favourite Food</p>
+    <mat-divider style="margin:10px 0 20px 0;" class="w-4/5 md:w-full"></mat-divider>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mx-4 mb-10 w-[300px] md:w-[600px] 2xl:w-[1000px]">
+  <div *ngFor="let food of favFoods" class="ml-5 md:ml-0">
+    <app-fav-food-item [favFoodItem]="food"></app-fav-food-item>
+  </div>
+</div>

@@ -1,0 +1,225 @@
+<div class="flex flex-col 2xl:flex-row mt-10">
+
+  <!-- Left-->
+  <div class="w-[340px] md:w-[600px] mx-3" >
+    <!--    avatar-->
+    <div class="flex justify-center">
+      <img class="object-cover object-center w-44 h-44 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Poster-sized_portrait_of_Barack_Obama.jpg"  alt="Your Image">
+    </div>
+
+    <!--preferred cuisines-->
+    <div class="w-[340px] md:max-2xl:w-[600px]">
+      <!--header-->
+      <div class="flex justify-between mt-10 ml-3">
+        <p class="font-medium text-gray-500 mt-2">Preferred Cuisines</p>
+        <button mat-button color="primary">Edit</button>
+      </div>
+      <!--buttons-->
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex flex-row md:flex-col space-x-2 md:space-y-2 ">
+          <div class="flex flex-col md:max-2xl:flex-row space-y-2">
+            <div class="flex space-x-3 md:mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Mexican</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Swedish</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Latvian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Spanish</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">American</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex md:hidden space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Italian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Canadian</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider style="margin: 20px 0 20px 0"></mat-divider>
+    <!--preferred Restaurants-->
+    <div class="w-[340px] md:max-2xl:w-[600px]">
+      <!--header-->
+      <div class="flex justify-between ml-3">
+        <p class="font-medium text-gray-500 mt-2">Preferred Restaurants</p>
+        <button mat-button color="primary">Edit</button>
+      </div>
+
+      <!--buttons-->
+      <div class="my-2 ml-2 flex w-[340px] md:w-[200px]">
+        <div style="border: none" class="flex md:flex-col flex-row  md:space-y-2 space-x-2">
+          <div class="flex flex-col md:max-2xl:flex-row space-y-2">
+            <div class="flex space-x-3 mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Fast food</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Fast casual</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Latvian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Contemporary</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Casual dining</p>
+              </mat-button-toggle>
+              <div class="hidden md:max-2xl:block">
+                <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                  <p style="margin-top: -4px">Cafés</p>
+                </mat-button-toggle>
+              </div>
+            </div>
+            <div class="flex md:hidden space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <mat-divider style="margin: 20px 0 20px 0"></mat-divider>
+
+    <!--preferred Restaurant types-->
+    <div>
+      <!--header-->
+      <div class="flex justify-between ml-3">
+        <p class="font-medium text-gray-500 mt-2">Preferred Restaurants Types</p>
+        <button mat-button color="primary">Edit</button>
+      </div>
+
+      <!--buttons-->
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex min-[1000px]:flex-col max-[1000px]:flex-row  min-[1000px]:space-y-2 max-[1000px]:space-x-2  ">
+          <div class="flex flex-col md:flex-row space-y-2">
+            <div class="flex space-x-3 mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Vegetarian</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Mexican</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Sushi</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2 mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Indian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Barbecue</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Right-->
+  <div class="mx-3 w-[320px] md:w-[620px]">
+
+    <!-- General -->
+    <div class="">
+      <p class="text-3xl font-medium text-gray-600">General</p>
+      <mat-divider style="margin:10px 0 20px 0;"></mat-divider>
+
+      <div class="flex flex-col space-y-2">
+        <mat-form-field appearance="outline" class="w-80 md:w-[600px]">
+          <mat-label>Full Name</mat-label>
+          <input matInput placeholder="Placeholder">
+          <mat-hint class="text-gray-500">Enter Your Full Name</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="w-80">
+          <mat-label>BirthDay</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-hint class="text-gray-500">This information will be use to calculate age.</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="mt-10  md:w-[600px]">
+      <!-- General -->
+      <p class="text-3xl font-medium text-gray-600">Personal Information</p>
+      <mat-divider style="margin:10px 0 20px 0"></mat-divider>
+
+      <div class="flex flex-col space-y-2">
+        <mat-form-field appearance="outline" class="w-80 md:w-[600px]">
+          <mat-label>Address 1</mat-label>
+          <input matInput placeholder="Placeholder">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-80 md:w-[600px]">
+          <mat-label>Address 2</mat-label>
+          <input matInput placeholder="Placeholder">
+        </mat-form-field>
+        <div class="flex flex-col justify-between">
+          <div class="flex justify-between">
+            <mat-form-field appearance="outline" class="w-[150px] md:w-[290px]">
+              <mat-label>City</mat-label>
+              <input matInput placeholder="Placeholder">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-[150px] md:w-[290px]">
+              <mat-label>District</mat-label>
+              <input matInput placeholder="Placeholder">
+            </mat-form-field>
+          </div>
+          <div class="flex justify-between">
+            <mat-form-field appearance="outline" class="w-[150px] md:w-[290px]">
+              <mat-label>Province</mat-label>
+              <input matInput placeholder="Placeholder">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-[150px] md:w-[290px]">
+              <mat-label>Country</mat-label>
+              <input matInput placeholder="Placeholder">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

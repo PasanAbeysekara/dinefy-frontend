@@ -1,0 +1,45 @@
+<div class="w-screen mt-10 2xl:w-[1300px]">
+  <div class="flex justify-center">
+    <div class="flex justify-between w-[340px] md:w-[630px] lg:w-[800px] 2xl:w-[1200px]">
+      <div>
+        <p class="text-lg font-medium text-gray-700">Promotions</p>
+        <p class="text-gray-500 mb-3">Based on traveller visits and local insights</p>
+      </div>
+      <button mat-button color="primary">See All</button>
+    </div>
+  </div>
+
+  <div class="flex justify-center">
+    <div class="w-[370px] md:w-[720px] lg:w-[900px] 2xl:w-[1300px] h-[300px]">
+      <ng-container *ngIf="(productsSubject | async) as products">
+        <p-carousel [value]="products?.length ? products : []" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+          <ng-template let-product pTemplate="item">
+            <div (click)="redirectToRestaurantDetails()" class="border-1 surface-border border-round m-2 text-center px-3 flex border-orange-400 border-solid rounded-md cursor-pointer hover:bg-gray-200 py-3">
+              <div class="mb-3">
+                <img [src]="product.image" [alt]="product.name" class="shadow-2 h-[200px] mt-2 md:mt-0"/>
+              </div>
+              <div class="flex flex-col justify-center">
+                <div class="md:flex md:max-2xl:justify-center">
+                  <img class="avatar w-14 ml-5 md:ml-4" [src]="product.avatar">
+                  <div class="mt-2 md:max-2xl:hidden ml-3 md:ml-0">
+                    <ngb-rating [rate]="product.rating" class="text-amber-500 md:ml-2" />
+                    <!-- <span class="text-gray-700 text-sm">(396)</span> -->
+                    <div class=" xl:-ml-10">
+                      <p class="text-gray-700 text-[13px]">({{ product.reviewCount }})</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="ml-4 md:ml-5 md:mt-2" id="text-section">
+                  <p class="text-md font-medium">{{product.name}}</p>
+                  <p class="text-lg font-mono" style="margin-bottom: 0">LKR {{ product.price }}</p>
+                  <p class="text-gray-500 hidden md:block" >Approx {{ product.approxPeople }}  Person</p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

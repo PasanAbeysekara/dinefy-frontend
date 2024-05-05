@@ -1,0 +1,8 @@
+<div class="flex flex-row justify-between space-x-6">
+  <div *ngFor="let tag of systemTags; let i = index" class="iconBlock cursor-pointer" [style.animation-delay]="i * 0.7 + 's'" (click)="redirectToSearchResults(tag)">
+    <div class="">
+      <mat-icon class="material-icons-outlined">{{tag.icon}}</mat-icon>
+    </div>
+    <div class="">{{tag.name}}</div>
+  </div>
+</div>

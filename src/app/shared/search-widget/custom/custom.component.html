@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="form-control flex h-12 w-[300px] md:w-[250px] mr-3 text-gray-600 mt-3 dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>
+<!--        <mat-icon class="mt-1">whatshot</mat-icon>-->
+        <span class="mt-1 ml-2">What are you looking for ?</span>
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+        <form class="px-4 py-3">
+
+          <div class="">
+            <fieldset>
+              <div class="mb-3">
+                <label class="col-xs-3 col-sm-auto col-form-label">Restaurant (name)</label>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [class.is-invalid]="searchFailed1"
+                    [(ngModel)]="model1"
+                    [ngbTypeahead]="search1"
+                    placeholder="Cinnamon Lakeside ..."
+                    name="wikiSearch1"
+                  />
+                  @if (searching1) {
+                    <small class="form-text text-muted">searching...</small>
+                  }
+                  @if (searchFailed1) {
+                    <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+                  }
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="">
+            <fieldset>
+              <div class="mb-3">
+                <label class="col-xs-3 col-sm-auto col-form-label">Events</label>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [class.is-invalid]="searchFailed2"
+                    [(ngModel)]="model2"
+                    [ngbTypeahead]="search2"
+                    placeholder="Date, Birthday ..."
+                    name="wikiSearch2"
+                  />
+                  @if (searching2) {
+                    <small class="form-text text-muted">searching...</small>
+                  }
+                  @if (searchFailed2) {
+                    <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+                  }
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="">
+            <fieldset>
+              <div class="mb-3">
+                <label class="col-xs-3 col-sm-auto col-form-label">Dishes</label>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [class.is-invalid]="searchFailed3"
+                    [(ngModel)]="model3"
+                    [ngbTypeahead]="search3"
+                    placeholder="Sushi, Koththu ..."
+                    name="wikiSearch3"
+                  />
+                  @if (searching3) {
+                    <small class="form-text text-muted">searching...</small>
+                  }
+                  @if (searchFailed3) {
+                    <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+                  }
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="">
+            <fieldset>
+              <div class="mb-3">
+                <label class="col-xs-3 col-sm-auto col-form-label">Cuisines</label>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [class.is-invalid]="searchFailed4"
+                    [(ngModel)]="model4"
+                    [ngbTypeahead]="search4"
+                    placeholder="Indian, Mexican ..."
+                    name="wikiSearch4"
+                  />
+                  @if (searching4) {
+                    <small class="form-text text-muted">searching...</small>
+                  }
+                  @if (searchFailed4) {
+                    <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+                  }
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="">
+            <fieldset>
+              <div class="mb-3">
+                <label class="col-xs-3 col-sm-auto col-form-label">Highlights</label>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [class.is-invalid]="searchFailed5"
+                    [(ngModel)]="model5"
+                    [ngbTypeahead]="search5"
+                    placeholder="Fine Dinning, Buffet ..."
+                    name="wikiSearch5"
+                  />
+                  @if (searching4) {
+                    <small class="form-text text-muted">searching...</small>
+                  }
+                  @if (searchFailed4) {
+                    <div class="invalid-feedback">Sorry, suggestions could not be loaded.</div>
+                  }
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

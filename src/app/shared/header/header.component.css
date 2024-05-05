@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.container {
+  position: relative;
+  padding-top: 70px; /* Adjust based on the height of your sticky header */
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.logo {
+  float: left;
+  padding-left: 20px;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.btn-container {
+  float: right;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.btn {
+  background-color: #3490dc;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.content {
+  margin-top: 90px; /* Adjust based on the height of your sticky header */
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}
+
+.list-item-content {
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif; /* Added font-family */
+}

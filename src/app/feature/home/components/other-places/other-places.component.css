@@ -1,0 +1,12 @@
+.section{
+  max-width: 70rem;
+}
+
+.scroll-section{
+  width: 70rem;
+}
+
+.shadow-button {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .5); /* You can adjust the values based on your preference */
+}
+

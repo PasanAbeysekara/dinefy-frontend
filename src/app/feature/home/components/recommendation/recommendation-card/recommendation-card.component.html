@@ -1,0 +1,21 @@
+<mat-card class="custom-card hover:cursor-pointer w-[300px] md:w-[300px] lg:w-[260px] 2xl:w-[280px]" id="recommendation-mat-card" (click)="redirectToRestaurantDetails()">
+  <div class="relative flex flex-col justify-center">
+    <p-toast></p-toast>
+    <mat-icon class="absolute top-2 right-2 z-10 text-gray-200 hover:text-red-500 cursor-pointer" (click)="$event.stopPropagation(); toggleFavorite()" [class.text-red-500]="isFavorite">
+      favorite
+    </mat-icon>
+    <img [src]="cardImage" style="height: 248px" class="rounded-md" alt="image">
+    <div>
+      <div class="mt-3 ml-4">
+        <ngb-rating [rate]="ratingsCount" class="text-amber-500 text-xl"></ngb-rating>
+        <span class="text-gray-700 text-sm">({{ reviewsCount }})</span>
+      </div>
+      <div class="ml-5 " id="text-section">
+        <p class="text-xl font-medium">{{restaurantName}}</p>
+        <p class="text-2xl font-mono" style="margin-bottom: 0">{{reservationPriceCurrency}} {{ reservationPrice }}</p>
+        <p class="text-gray-500">Per Person</p>
+      </div>
+    </div>
+    <img class="avatar" [src]="cardAvatar">
+  </div>
+</mat-card>

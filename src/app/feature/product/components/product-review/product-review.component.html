@@ -1,0 +1,59 @@
+<div class="mt-10 font-sans ml-6 w-[320px] md:w-[700px]">
+  <p class="text-3xl font-sans"> What People Say </p>
+  <mat-divider></mat-divider>
+<!--Reviews-->
+  <div class="mt-10">
+    <div *ngFor="let item of data">
+      <div class="flex mb-3 mt-3">
+        <p-skeleton shape="circle" size="3rem" styleClass="mr-2"></p-skeleton>
+        <div class="ml-2">
+          <p class="mt-2 text-gray-800 font-semibold">{{ item.name }}</p>
+          <div class="flex space-x-1 text-gray-500 -mt-2">
+            <p>{{ item.rating }}/5</p>
+            <ngb-rating [rate]="item.rating" class="text-red-500 text-md" />
+            <p>({{ item.reviews }})</p>
+          </div>
+          <p class="text-gray-600">{{ item.description }}</p>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+<!--Review Form-->
+  <form class="example-form flex flex-col my-10">
+    <div class="flex space-x-1 text-gray-500 -mt-2">
+      <p class="text-2xl">4/5</p>
+      <ngb-rating [rate]="4" class="text-red-500 text-2xl" />
+    </div>
+<!--    nick name, email-->
+    <div class="flex justify-between">
+      <mat-form-field appearance="outline" class="w-[385px]">
+        <mat-label>Nick Name</mat-label>
+        <input matInput placeholder="Mr.Saman Kumara">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-[385px]">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="SamanKumara@gmail.com">
+      </mat-form-field>
+    </div>
+<!--    description-->
+    <div>
+      <mat-form-field class="example-full-width w-[320px] md:w-[700px]">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Ex. It makes me feel..." class="h-[150px]"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5"
+        ></textarea>
+      </mat-form-field>
+
+    </div>
+
+    <div class="w-48 flex justify-between">
+      <button mat-raised-button color="primary">Submit</button>
+      <button mat-stroked-button>Cancel</button>
+    </div>
+  </form>
+
+
+</div>

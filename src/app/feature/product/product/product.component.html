@@ -1,0 +1,43 @@
+
+<!--Gallery-->
+<div class="justify-center mt-28 hidden md:block">
+    <app-product-images></app-product-images>
+</div>
+
+<div class="flex justify-center">
+  <div class="flex  2xl:w-[1300px]">
+    <!--Left-->
+    <div class="md:w-[720px] md:mt-3 flex flex-col justify-center mx-auto">
+      <div class="hidden md:block my-3">
+        <div class="tab-container">
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('overview')">Overview</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('facilities')">Facilities</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('menu')">Menu</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('map')">Map</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('media')">Media</button>
+          <button class="tab hover:font-medium text-[16px]" (click)="scrollToSection('reviews')">Reviews</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <app-product-overview id="overview"></app-product-overview>
+      <app-product-facilities id="facilities"></app-product-facilities>
+      <app-product-menu id="menu"></app-product-menu>
+      <app-product-map id="map"></app-product-map>
+      <app-product-media id="media"></app-product-media>
+      <app-product-review id="reviews"></app-product-review>
+    </div>
+
+    <!--Right-->
+    <div class="w-[400px] mt-20 hidden 2xl:block ">
+      <app-bottom-sheet-reserve-sheet></app-bottom-sheet-reserve-sheet>
+      <div class="mt-10">
+        <app-erg-menu></app-erg-menu>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<mat-button-toggle (click)="redirectToCheckout()">Checkout</mat-button-toggle>-->
+<!--<mat-button-toggle (click)="reserve()"> Make Reservation </mat-button-toggle>-->

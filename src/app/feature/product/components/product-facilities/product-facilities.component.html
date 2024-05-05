@@ -1,0 +1,29 @@
+<div class="conti mt-10 w-[350px] md:w-[720px] ml-5 md:ml-0" *ngIf="facilities.length > 0;else loadingTemplate">
+  <p class="text-3xl"> Facilities </p>
+
+  <mat-divider></mat-divider>
+
+  <div class="flex text-lg text-gray-600 mt-4 flex-wrap space-y-4 items-center ml-5 md:ml-0">
+    <div *ngFor="let facility of facilities" class="flex space-x-[30px] md:space-x-[6px] w-2/5 md:w-1/4 mt-2">
+      <mat-icon class="text-emerald-400">{{ facility.icon }}</mat-icon>
+      <p class="text-sm">{{ facility.description }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="mt-24 md:hidden ml-5">
+    <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="2rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="20rem" height="2rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" height="4rem"></p-skeleton>
+  </div>
+  <div class="mt-10 hidden md:block">
+    <p-skeleton styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" height="4rem"></p-skeleton>
+  </div>
+</ng-template>

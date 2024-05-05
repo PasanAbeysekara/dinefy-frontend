@@ -1,0 +1,8 @@
+::ng-deep .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: orangered;
+  background-color: #efc3f8;
+  font-size: 14px !important;
+  padding: 0 10px;
+  border-radius: 10%;
+}
+

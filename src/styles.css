@@ -1,0 +1,51 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+body { margin: 0;
+  font-family: Calibri, serif }
+/* Define color variables */
+:root {
+  --color1: #172562; 
+  --color2: #eee8f6; 
+  --color3: #666; /* Dark gray */
+  --foreground: #000000; /* Black text color for foreground */
+  --divider: #bdbdbd; /* Grey divider color */
+  --secondary-text: #858585; /* Grey secondary text color */
+}
+
+*, ::before, ::after {
+  border-style: none;
+}
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
+/* Order */
+@layer reset, primeng;
+
+/* Reset CSS */
+@layer reset {
+  button,
+  input {
+    /* CSS to Reset */
+  }
+}
+
+.conti{
+  font-family: 'Poppins', sans-serif;
+}
+
+.mdc-tab__text-label {
+  font-family: 'Poppins', sans-serif;
+}

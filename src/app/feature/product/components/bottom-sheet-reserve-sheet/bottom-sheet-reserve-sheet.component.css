@@ -1,0 +1,8 @@
+.time-btn{
+  border-color: rgb(156 163 175);
+  border-style: solid;
+}
+
+.dropdown-toggle::after {
+  display:none;
+}

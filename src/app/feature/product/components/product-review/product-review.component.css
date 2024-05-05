@@ -1,0 +1,25 @@
+.profile-picture img {
+  object-fit: cover;
+  width:  100%;
+  height:  100%;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: #fff;
+}
+.mat-mdc-raised-button:not(:disabled) {
+  background-color: rgb(23, 37, 84);
+}
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: rgb(23, 37, 84);
+  --mdc-protected-button-label-text-color: #fff;
+  --mat-protected-button-state-layer-color: #fff;
+  --mat-protected-button-ripple-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/*.save-button {*/
+/*  background: rgb(23, 37, 84);*/
+/*  color: #fff;*/
+/*}*/
+

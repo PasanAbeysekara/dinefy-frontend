@@ -1,0 +1,48 @@
+<div class="mt-[140px] md:mt-[40px] w-[330px] md:w-[680px] ml-5 md:ml-0" *ngIf="restaurantDetails;else loadingTemplate">
+  <p class="text-3xl font-sans">{{ restaurantDetails.name }}</p>
+  <p class="font-sans">{{ restaurantDetails.contactDetails.address1 }}, {{ restaurantDetails.contactDetails.address2 }}, {{ restaurantDetails.contactDetails.address3 }}</p>
+
+  <div class="flex space-x-1 text-gray-500">
+    <p>{{ restaurantDetails.avgRating }}/5</p>
+    <ngb-rating [rate]="restaurantDetails.avgRating" class="text-red-500 text-md" />
+    <p>({{ restaurantDetails.totalRating }})</p>
+  </div>
+  <p class="text-gray-600"><span class="font-sans text-xl text-gray-900"> {{ restaurantDetails.amountCurrency }} {{ restaurantDetails.amount }}</span> / Per Person</p>
+
+  <!-- description -->
+  <div class="font-sans text-[15px] mt-4">
+    <p class="text-gray-500">
+      {{ restaurantDetails.description }}
+    </p>
+
+    <p class="my-2 text-gray-500" *ngIf="showFullDescription">
+      {{ restaurantDetails.additionalDescription }}
+    </p>
+
+<!--    <div class="flex justify-center">-->
+<!--      <button mat-stroked-button (click)="showFullDescription = !showFullDescription" class="mt-3 text-blue-500 hover:text-blue-700 focus:outline-none">-->
+<!--        {{ showFullDescription ? 'See Less' : 'See More' }}-->
+<!--      </button>-->
+<!--    </div>-->
+
+  </div>
+
+</div>
+
+
+<ng-template #loadingTemplate>
+  <div class="mt-24 md:hidden ml-5">
+    <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="2rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="20rem" height="2rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" height="4rem"></p-skeleton>
+  </div>
+  <div class="mt-10 hidden md:block">
+    <p-skeleton styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="10rem" height="4rem"></p-skeleton>
+  </div>
+</ng-template>

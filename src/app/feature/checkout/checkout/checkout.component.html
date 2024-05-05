@@ -1,0 +1,847 @@
+<ng-template #content let-offcanvas>
+<!--  Header -->
+  <div class="offcanvas-header bg-gray-800 text-amber-50 conti">
+    <p class="text-lg font-medium mt-1">Order Summary ({{ totalItems }} items)</p>
+    <button type="button" class="mt-1" aria-label="Close" (click)="offcanvas.dismiss('Cross click')">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+<!--  Cart Items-->
+  <div class="offcanvas-body conti">
+    <div *ngFor="let cartItem of cart" class="flex justify-between items-center">
+      <div class="mt-3 mx-4">
+        <p class="my-0 font-medium text-lg">{{ cartItem.name }}</p>
+        <p class="my-0 font-mono">{{cartItem.amountCurrency}} {{ cartItem.amount }}</p>
+        <p class="my-0 text-gray-500">{{ cartItem.description }}</p>
+      </div>
+      <div class="flex justify-between h-10 mr-4 ">
+        <button mat-icon-button (click)="decrementCartItem(cartItem)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <input type="text" [(ngModel)]="cartItem.quantity" class="w-3 h-5 mt-3" readonly/>
+        <button mat-icon-button (click)="incrementCartItem(cartItem)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!--  Bottom -->
+  <div class="bg-gray-800 text-amber-50 absolute bottom-0 flex justify-between w-full conti">
+    <div class="m-3">
+      <p class="my-0">{{ totalItems }} items</p>
+      <p class="my-0 font-mono text-lg">{{amountCurrency}} {{ totalPrice }}</p>
+    </div>
+    <div (click)="offcanvas.dismiss('Cross click')" class="mt-3">
+      <button class="my-2 px-3 mr-2 bg-red-500 rounded-md" (click)="saveToDatabase()">
+        <p class="mt-2">Place Order</p>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="relative conti">
+
+
+  <!-- Cart Button -->
+  <div>
+    <div class="fixed bottom-5 right-5 flex z-2">
+      <button class="px-0 md:px-3 py-2 flex items-center justify-evenly bg-[#4b2870] hover:bg-[#6c3aa1] rounded-3xl md:rounded-full  text-amber-50 w-[60px] h-[60px] md:h-full md:w-[130px]"  (click)="openEnd(content)">
+        <mat-icon>shopping_cart</mat-icon>
+        <p class="mt-2 text-lg font-medium hidden md:block">Cart</p>
+      </button>
+    </div>
+    <p class="px-2 rounded-full bg-gray-800 text-gray-50 fixed bottom-14 right-5 z-3 font-medium">{{totalItems}}</p>
+  </div>
+
+  <!--  <div class="fixed bottom-8 right-8">-->
+  <!--    <button>Dope</button>-->
+  <!--  </div>-->
+
+  <!--Hero-->
+  <div class="flex flex-col 2xl:flex-row justify-center mt-20 md:mt-32 font-sans ml-5 md:ml-10 2xl:ml-0" >
+    <!--  Success message -->
+    <app-order-summary></app-order-summary>
+    <!--  Map -->
+    <div class="ml-2 md:ml-0 2xl:ml-12">
+      <!--      <img src="https://github.com/PasanAbeysekara/hangouts.lk/assets/69195287/2ddba3f9-3af4-46be-a815-8cae82418756" alt="">-->
+      <div>
+        <app-location-map></app-location-map>
+        <!--        <iframe class="w-[320px] md:w-[740px] 2xl:w-[500px] h-[350px] md:h-[400px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6822183036384!2d79.84186127593368!3d6.928535393071291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593b09364c4f%3A0x7dc13fa1f24d5c16!2sShangri-La%20Colombo!5e0!3m2!1sen!2slk!4v1703677846969!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Menu-->
+  <div class="flex justify-center mt-10 pb-10">
+    <div *ngIf="isLoading>=4; else loadingTemplate;"  class="-ml-24">
+      <p class="text-3xl text-gray-700 font-medium">Menu</p>
+      <mat-tab-group class="w-[320px] md:w-[720px] 2xl:w-[900px]" dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+
+        <mat-tab label="Main Menu">
+
+          <div class="">
+            <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+
+              <mat-tab label="Starters">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[0].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[0].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[0].amountCurrency}} {{propChoicesList[0].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[0]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[1].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[1].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[1].amountCurrency}} {{propChoicesList[1].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[1]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[2].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[2].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[2].amountCurrency}} {{propChoicesList[2].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[2]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[3].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[3].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[3].amountCurrency}} {{propChoicesList[3].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[3]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[4].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[4].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[4].amountCurrency}} {{propChoicesList[4].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[4]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[5].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[5].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[5].amountCurrency}} {{propChoicesList[5].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[5]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </mat-tab>
+
+              <mat-tab label="Mains">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 6-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[6].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[6].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[6].amountCurrency}} {{propChoicesList[6].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[6]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[7].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[7].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[7].amountCurrency}} {{propChoicesList[7].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[7]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[8].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[8].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[8].amountCurrency}} {{propChoicesList[8].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[8]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[9].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[9].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[9].amountCurrency}} {{propChoicesList[9].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[9]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[10].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[10].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[10].amountCurrency}} {{propChoicesList[10].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[10]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[11].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[11].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[11].amountCurrency}} {{propChoicesList[11].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[11]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </mat-tab>
+
+              <mat-tab label="Deserts">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[12].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[12].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[12].amountCurrency}} {{propChoicesList[12].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[12]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[13].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[13].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[13].amountCurrency}} {{propChoicesList[13].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[13]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[14].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[14].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[14].amountCurrency}} {{propChoicesList[14].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[14]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[15].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[15].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[15].amountCurrency}} {{propChoicesList[15].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[15]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[16].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[16].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[16].amountCurrency}} {{propChoicesList[16].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[16]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[17].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[17].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[17].amountCurrency}} {{propChoicesList[17].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[17]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </mat-tab>
+
+
+            </mat-tab-group>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Deserts">
+          <div class="">
+            <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+
+              <mat-tab label="Cakes">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[18].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[18].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[18].amountCurrency}} {{propChoicesList[18].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[18]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[19].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[19].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[19].amountCurrency}} {{propChoicesList[19].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[19]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[20].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[20].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[20].amountCurrency}} {{propChoicesList[20].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[20]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[21].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[21].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[21].amountCurrency}} {{propChoicesList[21].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[21]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[22].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[22].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[22].amountCurrency}} {{propChoicesList[22].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[22]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[23].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[23].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[23].amountCurrency}} {{propChoicesList[23].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[23]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Drinks">
+          <div class="">
+            <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
+
+              <mat-tab label="Cokctails">
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 0-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[24].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[24].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[24].amountCurrency}} {{propChoicesList[24].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[24]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[25].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[25].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[25].amountCurrency}} {{propChoicesList[25].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[25]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[26].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[26].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[26].amountCurrency}} {{propChoicesList[26].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[26]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[27].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[27].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[27].amountCurrency}} {{propChoicesList[27].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[27]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[28].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[28].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[28].amountCurrency}} {{propChoicesList[28].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[28]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[29].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[29].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[29].amountCurrency}} {{propChoicesList[29].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[29]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+              </mat-tab>
+
+              <mat-tab label="MockTails">
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 6-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[30].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[30].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[30].amountCurrency}} {{propChoicesList[30].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[30]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 1-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[31].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[31].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[31].amountCurrency}} {{propChoicesList[31].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[31]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 2 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[32].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[32].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[32].amountCurrency}} {{propChoicesList[32].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[32]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="flex justify-between mt-4">
+
+                  <!-- Choice 3-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[33].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[33].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[33].amountCurrency}} {{propChoicesList[33].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[33]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 4-->
+                  <div class="flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[34].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[34].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[34].amountCurrency}} {{propChoicesList[34].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[34]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Choice 5 -->
+                  <div class="hidden md:flex items-center justify-between">
+                    <!-- Description -->
+                    <div>
+                      <p class="text-md font-medium text-gray-700">{{propChoicesList[35].name}}</p>
+                      <p class="font-medium text-gray-500">
+                        {{propChoicesList[35].description}}
+                      </p>
+                      <p class="font-mono text-lg">{{propChoicesList[35].amountCurrency}} {{propChoicesList[35].amount}}</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="flex items-center">
+                      <button mat-icon-button (click)="addToCart(propChoicesList[35]); openEnd(content)">
+                        <mat-icon>add_circle</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+        </mat-tab>
+
+
+      </mat-tab-group>
+    </div>
+  </div>
+
+
+</div>
+
+<ng-template #loadingTemplate>
+
+  <div class="block">
+    <p-skeleton width="800px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="800px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="400px" height="40px" styleClass="mb-2"></p-skeleton>
+    <p-skeleton height="220px"  styleClass="mb-2"></p-skeleton>
+  </div>
+
+</ng-template>

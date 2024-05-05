@@ -1,0 +1,75 @@
+<div
+  class="bg-gray-100 py-2 fixed top-0 left-0 w-full transition-all duration-300 ease-in-out flex items-center justify-between z-50"
+>
+
+<div class="container mx-auto p-1 md:p-4 w-full">
+    <div class="">
+      <div class="logo">
+        <a routerLink="/home" routerLinkActive="active" class="logo-link">
+          <img src="assets/logo.png" alt="Logo" class="mr-4" [ngStyle]="{'height.px': isTransparent ? 40 : 40}" />
+        </a>
+      </div>
+      <div class="c-header__links erg-btn--list btn-container">
+        <ng-container *ngIf="loginService.getIsLoggedIn()">
+          <div class="user-container" mat-button [matMenuTriggerFor]="user">
+            <div class="flex items-center">
+              <div class="user-details flex">
+                <span class="text-lg font-bold ">Hi! {{ userInfo?.info?.name }}</span>
+                <span class="text-black-600 text-sm">{{ userInfo?.info?.email }}</span>
+              </div>
+              <img class="avatar-user rounded-full w-12 h-12 ml-4" src="{{userInfo?.info?.picture}}" />
+            </div>
+          </div>
+
+          <mat-menu #user="matMenu" class="user-drop-menu">
+            <mat-list>
+              <mat-list-item>
+                <div class="user-details user-details--ms">
+                  <span class="text-lg"> {{ userInfo?.info?.name }} </span>
+                  <span class="text-gray-600  mb-2">{{ userInfo?.info?.email }} </span>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item routerLink="/profile" mat-ripple class="mat-menu-item" style="cursor: pointer" (click)="redirectToUserProfile()">
+                <div class="list-item-content">
+                  <mat-icon mat-list-icon>account_circle</mat-icon>
+                  <div mat-line class="ml-4">My Account</div> </div>
+              </mat-list-item>
+              <mat-list-item mat-ripple class="mat-menu-item">
+                <div class="list-item-content">
+                  <mat-icon mat-list-icon>notifications</mat-icon>
+                  <div mat-line class="ml-4">Notifications</div>
+                </div>
+              </mat-list-item>
+              <mat-list-item mat-ripple class="mat-menu-item">
+                <div class="list-item-content">
+                  <mat-icon mat-list-icon>room_service</mat-icon>
+                  <div mat-line class="ml-4">Reservation History</div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item mat-ripple class="mat-menu-item" (click)="logout()">
+                <div class="list-item-content">
+                  <mat-icon mat-list-icon>login</mat-icon>
+                  <div mat-line>Logout</div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-menu>
+        </ng-container>
+        <ng-container *ngIf="!loginService.getIsLoggedIn()">
+          <div class="mt-1">
+            <div class="flex items-center space-x-4 ">
+              <button class="text-white bg-black hover:bg-opacity-80 transition-colors duration-300 rounded-md px-4 py-2" (click)="signin()">
+                Sign In
+              </button>
+              <button class="text-black bg-white hover:bg-gray-800 hover:text-white transition-colors duration-300 rounded-md px-4 py-2" (click)="signup()">
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

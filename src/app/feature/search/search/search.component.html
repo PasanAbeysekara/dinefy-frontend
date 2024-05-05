@@ -1,0 +1,11 @@
+<!--<p>search works!</p>-->
+<!--<mat-button-toggle (click)="redirectToRestaurant()">Restaurant A</mat-button-toggle>-->
+
+
+<section class="sticky top-0 z-10 py-3 bg-white flex justify-center items-center shadow-md">
+  <div class="mt-24">
+    <app-filter-section></app-filter-section>
+  </div>
+</section>
+
+<app-result-restaurants [viewRestaurantList]="viewRestaurantList"></app-result-restaurants>

@@ -1,0 +1,22 @@
+<div class="mt-10 ml-2 w-[350px]">
+  <p class="text-3xl font-sans"> Map </p>
+  <mat-divider></mat-divider>
+  <!--  Map -->
+  <div class="mt-10">
+    <ng-container *ngIf="!isLoading; else loadingTemplate">
+      <iframe class="w-[320px] md:w-[700px] ml-5 md:ml-0" [src]="locationPath" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+
+  <div class="md:hidden ml-4">
+    <p-skeleton width="320px" height="450px"></p-skeleton>
+  </div>
+
+  <div class="hidden md:block">
+    <p-skeleton width="700px" height="450px"></p-skeleton>
+  </div>
+
+</ng-template>

@@ -1,0 +1,393 @@
+<div class="flex flex-col xl:flex-row mt-10">
+
+<!-- Left-->
+  <div class="w-[340px] md:w-[600px] 2xl:w-[340px] mx-3" >
+<!--    avatar-->
+    <div class="flex justify-center">
+      <img class="object-cover object-center w-44 h-44 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Poster-sized_portrait_of_Barack_Obama.jpg"  alt="Your Image">
+    </div>
+
+<!--    loyalty credits-->
+    <mat-list style="margin-top: 20px">
+      <mat-list-item>
+        <div class="flex justify-between">
+          <p class="text-gray-500">Loyalty Credits</p>
+          <p class="font-medium text-gray-700">500</p>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="flex justify-between">
+          <p class="text-gray-500">Loyalty Credits</p>
+          <p class="font-medium text-gray-700">500</p>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="flex justify-between">
+          <p class="text-gray-500">Loyalty Credits</p>
+          <p class="font-medium text-gray-700">500</p>
+        </div>
+      </mat-list-item>
+      <mat-divider ></mat-divider>
+
+    </mat-list>
+
+    <!--preferred cuisines-->
+    <div class="w-[340px] md:max-2xl:w-[600px]">
+      <!--header-->
+      <div class="flex justify-between mt-10 ml-3">
+        <p class="font-medium text-gray-500 mt-2">Preferred Cuisines</p>
+        <button mat-button color="primary">Edit</button>
+      </div>
+      <!--buttons-->
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex flex-row md:flex-col space-x-2 md:space-y-2 ">
+          <div class="flex flex-col md:max-2xl:flex-row space-y-2">
+            <div class="flex space-x-3 md:mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Mexican</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Swedish</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Latvian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Spanish</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">American</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex md:hidden space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Italian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Canadian</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider style="margin: 20px 0 20px 0"></mat-divider>
+    <!--preferred Restaurants-->
+    <div class="w-[340px] md:max-2xl:w-[600px]">
+      <!--header-->
+      <div class="flex justify-between ml-3">
+        <p class="font-medium text-gray-500 mt-2">Preferred Restaurants</p>
+        <button mat-button color="primary">Edit</button>
+      </div>
+
+      <!--buttons-->
+      <div class="my-2 ml-2 flex w-[340px] md:w-[200px]">
+        <div style="border: none" class="flex md:flex-col flex-row  md:space-y-2 space-x-2">
+          <div class="flex flex-col md:max-2xl:flex-row space-y-2">
+            <div class="flex space-x-3 mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Fast food</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Fast casual</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Latvian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Contemporary</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Casual dining</p>
+              </mat-button-toggle>
+              <div class="hidden md:max-2xl:block">
+                <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                  <p style="margin-top: -4px">Cafés</p>
+                </mat-button-toggle>
+              </div>
+            </div>
+            <div class="flex md:hidden space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <mat-divider style="margin: 20px 0 20px 0"></mat-divider>
+    <!--preferred Restaurant types-->
+    <div>
+      <!--header-->
+      <div class="flex justify-between ml-3">
+        <p class="font-medium text-gray-500 mt-2">Preferred Restaurants Types</p>
+        <button mat-button color="primary">Edit</button>
+      </div>
+
+      <!--buttons-->
+      <div class="my-2 ml-2 flex">
+        <div style="border: none" class="flex min-[1000px]:flex-col max-[1000px]:flex-row  min-[1000px]:space-y-2 max-[1000px]:space-x-2  ">
+          <div class="flex flex-col md:flex-row space-y-2">
+            <div class="flex space-x-3 mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;" checked="true">
+                <p style="margin-top: -4px">Japanese</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Vegetarian</p>
+              </mat-button-toggle>
+            </div>
+            <div class="flex space-x-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Mexican</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Sushi</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2">
+            <div class="flex space-x-2 mt-2">
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Indian</p>
+              </mat-button-toggle>
+              <mat-button-toggle style="border-radius: 2rem;height: 40px;border: 1px solid #ccc;">
+                <p style="margin-top: -4px">Barbecue</p>
+              </mat-button-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<!--  Right-->
+  <div class="mx-3 xl:ml-10 md:mt-10">
+
+<!-- Loyalty-->
+    <p class="text-3xl font-medium text-gray-600">Loyalty</p>
+    <mat-divider style="margin:10px 0 20px 0;"></mat-divider>
+    <mat-card class="px-10 py-3 w-[340px] md:w-[600px]">
+      <div>
+        <p class="text-xl">Available Credits</p>
+        <p class="text-gray-500">Subtitle</p>
+      </div>
+
+      <div class="flex justify-between">
+        <div>
+          <p class="my-0">Available Credits</p>
+          <p class="text-gray-500 my-1">Subtitle</p>
+        </div>
+        <div>
+          <p class="my-0">Available Credits</p>
+          <p class="text-gray-500 my-1">Subtitle</p>
+        </div>
+        <div>
+          <p class="my-0">Available Credits</p>
+          <p class="text-gray-500 my-1">Subtitle</p>
+        </div>
+      </div>
+    </mat-card>
+
+<!--Upcoming Reservations-->
+    <p class="text-3xl font-medium text-gray-600 " style="margin-top: 40px">Upcoming Reservations</p>
+    <mat-divider style="margin:10px 0 20px 0"></mat-divider>
+
+    <div class="w-[600px]">
+      <div class="flex justify-between">
+        <!--Reserve-->
+        <div>
+          <mat-card matRipple style="border: 1px solid #ccc;border-radius: 5%" class="w-[350px] md:w-[280px] cursor-pointer" >
+            <div class="flex">
+              <div>
+                <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://d3plttq4n63nzt.cloudfront.net/Rectangle_73.png" alt="">
+              </div>
+              <div class="mx-4 mt-1">
+                <p class="text-lg font-bold text-gray-700">A Minute by Tuk Tuk Colombo</p>
+                <p class="mb-0">28 Dec, 2020 10.30 AM, User Name</p>
+                <p class="text-gray-500 -mt-2" style="font-size: small">2 Adults, 1 Child</p>
+                <div class="flex -mt-2">
+                  <p class="font-mono text-xl font-bold" style="color: var(--color1)">LKR 6,500</p>
+                  <div class="flex mt-1 space-x-1" style="margin-left: 20px">
+                    <mat-icon>check_circle_outline</mat-icon>
+                    <p class="font-medium text-gray-500" style="margin-top: 2px">Reserved</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="w-full"></mat-divider>
+            <div class="flex justify-evenly" style="position: relative">
+              <button mat-stroked-button style="border: none;color: #b43939">
+                <mat-icon>cancel</mat-icon>
+                <p class="mt-2">Cancel</p>
+              </button>
+              <button mat-stroked-button style="border: none;color: var(--color1)">
+                <mat-icon>edit</mat-icon>
+                <p class="mt-2">Change</p>
+              </button>
+            </div>
+
+          </mat-card>
+        </div>
+        <!--Reserve-->
+        <div class="hidden md:block">
+          <mat-card matRipple style="border: 1px solid #ccc;border-radius: 5%" class="w-[350px] md:w-[280px] cursor-pointer" >
+            <div class="flex">
+              <div>
+                <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://d3plttq4n63nzt.cloudfront.net/Rectangle_73.png" alt="">
+              </div>
+              <div class="mx-4 mt-1">
+                <p class="text-lg font-bold text-gray-700">A Minute by Tuk Tuk Colombo</p>
+                <p class="mb-0">28 Dec, 2020 10.30 AM, User Name</p>
+                <p class="text-gray-500 -mt-2" style="font-size: small">2 Adults, 1 Child</p>
+                <div class="flex -mt-2">
+                  <p class="font-mono text-xl font-bold" style="color: var(--color1)">LKR 6,500</p>
+                  <div class="flex mt-1 space-x-1" style="margin-left: 20px">
+                    <mat-icon>check_circle</mat-icon>
+                    <p class="font-medium text-gray-500" style="margin-top: 2px">Booked</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="w-full"></mat-divider>
+            <div class="flex justify-evenly" style="position: relative">
+              <button mat-stroked-button style="border: none;color: #b43939">
+                <mat-icon>cancel</mat-icon>
+                <p class="mt-2">Cancel</p>
+              </button>
+              <button mat-stroked-button style="border: none;color: var(--color1)">
+                <mat-icon>edit</mat-icon>
+                <p class="mt-2">Change</p>
+              </button>
+            </div>
+
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="flex my-4 justify-between">
+        <!--Reserve-->
+        <div>
+          <mat-card matRipple style="border: 1px solid #ccc;border-radius: 5%" class="w-[350px] md:w-[280px] cursor-pointer" >
+            <div class="flex">
+              <div>
+                <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://d3plttq4n63nzt.cloudfront.net/Rectangle_73.png" alt="">
+              </div>
+              <div class="mx-4 mt-1">
+                <p class="text-lg font-bold text-gray-700">A Minute by Tuk Tuk Colombo</p>
+                <p class="mb-0">28 Dec, 2020 10.30 AM, User Name</p>
+                <p class="text-gray-500 -mt-2" style="font-size: small">2 Adults, 1 Child</p>
+                <div class="flex -mt-2">
+                  <p class="font-mono text-xl font-bold" style="color: var(--color1)">LKR 6,500</p>
+                  <div class="flex mt-1 space-x-1" style="margin-left: 20px">
+                    <mat-icon>check_circle_outline</mat-icon>
+                    <p class="font-medium text-gray-500" style="margin-top: 2px">Reserved</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="w-full"></mat-divider>
+            <div class="flex justify-evenly" style="position: relative">
+              <button mat-stroked-button style="border: none;color: #b43939">
+                <mat-icon>cancel</mat-icon>
+                <p class="mt-2">Cancel</p>
+              </button>
+              <button mat-stroked-button style="border: none;color: var(--color1)">
+                <mat-icon>edit</mat-icon>
+                <p class="mt-2">Change</p>
+              </button>
+            </div>
+
+          </mat-card>
+        </div>
+        <!--Reserve-->
+        <div class="hidden md:block">
+          <mat-card matRipple style="border: 1px solid #ccc;border-radius: 5%" class="w-[350px] md:w-[280px] cursor-pointer" >
+            <div class="flex">
+              <div>
+                <img class="object-cover object-center w-20 h-20 rounded-md m-2" src="https://d3plttq4n63nzt.cloudfront.net/Rectangle_73.png" alt="">
+              </div>
+              <div class="mx-4 mt-1">
+                <p class="text-lg font-bold text-gray-700">A Minute by Tuk Tuk Colombo</p>
+                <p class="mb-0">28 Dec, 2020 10.30 AM, User Name</p>
+                <p class="text-gray-500 -mt-2" style="font-size: small">2 Adults, 1 Child</p>
+                <div class="flex -mt-2">
+                  <p class="font-mono text-xl font-bold" style="color: var(--color1)">LKR 6,500</p>
+                  <div class="flex mt-1 space-x-1" style="margin-left: 20px">
+                    <mat-icon>check_circle</mat-icon>
+                    <p class="font-medium text-gray-500" style="margin-top: 2px">Booked</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="w-full"></mat-divider>
+            <div class="flex justify-evenly" style="position: relative">
+              <button mat-stroked-button style="border: none;color: #b43939">
+                <mat-icon>cancel</mat-icon>
+                <p class="mt-2">Cancel</p>
+              </button>
+              <button mat-stroked-button style="border: none;color: var(--color1)">
+                <mat-icon>edit</mat-icon>
+                <p class="mt-2">Change</p>
+              </button>
+            </div>
+
+          </mat-card>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!--Favourite Restaurants-->
+    <div class="min-[1000px]:w-[740px] max-[1000px]:w-[600px]">
+      <div class="flex justify-between">
+        <p class="text-3xl font-medium text-gray-600" style="margin-top: 40px;width: 33vh;">Favourite Restaurants</p>
+        <mat-paginator [pageSizeOptions]="[9]" class="mt-9" style="font-size: 15px;color: #666666;width: 42vh;"></mat-paginator>
+      </div>
+    </div>
+
+    <mat-divider style="margin:10px 0 20px 0" class="min-[1000px]:w-[740px] max-[1000px]:w-[600px]"></mat-divider>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mx-4 mb-10 min-[1000px]:w-[740px] max-[1000px]:w-[600px]">
+
+      <div *ngFor="let favPlaceItem of obs | async">
+        <!--One Card-->
+        <div class="flex hover:bg-gray-200 w-56 px-2 pt-2 cursor-pointer rounded-md" >
+          <img src="{{ favPlaceItem.imgUrl}}" class="w-16 h-16 rounded-md" alt="avatar">
+          <div class="ml-3">
+            <div class="font-medium">{{ favPlaceItem.title}}</div>
+            <div class="text-gray-500">{{ favPlaceItem.subTitle}}</div>
+            <div class="flex space-x-1 text-gray-500">
+              <p>3/5</p>
+              <ngb-rating [rate]="4" class="text-red-500 text-md" />
+              <p>(396)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

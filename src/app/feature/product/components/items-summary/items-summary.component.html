@@ -1,0 +1,20 @@
+<div class="summary-item">
+  <div class="imageWrapper">
+    <img src="https://resizer.otstatic.com/v2/photos/small/1/25287184.jpg" class="imageClass">
+  </div>
+  <div class="contentWrapper">
+    <div class="itemTitle">{{restaurantData.name}}</div>
+    <div class="itemsDetails">
+      <div class="itemsDetails__item">
+        <mat-icon>event</mat-icon>{{reservationData.date}}
+      </div>
+      <div class="itemsDetails__item">
+        <mat-icon>access_time</mat-icon>
+        {{ reservationData.time }}
+      </div>
+      <div class="itemsDetails__item">
+        <mat-icon>person_outline</mat-icon>{{reservationData.headCount}} People
+      </div>
+    </div>
+  </div>
+</div>

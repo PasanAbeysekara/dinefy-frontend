@@ -1,0 +1,79 @@
+.dropdown-toggle::after {
+  display:none;
+}
+
+/* hero.component.css */
+
+.hero-header {
+  position: relative;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.gradient {
+  background: linear-gradient(to bottom, transparent 50%, white 100%);
+}
+
+:host {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, transparent, white),
+  url('/assets/home-background.jpg') center/cover no-repeat;
+}
+
+
+.content {
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
+
+/* Styles for the tab container */
+.tab-container {
+  display: flex;
+}
+
+/* Styles for the tab */
+.tab {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  padding: 10px 15px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Underline effect */
+.tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.tab:hover::after {
+  background-color: #8a2be2; /* Purple color */
+}
+
+/* Active tab */
+.tab.active {
+  color: #8a2be2; /* Purple color */
+}
+
+/* Active tab underline */
+.tab.active::after {
+  background-color: #8a2be2; /* Purple color */
+}
