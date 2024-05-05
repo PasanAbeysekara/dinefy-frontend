@@ -29,7 +29,7 @@ export class ReservationService {
   }
 
   postReservation(reservationPayload:any):any{
-    this.httpClient.post('http://localhost:8081/res/reservations',reservationPayload)
+    this.httpClient.post(`http://${environment.host}:8081/res/reservations`,reservationPayload)
   }
 
 }

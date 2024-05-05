@@ -8,6 +8,7 @@ import {Product} from "../promotions/model/product";
 import {Router} from "@angular/router";
 import {finalize, forkJoin, Observable, of, Subject} from "rxjs";
 import {mergeMap, tap} from "rxjs/operators";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-deletemme',
@@ -72,7 +73,7 @@ export class DeletemmeComponent implements OnInit{
 
 
   fetchPromotionData(): Observable<any> {
-    return this.httpClient.get('http://localhost:8081/data/promotions').pipe(
+    return this.httpClient.get(`http://${environment.host}:8081/data/promotions`).pipe(
       tap((data: any) => {
         data.data.content.forEach((promo: any) => {
           this.promotionPropIds.push(promo.propId);
@@ -82,7 +83,7 @@ export class DeletemmeComponent implements OnInit{
   }
 
   fetchPropertyData(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8081/data/properties/${id}`).pipe(
+    return this.httpClient.get(`http://${environment.host}:8081/data/properties/${id}`).pipe(
       tap((data: any) => {
         this.property = data.data;
         this.products.push({

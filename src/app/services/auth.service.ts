@@ -7,6 +7,7 @@ import { LoginService } from "./login.service";
 import {jwtDecode} from 'jwt-decode';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
+import {environment} from "../../environments/environment";
 
 
 export interface UserInfo {
@@ -31,7 +32,7 @@ export interface UserDto {
 })
 
 export class AuthService {
-  private apiUrl = 'http://localhost:8081/data';
+  private apiUrl = `http://${environment.host}:8081/data`;
   //private userInfoSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
   public token = new BehaviorSubject<String | null>(null);
@@ -66,7 +67,7 @@ export class AuthService {
             console.error('Error decoding token');
             return this.userInfoSubject.asObservable();
           }
-  
+
           const userInfo = {
             info: {
               sub:'',
@@ -77,17 +78,17 @@ export class AuthService {
               picture: '',
             },
           };
-  
-  
+
+
           this.setUserInfo(userInfo);
-  
+
           return of(userInfo);
         }
         else{
           console.log('Google logged in');
           return this.userInfoSubject.asObservable();
         }
-       
+
       })
 
     ).subscribe()
@@ -175,7 +176,7 @@ export class AuthService {
         }
      })
     );
-    
+
   }
 
     signInWithFacebook(): Observable<any> {
