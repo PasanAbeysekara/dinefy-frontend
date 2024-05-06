@@ -5,7 +5,7 @@ let driver;
 
 Given('the customer is on the reservation page', async function () {
   driver = await new Builder().forBrowser('chrome').build();
-  await driver.get('http://localhost:4200/product/GHI012');
+  await driver.get('https://dinefy.netlify.app/product/GHI012');
 });
 
 When('they input their details', async function () {
