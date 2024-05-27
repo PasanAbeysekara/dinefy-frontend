@@ -1,27 +1,79 @@
-# Hangouts
+# DineFy Frontend
+![Angular](https://img.shields.io/badge/angular-v17.0.0-red)
+![Node](https://img.shields.io/badge/node-v18.17.0-green)
+![AWS S3](https://img.shields.io/badge/AWS-S3-orange)
+![AWS CloudFront](https://img.shields.io/badge/AWS-CloudFront-blue)
+![Netlify](https://img.shields.io/badge/Netlify-000000?logo=netlify&logoColor=white)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
 
-## Development server
+Welcome to the DineFy Frontend repository! DineFy is a restaurant reservation and time allocation system built with Angular. This application allows users to seamlessly book reservations at their favorite restaurants and helps restaurants manage their booking schedules efficiently.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Table of Contents
 
-## Code scaffolding
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- **User Authentication**: Secure login and registration system.
+- **Reservation Management**: Easy reservation booking, viewing, and cancellation.
+- **Time Allocation**: Efficient time slot management for restaurants.
+- **Responsive Design**: User-friendly interface across all devices.
+- **Real-Time Updates**: Instant updates on reservation status.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Getting Started
 
-## Running unit tests
+To get a local copy of the project up and running, follow these steps.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Prerequisites
 
-## Running end-to-end tests
+Ensure you have the following installed on your machine:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- [Node.js](https://nodejs.org/)
+- [Angular CLI](https://angular.io/cli)
 
-## Further help
+### Installation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/PasanAbeysekara/dinefy-frontend.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd dinefy-frontend
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
+
+### Usage
+
+1. Start the development server:
+   ```sh
+   ng serve
+   ```
+2. Open your browser and navigate to `http://localhost:4200/`.
+
+You should now see the DineFy application running. You can start exploring the features and functionality.
+
+## Contributing
+
+We welcome contributions to improve DineFy! To contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
+
+Please ensure your code adheres to our coding standards and includes appropriate tests.
+
+---
+
+Thank you for using DineFy! If you have any questions or need further assistance, feel free to open an issue on GitHub. Happy dining!
+
+---
