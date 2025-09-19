@@ -6,6 +6,8 @@
 ![Netlify](https://img.shields.io/badge/Netlify-000000?logo=netlify&logoColor=white)
 
 
+Backend: https://github.com/PasanAbeysekara/dinefy-data-service
+
 Welcome to the DineFy Frontend repository! DineFy is a restaurant reservation and time allocation system built with Angular. This application allows users to seamlessly book reservations at their favorite restaurants and helps restaurants manage their booking schedules efficiently.
 
 ## Table of Contents
@@ -77,3 +79,4 @@ Please ensure your code adheres to our coding standards and includes appropriate
 Thank you for using DineFy! If you have any questions or need further assistance, feel free to open an issue on GitHub. Happy dining!
 
 ---
+
